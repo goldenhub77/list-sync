@@ -1,6 +1,8 @@
-<% @lists.each do |list| %>
-  <div class="jumbotron">
-    <h1><%= list.title %></h1>
-    <p></p>
-  </div>
-<% end %>
+  <% @lists.each do |list| %>
+    <div class="panel panel-primary">
+      <div class="panel-body">
+        <%= link_to list.title, list_path(list) %>
+      </div>
+      <div class="panel-footer">For future use</div>
+    </div>
+  <% end %>

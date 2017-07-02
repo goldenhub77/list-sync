@@ -1,5 +1,17 @@
+body {
+  margin-top: 10rem;
+}
+
 .btn-center {
   margin-left: auto;
   margin-right: auto;
   display: block;
+}
+
+.element-inline {
+  display: inline;
+}
+
+i.element-inline {
+  float: right;
 }

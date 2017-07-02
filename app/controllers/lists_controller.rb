@@ -1,7 +1,8 @@
 class ListsController < ApplicationController
+  before_action :find_list, only: [:show, :edit, :update, :destroy]
 
   def index
-    @lists = List.all
+    @lists = List.all.order("title DESC")
   end
 
   def new
@@ -20,10 +21,36 @@ class ListsController < ApplicationController
   end
 
   def show
-    @list = List.find(get_list_params[:id])
+  end
+
+  def edit
+  end
+
+  def update
+    @list.update_attributes(post_list_params)
+    if @list.valid?
+      flash[:notice] = "Updated List Successfully."
+      redirect_to list_path(@list)
+    else
+      flash.now[:error] = @list.errors.full_messages
+      render :edit
+    end
+  end
+
+  def destroy
+    if @list.destroy
+      flash[:notice] = "Deleted List Successfully."
+      redirect_to lists_path
+    else
+      redirect_to list_path(@list)
+    end
   end
 
   protected
+
+  def find_list
+    @list = List.find(get_list_params[:id])
+  end
 
   def get_list_params
     params.permit(:id)

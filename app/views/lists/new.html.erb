@@ -1,16 +1,4 @@
-<h1>Create <%= controller_path.humanize %></h1>
+<h1>Create List</h1>
 <div class="container">
-<%= form_for @list do |f| %>
-  <div class="form-group row">
-    <%= f.label :title, class: "col-md-2 col-form-label" %>
-    <div class="col-md-10">
-      <%= f.text_field :title, class: "form-control" %><br />
-    </div>
-  </div>
-  <div class="form-group row">
-    <div class="col-md-10">
-      <%= f.submit "Create List", class: "btn btn-lg btn-primary btn-center" %>
-    </div>
-  </div>
-<% end %>
+  <%= render "list_form" %> 
 </div>
