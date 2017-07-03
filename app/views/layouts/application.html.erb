@@ -9,22 +9,25 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application' %>
-    <%= javascript_pack_tag 'flash_message' %>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   </head>
 
   <body>
     <%= render 'layouts/header' %>
-    <% if flash[:notice] %>
-      <div class="alert alert-info">
-        <%= content_tag :p, notice, class: "element-inline" %>
-        <i class="fa fa-times element-inline" aria-hidden="true"></i>
-      </div>
-    <% end %>
-    <% if flash[:error] %>
-      <%= render 'shared/errors', collection: flash[:error] %>
-    <% end %>
-    <%= yield %>
+    <div class="yield-container">
+      <% if flash[:notice] %>
+        <div class="alert alert-info">
+          <%= content_tag :p, notice, class: "element-inline" %>
+          <button type="button" class="close element-inline" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      <% end %>
+      <% if flash[:error] %>
+        <%= render 'shared/errors', collection: flash[:error] %>
+      <% end %>
+      <%= yield %>
+    </div>
     <%= render 'layouts/footer' %>
   </body>
 </html>

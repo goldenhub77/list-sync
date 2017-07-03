@@ -1,5 +1,19 @@
 body {
-  margin-top: 10rem;
+  font-size: 15px;
+  background: white url(/assets/yield-background.png) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+h1 {
+  text-align: center;
+}
+
+.yield-container {
+  margin-top: 8rem;
+  min-height: 50rem;
 }
 
 .btn-center {
@@ -12,6 +26,10 @@ body {
   display: inline;
 }
 
-i.element-inline {
+button.element-inline {
   float: right;
+}
+
+.object-errors {
+  padding-left: 5rem;
 }

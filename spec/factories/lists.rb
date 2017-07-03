@@ -1,3 +1,5 @@
 FactoryGirl.define do
-  sequence(:name) { |n| "List Name#{n}"}
+  factory :list do
+    sequence(:title) { |n| "List Name#{n}"}
+  end
 end
