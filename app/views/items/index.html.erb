@@ -1,0 +1,8 @@
+  <% @items.each do |item| %>
+    <div class="panel panel-primary">
+      <div class="panel-body">
+        <%= link_to item.title, item_path(item) %>
+      </div>
+      <div class="panel-footer">For future use</div>
+    </div>
+  <% end %>
