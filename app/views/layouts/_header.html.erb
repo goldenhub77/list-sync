@@ -16,6 +16,7 @@
         <li class=""><a href="#">Friends<span class="sr-only">(current)</span></a></li>
         <li class="<%= link_active?(lists_path) %>"><a href="<%= lists_path %>">Lists</a></li>
       </ul>
+      <!-- future search integration -->
       <!-- <form class="navbar-form navbar-left">
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Search">
@@ -26,7 +27,8 @@
         <li class="<%= link_active?(new_list_path) %>"><%= link_to "Create List", new_list_path %></li>
         <li><a href="#">Sign In</a></li>
         <li><a href="#">Sign Up</a></li>
-        <li class="dropdown">
+        <!-- will be used for future user profile tasks -->
+        <!-- <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="#">Action</a></li>
@@ -35,7 +37,7 @@
             <li role="separator" class="divider"></li>
             <li><a href="#">Separated link</a></li>
           </ul>
-        </li>
+        </li> -->
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
