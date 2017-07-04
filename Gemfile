@@ -24,8 +24,6 @@ gem 'webpacker'
 #jquery for rails
 gem 'jquery-rails'
 
-# Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -48,6 +46,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'valid_attribute'
   gem 'factory_girl_rails'
+  gem 'coffee-rails'
   #support for javascript spec testing
   gem 'teaspoon-jasmine'
   gem 'launchy', require: false

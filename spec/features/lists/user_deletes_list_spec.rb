@@ -17,6 +17,7 @@ feature 'user deletes list', %{
 
     click_on "Delete"
 
+    expect(@list.items).to be_empty
     expect(page).to have_content("Deleted List Successfully.")
     expect(page).not_to have_content(@list.title)
   end

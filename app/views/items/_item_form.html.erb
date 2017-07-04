@@ -1,5 +1,6 @@
-<%= form_for @list do |f| %>
+<%= form_for [@list, @item] do |f| %>
   <div class="form-group row">
+    <%= f.hidden_field :list_id, value: @list.id %>
     <%= f.label :title, class: "col-sm-2 col-form-label" %>
     <div class="col-sm-7">
       <%= f.text_field :title, class: "form-control" %><br />
