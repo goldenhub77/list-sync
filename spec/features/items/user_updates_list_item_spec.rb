@@ -11,11 +11,32 @@ feature 'user updates list item', %{
     end
   end
 
-  scenario 'user updates first item from list' do
+  scenario 'user updates first item from list from list show page' do
     @list = List.first
     @item = @list.items.first
 
-    visit edit_list_item_path(@list, @item)
+    visit list_path(@list)
+
+    click_on "edit-item-#{@item.id}"
+
+    expect(find_field("Title").value).to eq(@item.title)
+
+    fill_in "Title", with: "Different item"
+
+    click_on "Update Item"
+    @item.reload
+
+    expect(page).to have_content("Updated Item Successfully.")
+    expect(page).to have_content("Different item")
+  end
+
+  scenario 'user updates first item from list from list show page' do
+    @list = List.first
+    @item = @list.items.first
+
+    visit list_item_path(@list, @item)
+
+    click_on "Edit"
 
     expect(find_field("Title").value).to eq(@item.title)
 
