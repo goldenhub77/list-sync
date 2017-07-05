@@ -60,12 +60,11 @@
 /******/ 	__webpack_require__.p = "/packs-test/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 82);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
-/******/ ({
-
-/***/ 82:
+/******/ ([
+/* 0 */
 /***/ (function(module, exports) {
 
 /* eslint no-console:0 */
@@ -85,5 +84,4 @@ $(document).ready(function () {
 });
 
 /***/ })
-
-/******/ });
+/******/ ]);

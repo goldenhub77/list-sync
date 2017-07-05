@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-feature 'user views list', %{
-  As a user I should be able to view existing list
+feature 'user views list show page', %{
+  As a user I should be able to view existing list show page
 } do
 
   before(:each) do
@@ -10,7 +10,7 @@ feature 'user views list', %{
     end
   end
 
-  scenario 'user visits lists' do
+  scenario 'user visits lists show page' do
     @list = List.first
 
     visit list_path(@list)

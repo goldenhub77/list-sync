@@ -2,7 +2,7 @@ class ListsController < ApplicationController
   before_action :find_list, only: [:show, :edit, :update, :destroy]
 
   def index
-    @lists = List.all.order("title DESC")
+    @lists = List.public.order("title DESC")
   end
 
   def new
@@ -57,6 +57,6 @@ class ListsController < ApplicationController
   end
 
   def post_list_params
-    params.require(:list).permit(:title)
+    params.require(:list).permit(:title, :public)
   end
 end
