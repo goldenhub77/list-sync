@@ -1,5 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe List, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe '.public' do
+    it 'returns all lists that are public' do
+      public_lists = List.public
+
+      expect(public_lists).not_to include(public: false)
+    end
+  end
 end

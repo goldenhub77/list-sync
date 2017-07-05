@@ -10,16 +10,21 @@ feature 'user sees only public lists', %{
       FactoryGirl.create(:list)
     end
     2.times do
-      FactoryGirl.create(:list, public: false)
+      FactoryGirl.create(:list, public: true)
     end
   end
 
   scenario 'user visits lists' do
     visit lists_path
-    public_lists = List.public
+    
     expect(List.public.count).to eq(2)
-    public_lists.each do |list|
-      expect(page).to have_content(list.title)
+
+    List.all.each do |list|
+      if list.public == false
+        expect(page).not_to have_content(list.title)
+      elsif list.public == true
+        expect(page).to have_content(list.title)
+      end
     end
   end
 end

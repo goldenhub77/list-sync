@@ -46,7 +46,7 @@ Rails.application.configure do
   config.assets.quiet = true
 
   #webpack-dev-server
-  config.x.webpacker[:dev_server_host] = "http://120.0.0.1:8080"
+  config.x.webpacker[:dev_server_host] = "http://127.0.0.1:8080"
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
