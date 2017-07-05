@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'user creates list', %{
-  As a user I should be able to creates existing list
+  As a user I should be able to create a list
 } do
 
   scenario 'user creates public list' do
