@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-feature 'user sees lists', %{
-  As a user I should be able to view
+feature 'user sees all lists', %{
+  As a user I should be able to view all
   lists created
 } do
 
