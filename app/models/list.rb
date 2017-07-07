@@ -4,7 +4,7 @@ class List < ApplicationRecord
 
   validates :title, presence: true
   validates :public, inclusion: { in: [true, false] }
-
+  validate :due_date_greater_than_today
 
   def local_time
     if self.due_date
