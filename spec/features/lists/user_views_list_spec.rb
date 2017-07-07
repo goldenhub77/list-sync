@@ -18,5 +18,6 @@ feature 'user views list show page', %{
     expect(page).to have_content(@list.title)
     expect(page).to have_link("Edit")
     expect(page).to have_link("Delete")
+    expect(page).to have_content("No Due Date")
   end
 end

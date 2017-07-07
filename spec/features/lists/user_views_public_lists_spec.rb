@@ -16,7 +16,7 @@ feature 'user sees only public lists', %{
 
   scenario 'user visits lists' do
     visit lists_path
-    
+
     expect(List.public.count).to eq(2)
 
     List.all.each do |list|
@@ -24,6 +24,7 @@ feature 'user sees only public lists', %{
         expect(page).not_to have_content(list.title)
       elsif list.public == true
         expect(page).to have_content(list.title)
+        expect(page).to have_content("No Due Date")
       end
     end
   end

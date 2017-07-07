@@ -10,7 +10,7 @@ feature 'user updates list', %{
     end
   end
 
-  scenario 'user visits lists' do
+  scenario 'user updates list' do
     @list = List.first
 
     visit edit_list_path(@list)
@@ -21,8 +21,27 @@ feature 'user updates list', %{
 
     click_on "Update List"
     @list.reload
-    
+
     expect(page).to have_content("Updated List Successfully.")
     expect(page).to have_content("Test list")
+    expect(page).to have_content("No Due Date")
+  end
+
+  scenario 'user updates list with due date' do
+    @list = List.first
+
+    visit edit_list_path(@list)
+
+    expect(find_field("Title").value).to eq(@list.title)
+
+    fill_in "Title", with: "Test list"
+    fill_in "Due date", with: "2017-08-01T22:00:00"
+
+    click_on "Update List"
+    @list.reload
+
+    expect(page).to have_content("Updated List Successfully.")
+    expect(page).to have_content("Test list")
+    expect(page).to have_content("26 days")
   end
 end

@@ -4,7 +4,11 @@
       <div class="panel-body">
         <%= link_to list.title, list_path(list) %>
       </div>
-      <div class="panel-footer">For future use</div>
+      <div class="panel-footer">
+        <% if list.present? %>
+          <%= list.time_left %>
+        <% end %>
+      </div>
     </div>
   <% end %>
 </div>

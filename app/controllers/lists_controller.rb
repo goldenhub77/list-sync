@@ -57,6 +57,6 @@ class ListsController < ApplicationController
   end
 
   def post_list_params
-    params.require(:list).permit(:title, :public)
+    params.require(:list).permit(:title, :public, :due_date)
   end
 end
