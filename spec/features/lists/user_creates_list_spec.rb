@@ -26,7 +26,7 @@ feature 'user creates list', %{
     visit new_list_path
 
     fill_in "Title", with: "Test list"
-    #when creating a list it defaults to a public being unchecked
+    #when creating a list it defaults to public being unchecked
 
     click_button "Create List"
 
@@ -46,8 +46,8 @@ feature 'user creates list', %{
     visit new_list_path
 
     fill_in "Title", with: "Test list"
-    fill_in "Due date", with: "#{date.day}/#{date.month}/#{date.year}, #{date.hour}:#{date.minute} AM"
-    #when creating a list it defaults to a public being unchecked
+    fill_in "Due date", with: date.strftime("%m/%d/%Y %I:%M %p")
+    #when creating a list it defaults to public being unchecked
 
     click_button "Create List"
 

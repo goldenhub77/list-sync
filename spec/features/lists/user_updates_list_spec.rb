@@ -29,19 +29,20 @@ feature 'user updates list', %{
 
   scenario 'user updates list with due date' do
     @list = List.first
+    date = DateTime.now + 36.hours
 
     visit edit_list_path(@list)
 
     expect(find_field("Title").value).to eq(@list.title)
 
     fill_in "Title", with: "Test list"
-    fill_in "Due date", with: "2017-08-01T22:00:00"
+    fill_in "Due date", with: date.strftime("%m/%d/%Y %I:%M %p")
 
     click_on "Update List"
     @list.reload
 
     expect(page).to have_content("Updated List Successfully.")
     expect(page).to have_content("Test list")
-    expect(page).to have_content("26 days")
+    expect(page).to have_content("1 day")
   end
 end

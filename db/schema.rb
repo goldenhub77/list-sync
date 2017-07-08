@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20170706143654) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "public", default: false, null: false
-    t.datetime "due_date"
+    t.string "due_date"
   end
 
 end

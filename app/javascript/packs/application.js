@@ -6,11 +6,11 @@
 //
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
+let lists = require('packs/lists');
 
 $(document).ready(() => {
 
   $(".close").on("click", (event) => {
     $(".close").parent().hide("slow");
   });
-
 });

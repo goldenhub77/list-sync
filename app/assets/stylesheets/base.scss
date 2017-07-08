@@ -42,8 +42,8 @@ h1 {
 
 
 .yield-container {
-  margin-top: 8rem;
-  min-height: 50rem;
+  margin-top: 8em;
+  min-height: 60em;
 }
 
 .btn-center {
@@ -58,7 +58,7 @@ h1 {
   margin-right: 2rem;
 }
 
-button.element-inline {
+button.close.element-inline {
   float: right;
 }
 
@@ -70,6 +70,6 @@ button.element-inline {
   text-align: right;
 }
 
-.list-group {
-  margin: 2em;
+.form-explanation {
+  font-size: 1.25rem;
 }

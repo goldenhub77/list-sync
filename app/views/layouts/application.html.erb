@@ -23,9 +23,6 @@
           </button>
         </div>
       <% end %>
-      <% if flash[:error] %>
-        <%= render 'shared/errors', collection: flash[:error] %>
-      <% end %>
       <%= yield %>
     </div>
     <%= render 'layouts/footer' %>
