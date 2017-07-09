@@ -14,6 +14,7 @@ $(document).on("turbolinks:load", () => {
 
   $("#list-date-picker").datetimepicker({
     format: 'MM/DD/YYYY hh:mm A',
+    defaultDate: false,
     useCurrent: false
   });
 

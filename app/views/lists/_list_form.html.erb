@@ -12,7 +12,7 @@
     <%= f.label :due_date, class: "col-sm-2 col-form-label" %>
     <div class="col-sm-7">
       <div class='input-group date' id='list-date-picker'>
-        <%= f.hidden_field :due_date, id: "js-list-due-date" %>
+        <%= f.hidden_field :due_date, id: "js-list-due-date", value: time_to_s(@list.due_date) %>
         <input type='text' class="form-control" id="js-date-time-view" />
         <span class="input-group-addon">
           <span class="glyphicon glyphicon-calendar"></span>
