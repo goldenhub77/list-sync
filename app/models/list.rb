@@ -6,16 +6,6 @@ class List < ApplicationRecord
   validates :public, inclusion: { in: [true, false] }
   validate :check_date_format, :due_date_greater_than_today
 
-  def time_left
-    if due_date.present? && due_date > DateTime.now
-      distance_of_time_in_words_to_now(due_date)
-    elsif due_date.present? && due_date < DateTime.now
-      "Overdue"
-    else
-      "No Due Date"
-    end
-  end
-
   def self.public
     List.where('public = true')
   end

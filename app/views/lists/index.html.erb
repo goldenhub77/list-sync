@@ -6,7 +6,7 @@
       </div>
       <div class="panel-footer">
         <% if list.present? %>
-          <%= list.time_left %>
+          <%= time_left_until_due(list.due_date) %>
         <% end %>
       </div>
     </div>

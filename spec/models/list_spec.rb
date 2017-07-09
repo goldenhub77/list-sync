@@ -18,17 +18,4 @@ RSpec.describe List, type: :model do
       end
     end
   end
-
-  describe '.time_left' do
-    it 'returns remaining time if due date specified' do
-      list_with_date = List.first
-      list_overdue = List.first
-      list_overdue.due_date = DateTime.now - 1.hour
-      list_no_date = List.second
-
-      expect(list_no_date.time_left).to eq("No Due Date")
-      expect(list_with_date.time_left).to eq("about 1 hour")
-      expect(list_overdue.time_left).to eq("Overdue")
-    end
-  end
 end
