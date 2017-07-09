@@ -31,16 +31,4 @@ RSpec.describe List, type: :model do
       expect(list_overdue.time_left).to eq("Overdue")
     end
   end
-
-  describe '.local_time' do
-    it 'returns local time with no time zone offset if due date specified' do
-      list_with_date = List.first
-      list_no_date = List.second
-      date = DateTime.parse(list_with_date.due_date)
-      calculated_time = Time.local(date.year, date.month, date.day, date.hour, date.min)
-
-      expect(list_no_date.local_time).to eq(nil)
-      expect(list_with_date.local_time).to eq(calculated_time)
-    end
-  end
 end

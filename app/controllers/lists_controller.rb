@@ -10,8 +10,8 @@ class ListsController < ApplicationController
   end
 
   def create
-    @list = List.new(post_list_params)
-    if @list.save
+    @list = List.create(post_list_params)
+    if @list.valid?
       flash[:notice] = "Created List Successfully."
       redirect_to list_path(@list)
     else
@@ -28,7 +28,7 @@ class ListsController < ApplicationController
 
   def update
     @list.update(post_list_params)
-    if @list.save
+    if @list.valid?
       flash[:notice] = "Updated List Successfully."
       redirect_to list_path(@list)
     else
@@ -57,14 +57,6 @@ class ListsController < ApplicationController
   end
 
   def post_list_params
-    if params[:list][:due_date].empty?
-      params[:list][:due_date] = nil
-    else
-      begin
-        params[:list][:due_date] = DateTime.strptime(params[:list][:due_date], "%m/%d/%Y %I:%M %p")
-      rescue DateTime::ArgumentError
-      end
-    end
     params.require(:list).permit(:title, :public, :due_date)
   end
 end

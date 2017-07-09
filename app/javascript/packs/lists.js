@@ -1,15 +1,33 @@
 $(document).on("turbolinks:load", () => {
-  $("#list_due_date").on("keydown keyup", (event) => {
+  const dateTimeHidden = $("#js-list-due-date");
+  const dateTimeString = dateTimeHidden.val() || null;
+  const dueDateInput = $("#js-date-time-view");
+  var formattedTime = "";
+
+  dueDateInput.on("keydown keyup", (event) => {
     event.preventDefault();
   });
 
-  $("#list_due_date").datetimepicker({
-    dateFormat: "mm/dd/yy",
-    timeFormat: "hh:mm TT"
+  if (dateTimeString != null) {
+    formattedTime = moment(dateTimeString).local().format('MM/DD/YYYY hh:mm A');
+  }
+
+  $("#list-date-picker").datetimepicker({
+    format: 'MM/DD/YYYY hh:mm A',
+    useCurrent: false
+  });
+
+  dueDateInput.val(formattedTime);
+  dateTimeHidden.val("");
+
+  $("#list-date-picker").on("dp.change", (event) => {
+    formattedTime = moment(event.date._d).local().format();
+    dateTimeHidden.val(formattedTime);
   });
 
   $("#clear-list-date").on("click", (event) => {
     event.preventDefault();
-    $("#list_due_date").val("");
+    dueDateInput.val("");
+    dateTimeHidden.val("");
   });
 });

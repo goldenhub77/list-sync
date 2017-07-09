@@ -46,7 +46,8 @@ feature 'user creates list', %{
     visit new_list_path
 
     fill_in "Title", with: "Test list"
-    fill_in "Due date", with: date.strftime("%m/%d/%Y %I:%M %p")
+    #server reads due date params from a hidden input field
+    find(:xpath, "//input[@id='js-list-due-date']", visible: false).set date.to_s
     #when creating a list it defaults to public being unchecked
 
     click_button "Create List"
