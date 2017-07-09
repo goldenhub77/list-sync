@@ -22,7 +22,7 @@ $(document).on("turbolinks:load", () => {
   dateTimeHidden.val("");
 
   $("#list-date-picker").on("dp.change", (event) => {
-    formattedTime = moment(event.date._d).local().format();
+    formattedTime = moment(event.date).local().format();
     dateTimeHidden.val(formattedTime);
   });
 
