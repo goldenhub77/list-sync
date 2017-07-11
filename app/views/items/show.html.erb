@@ -3,5 +3,4 @@
 <h1><%= @item.title %></h1>
 <%= link_to "Edit", edit_list_item_path(@list, @item), class: "btn btn-primary" %>
 <%= link_to "Delete", list_item_path(@list, @item), method: "delete", class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
-<%= check_box @item, @item.completed, { "data-toggle": "toggle", "data-on": "Completed", "data-off": "Pending" } %>
-<%= javascript_pack_tag 'items' %>
+<%= check_box :item, :completed, { "data-onstyle": "success", "data-offstyle": "warning", "data-toggle": "toggle", "data-on": "Completed", "data-off": "Incomplete", class: "js-item-completed" } %>
