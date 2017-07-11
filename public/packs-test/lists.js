@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/packs-test/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -93,28 +93,6 @@ $(document).on("turbolinks:load", function () {
   $("#js-list-date-picker").on("dp.change db.show", function (event) {
     formattedTime = moment(dueDateInput.val()).local().format();
     dateTimeHidden.val(formattedTime);
-  });
-});
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* eslint no-console:0 */
-// This file is automatically compiled by Webpack, along with any other files
-// present in this directory. You're encouraged to place your actual application logic in
-// a relevant structure within app/javascript and only use these pack files to reference
-// that code so it'll be compiled.
-//
-// To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
-// layout file, like app/views/layouts/application.html.erb
-
-
-$(document).ready(function () {
-  var lists = __webpack_require__(0);
-
-  $(".close").on("click", function (event) {
-    $(".close").parent().hide("slow");
   });
 });
 

@@ -11,15 +11,14 @@
   <div class="form-group row">
     <%= f.label :due_date, class: "col-sm-2 col-form-label" %>
     <div class="col-sm-7">
-      <div class='input-group date' id='list-date-picker'>
-        <%= f.hidden_field :due_date, id: "js-list-due-date", value: time_to_s(@list.due_date) %>
+      <div class='input-group date' id='js-list-date-picker'>
+        <%= f.hidden_field :due_date, id: "js-list-due-date", value: format_date_to_ISO(@list.due_date) %>
         <input type='text' class="form-control" id="js-date-time-view" />
         <span class="input-group-addon">
           <span class="glyphicon glyphicon-calendar"></span>
         </span>
       </div>
-      <%= button_tag "Clear date", type: "button", class: "element-inline btn btn-secondary", id: "clear-list-date" %>
-      <p class="form-explanation element-inline">Format: mm/dd/yyyy hh:mm AM or PM</p>
+      <p class="form-explanation">Format: mm/dd/yyyy hh:mm AM or PM</p>
     </div>
   </div>
   <div class="form-group row">

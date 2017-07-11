@@ -21,6 +21,7 @@ class ListsController < ApplicationController
   end
 
   def show
+    @items = @list.items.order("date_completed DESC")
   end
 
   def edit

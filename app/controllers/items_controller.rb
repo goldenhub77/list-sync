@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
   before_action :find_list, except: [:index]
 
   def index
-    @items = Item.all.order("created_at DESC")
+    @items = Item.order('created_at DESC')
   end
 
   def new
@@ -28,8 +28,9 @@ class ItemsController < ApplicationController
   end
 
   def update
-    @item.update_attributes(post_item_params)
-    if @item.valid?
+    @item.update(post_item_params)
+    @item.completed.present? ? nil : @item.date_completed = nil
+    if @item.save
       flash[:notice] = "Updated Item Successfully."
       redirect_to list_path(@list)
     else
@@ -62,6 +63,6 @@ class ItemsController < ApplicationController
   end
 
   def post_item_params
-    params.require(:item).permit(:title, :list_id)
+    params.require(:item).permit(:title, :list_id, :completed, :date_completed)
   end
 end

@@ -1,3 +1,5 @@
 {
-  "application.js": "/packs-test/application.js"
+  "application.js": "/packs-test/application.js",
+  "items.js": "/packs-test/items.js",
+  "lists.js": "/packs-test/lists.js"
 }

@@ -1,3 +1,6 @@
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+<%= javascript_pack_tag 'items' %>
 <h1><%= @list.title %></h1>
 <div class="container">
   <%= link_to "Edit", edit_list_path(@list), id: "edit-list-#{@list.id}", class: "btn btn-primary" %>
@@ -7,12 +10,25 @@
   <% end %>
   <a class="add-btn btn btn-primary" href="<%= new_list_item_path(@list) %>" role="button">&#43;</a>
   <div class="list-group">
-    <% @list.items.each do |item| %>
-      <div class="well">
-        <h3 class="element-inline"><%= link_to item.title, list_item_path(@list, item) %></h3>
-        <%= link_to "Edit", edit_list_item_path(@list, item), id: "edit-item-#{item.id}", class: "btn btn-default element-inline" %>
-        <%= link_to "Delete", list_item_path(@list, item), method: "delete", id: "delete-item-#{item.id}", class: "btn btn-danger element-inline", data: { confirm: "Are you sure?" } %>
-        <p class="">future description if provided</p>
+    <% @items.each do |item| %>
+      <div class="well list-items">
+        <div class="row">
+          <div class="col-xs-12 col-md-7">
+            <h3><%= link_to item.title, list_item_path(@list, item) %></h3>
+          </div>
+          <div class="col-xs-6 col-md-3">
+            <%= link_to "Edit", edit_list_item_path(@list, item), id: "edit-item-#{item.id}", class: "btn btn-default element-inline" %>
+            <%= link_to "Delete", list_item_path(@list, item), method: "delete", id: "delete-item-#{item.id}", class: "btn btn-danger element-inline", data: { confirm: "Are you sure?" } %>
+          </div>
+          <div class="col-xs-6 col-md-2">
+            <%= form_for [@list, item] do |f| %>
+              <%= f.hidden_field :list_id, value: @list.id %>
+              <%= f.hidden_field :date_completed, value: format_date_to_ISO(item.date_completed), class: "js-item-date-completed" %>
+              <%= f.check_box :completed, { "data-onstyle": "success", "data-offstyle": "warning", "data-toggle": "toggle", "data-on": "Completed", "data-off": "Incomplete", class: "js-item-completed" } %>
+            <% end %>
+            <p class="js-item-human-date"></p>
+          </div>
+        </div>
         <small>footnote</small>
       </div>
     <% end %>

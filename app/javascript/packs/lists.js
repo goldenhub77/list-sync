@@ -9,26 +9,20 @@ $(document).on("turbolinks:load", () => {
   });
 
   if (dateTimeString != null) {
-    formattedViewTime = moment(dateTimeString).local().format('MM/DD/YYYY hh:mm A');
+    formattedViewTime = moment(dateTimeString).format('MM/DD/YYYY hh:mm A');
   }
 
-  $("#list-date-picker").datetimepicker({
-    format: 'MM/DD/YYYY hh:mm A',
-    defaultDate: false,
-    useCurrent: false
+  $("#js-list-date-picker").datetimepicker({
+    useCurrent: false,
+    keepInvalid: true,
+    showTodayButton: true,
+    showClear: true
   });
-
   dueDateInput.val(formattedViewTime);
-  dateTimeHidden.val(moment(formattedViewTime).local().format());
+  dateTimeHidden.val(dateTimeString);
 
-  $("#list-date-picker").on("dp.change", (event) => {
-    formattedTime = moment(event.date).local().format();
+  $("#js-list-date-picker").on("dp.change db.show", (event) => {
+    formattedTime = moment(dueDateInput.val()).local().format();
     dateTimeHidden.val(formattedTime);
-  });
-
-  $("#clear-list-date").on("click", (event) => {
-    event.preventDefault();
-    dueDateInput.val("");
-    dateTimeHidden.val("");
   });
 });

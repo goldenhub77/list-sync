@@ -20,8 +20,9 @@ ActiveRecord::Schema.define(version: 20170709194934) do
     t.string "title", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "completed"
-    t.index ["completed"], name: "index_items_on_completed"
+    t.boolean "completed", default: false, null: false
+    t.datetime "date_completed"
+    t.index ["date_completed", "completed"], name: "index_items_on_date_completed_and_completed"
     t.index ["list_id"], name: "index_items_on_list_id"
     t.index ["title"], name: "index_items_on_title", unique: true
   end
