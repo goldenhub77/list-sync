@@ -1,4 +1,4 @@
-$(document).on("turbolinks:load", () => {
+$(document).ready( () => {
   const dateTimeHidden = $("#js-list-due-date");
   const dateTimeString = dateTimeHidden.val() || null;
   const dueDateInput = $("#js-date-time-view");
