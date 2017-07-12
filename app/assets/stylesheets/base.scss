@@ -1,5 +1,5 @@
 body {
-  font-size: 15px;
+  font-size: 18px;
   background: white url(asset-path("yield-background.png")) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -20,6 +20,18 @@ img.welcome-image {
 h1 {
   text-align: center;
   margin-bottom: 3rem;
+}
+
+h1, .panel > * {
+  font-family: 'Inika', serif;
+}
+
+h1.title > span, #myFooter .logo, title, .navbar-brand {
+  font-family: 'Permanent Marker', cursive;
+}
+
+.navbar-brand {
+  font-size: 3rem;
 }
 
 .add-btn {
