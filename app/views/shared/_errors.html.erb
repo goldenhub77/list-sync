@@ -1,5 +1,7 @@
-<ul class="object-errors alert alert-danger">
-  <% collection.each do |msg| %>
-    <li><%= msg.humanize %></li>
-  <% end %>
-</ul>
+<% if collection.present? %>
+  <ul class="object-errors alert alert-danger">
+    <% collection.each do |msg| %>
+      <li><%= msg.humanize %></li>
+    <% end %>
+  </ul>
+<% end %>

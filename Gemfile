@@ -42,7 +42,6 @@ gem 'bootstrap3-datetimepicker-rails'
 #devise user authentication with twitter/facebook integration
 gem 'devise'
 gem 'omniauth'
-gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 
 group :development, :test do
@@ -59,6 +58,8 @@ group :development, :test do
   #support for javascript spec testing
   gem 'teaspoon-jasmine'
   gem 'launchy', require: false
+  #handles environment variables in .env
+  gem 'dotenv-rails'
 
 end
 

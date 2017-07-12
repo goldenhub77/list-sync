@@ -13,7 +13,6 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class=""><a href="#">Friends<span class="sr-only">(current)</span></a></li>
         <li class="<%= link_active?(lists_path) %>"><a href="<%= lists_path %>">Lists</a></li>
       </ul>
       <!-- future search integration -->
@@ -24,20 +23,24 @@
         <button type="submit" class="btn btn-default">Submit</button>
       </form> -->
       <ul class="nav navbar-nav navbar-right">
-        <li class="<%= link_active?(new_list_path) %>"><%= link_to "Create List", new_list_path %></li>
-        <li><a href="#">Sign In</a></li>
-        <li><a href="#">Sign Up</a></li>
-        <!-- will be used for future user profile tasks -->
-        <!-- <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-          </ul>
-        </li> -->
+        <% if current_user %>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.email %><span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li class="<%= link_active?(new_list_path) %>"><%= link_to "Create List", new_list_path %></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li role="separator" class="divider"></li>
+              <li class=""><a href="#">Friends<span class="sr-only">(current)</span></a></li>
+              <li role="separator" class="divider"></li>
+              <li class="<%= link_active?(edit_user_registration_path) %>"><%= link_to "Edit Account", edit_user_registration_path %></li>
+              <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+            </ul>
+          </li>
+        <% else %>
+          <li class="<%= link_active?(new_user_session_path) %>"><%= link_to "Sign In", new_user_session_path %></li>
+          <li class="<%= link_active?(new_user_registration_path) %>"><%= link_to "Sign Up", new_user_registration_path %></li>
+        <% end %>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

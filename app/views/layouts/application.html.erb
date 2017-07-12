@@ -18,14 +18,16 @@
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     <%= render 'layouts/header' %>
     <div class="yield-container">
-      <% if flash[:notice] %>
+      <% if flash[:notice] || flash[:alert] %>
         <div class="alert alert-info">
           <%= content_tag :p, notice, class: "element-inline" %>
+          <%= content_tag :p, alert, class: "element-inline" %>
           <button type="button" class="close element-inline" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
       <% end %>
+
       <%= yield %>
     </div>
     <%= render 'layouts/footer' %>
