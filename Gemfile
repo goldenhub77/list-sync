@@ -39,6 +39,11 @@ gem 'bootstrap3-datetimepicker-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+#devise user authentication with twitter/facebook integration
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
 
 group :development, :test do
   # Adds support for Capybara system testing and selenium driver
