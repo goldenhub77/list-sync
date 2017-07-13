@@ -1,7 +1,5 @@
 <%= form_for @list do |f| %>
-  <% if flash[:error] %>
-    <%= render 'shared/errors', collection: flash[:error] %>
-  <% end %>
+  <%= render 'shared/errors', collection: flash[:error] %>
   <div class="form-group row">
     <%= f.label :title, class: "col-sm-2 col-form-label" %>
     <div class="col-sm-7">
