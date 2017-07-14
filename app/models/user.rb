@@ -15,8 +15,8 @@ class User < ApplicationRecord
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
-      user.name = auth.info.name   # assuming the user model has a name
-      user.profile_picture = auth.info.image # assuming the user model has an image
+      user.name = auth.info.name
+      user.profile_picture = auth.info.image #no functionality for this yet, but will be implemented
       # If you are using confirmable and the provider(s) you use validate emails,
       # uncomment the line below to skip the confirmation emails.
       # user.skip_confirmation!
@@ -33,9 +33,10 @@ class User < ApplicationRecord
     end
   end
 
+# if registering from LystSync directly this handles the password restrictions
   def password_complexity
-    if provider.present? && password.present? and not password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d). /)
-      errors.add :password, "must include at least one lowercase letter, one uppercase letter, and one digit"
+    if provider.nil? && password.present? and not password.match(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=.\-_*])([a-zA-Z0-9@#$%^&+=*.\-_]){3,}$/)
+      errors.add :password, "must include at least one lowercase letter, one uppercase letter, one digit, and one symbol"
     end
   end
 end

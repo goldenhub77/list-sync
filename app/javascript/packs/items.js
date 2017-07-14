@@ -1,7 +1,3 @@
-let validate = () => {
-  return confirm("Are you sure you want to change?");
-};
-
 $(document).ready( () => {
   let dates = $(".js-item-date-completed");
   let humanDateTags = $(".js-item-human-date");

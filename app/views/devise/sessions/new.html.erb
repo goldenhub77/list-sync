@@ -1,34 +1,60 @@
 <h1>Log in</h1>
+
 <div class="container">
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+	<div class="row main">
+		<div class="main-login main-center">
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <%= render 'shared/errors', collection: devise_error_messages! %>
 
-    <div class="form-group row">
-      <%= f.label :email, class: "col-sm-2 col-form-label" %><br />
-      <div class="col-sm-7">
-        <%= f.email_field :email, class: "form-control" %>
-      </div>
-    </div>
+				<div class="form-group">
+					<%= f.label :email, class: "cols-sm-2 control-label" %>
+					<div class="cols-sm-10">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+							<%= f.email_field :email, class: "form-control", placeholder: "Enter your Email" %>
+						</div>
+					</div>
+				</div>
 
-    <div class="form-group row">
-      <%= f.label :password, class: "col-sm-2 col-form-label" %><br />
-      <div class="col-sm-7">
-        <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
-      </div>
-    </div>
+				<div class="form-group">
+					<%= f.label :password, class: "cols-sm-2 control-label" %> <i>(leave blank if you don't want to change it)</i>
+					<div class="cols-sm-10">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+              <%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: "Enter your Password" %>
+						</div>
+            <% if @minimum_password_length %>
+              <em>(<%= @minimum_password_length %> characters minimum with 1 lowercase, 1 capital, and 1 symbol.)</em>
+            <% end %>
+					</div>
+				</div>
 
-    <% if devise_mapping.rememberable? -%>
-      <div class="form-group row">
-        <%= f.label :remember_me, class: "col-sm-6 col-form-label" %>
-        <div class="col-sm-1">
-          <%= f.check_box :remember_me%>
+        <div class="form-group">
+          <%= f.label :remember_me, class: "cols-sm-2 control-label" %>
+           <div class="cols-sm-10">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+              <%= f.check_box :remember_me, { "data-onstyle": "success", "data-offstyle": "info", "data-toggle": "toggle", "data-on": "Yes", "data-off": "No" } %>
+            </div>
+          </div>
         </div>
-      </div>
-    <% end -%>
 
-    <div class="form-group row">
-      <%= f.submit "Log in", class: "btn btn-lg btn-primary btn-center" %>
-    </div>
-  <% end %>
+				<div class="form-group">
+					<%= f.submit "Log In", class: "btn btn-primary btn-lg btn-block login-button" %>
+				</div>
 
+        <div class="form-group">
+          <%- if devise_mapping.omniauthable? %>
+            <%- resource_class.omniauth_providers.each do |provider| %>
+              <%= link_to omniauth_authorize_path(resource_name, provider), class: "btn btn-facebook btn-lg btn-block" do %>
+                <i class="fa fa-facebook-square fa-2x"></i><span>Connect with Facebook</span>
+              <% end %>
+            <% end -%>
+          <% end -%>
+        </div>
+
+			<% end %>
+		</div>
+	</div>
   <%= render "devise/shared/links" %>
 </div>
