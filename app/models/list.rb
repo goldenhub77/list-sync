@@ -1,6 +1,8 @@
 class List < ApplicationRecord
   belongs_to :user
   has_many :items, dependent: :destroy
+  has_many :lists_users, dependent: :destroy
+  has_many :collaborators, source: :user, through: :lists_users, foreign_key: :user_id
 
   validates :title, presence: true
   validates :public, inclusion: { in: [true, false] }

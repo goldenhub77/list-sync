@@ -5,8 +5,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable,
          :omniauth_providers => [:facebook]
 
-  has_many :lists
-  has_many :items
+  has_many :lists, dependent: :destroy
+  has_many :items, dependent: :destroy
+  has_many :lists_users, dependent: :destroy
+  has_many :list_collaborations, source: :list, through: :lists_users, foreign_key: :list_id
+
   accepts_nested_attributes_for :lists
 
   validates :provider, presence: true, allow_blank: true
