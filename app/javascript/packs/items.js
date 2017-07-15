@@ -11,7 +11,7 @@ $(document).ready( () => {
   }
 
   $(".js-item-completed").change((event) => {
-    event.delegateTarget.form.elements[4].value = moment().format();
+    event.delegateTarget.form.elements[5].value = moment().format();
     event.currentTarget.form.submit();
   });
 });
