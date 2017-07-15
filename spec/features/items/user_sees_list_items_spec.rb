@@ -10,6 +10,7 @@ feature 'user sees list items', %{
     4.times do
       FactoryGirl.create(:item, list: list)
     end
+    login_as(list.user, scope: :user)
   end
 
   scenario 'user visits a list and sees all items' do

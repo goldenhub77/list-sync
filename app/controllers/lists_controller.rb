@@ -1,6 +1,7 @@
 class ListsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_list, only: [:show, :edit, :update, :destroy]
+  before_action :find_user, only: [:new, :show, :edit, :update, :destroy]
 
   def index
     @lists = List.public.order("title DESC")
@@ -54,11 +55,19 @@ class ListsController < ApplicationController
     @list = List.find(get_list_params[:id])
   end
 
+  def find_user
+    if get_list_params[:user_id].present?
+      @user = User.find(get_list_params[:user_id])
+    else
+      @user = current_user
+    end
+  end
+
   def get_list_params
-    params.permit(:id)
+    params.permit(:id, :user_id)
   end
 
   def post_list_params
-    params.require(:list).permit(:title, :public, :due_date)
+    params.require(:list).permit(:title, :public, :due_date, :user_id)
   end
 end

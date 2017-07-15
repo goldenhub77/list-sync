@@ -5,7 +5,10 @@ feature 'user creates list item', %{
 } do
 
   scenario 'user creates list item' do
-    list = FactoryGirl.create(:list)
+    user = FactoryGirl.create(:user)
+    list = FactoryGirl.create(:list, user_id: user.id)
+    login_as(user, scope: :user)
+
 
     visit new_list_item_path(list)
 

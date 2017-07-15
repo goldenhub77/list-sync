@@ -1,7 +1,7 @@
 <%= javascript_pack_tag 'items' %>
 <h1><%= @list.title %></h1>
 <div class="container">
-  <%= link_to "Edit", edit_list_path(@list), id: "edit-list-#{@list.id}", class: "btn btn-primary" %>
+  <%= link_to "Edit", edit_user_list_path(@user, @list), id: "edit-list-#{@list.id}", class: "btn btn-primary" %>
   <%= link_to "Delete", list_path(@list), method: "delete", id: "delete-list-#{@list.id}", class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
   <% if @list.present? %>
     <%= time_left_until_due(@list.due_date) %>
@@ -21,6 +21,7 @@
           <div class="col-xs-6 col-md-2">
             <%= form_for [@list, item] do |f| %>
               <%= f.hidden_field :list_id, value: @list.id %>
+              <%= f.hidden_field :user_id, value: item.user.id %>
               <%= f.hidden_field :date_completed, value: format_date_to_ISO(item.date_completed), class: "js-item-date-completed" %>
               <%= f.check_box :completed, { "data-onstyle": "success", "data-offstyle": "warning", "data-toggle": "toggle", "data-on": "Completed", "data-off": "Incomplete", class: "js-item-completed" } %>
             <% end %>

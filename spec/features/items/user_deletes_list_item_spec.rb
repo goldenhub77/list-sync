@@ -9,13 +9,14 @@ feature 'user deletes list item', %{
     4.times do
       FactoryGirl.create(:item, list: list)
     end
+    login_as(list.user, scope: :user)
   end
 
   scenario 'user delete first item from list show page' do
     @list = List.first
     @item = @list.items.first
 
-    visit list_path(@list)
+    visit user_list_path(@list.user, @list)
 
     click_on "delete-item-#{@item.id}"
 

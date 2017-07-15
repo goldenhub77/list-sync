@@ -1,7 +1,9 @@
 <%= form_for [@list, @item] do |f| %>
   <%= render 'shared/errors', collection: flash[:error] %>
+
+  <%= f.hidden_field :list_id, value: @list.id %>
+  <%= f.hidden_field :user_id, value: @user.id %>
   <div class="form-group row">
-    <%= f.hidden_field :list_id, value: @list.id %>
     <%= f.label :title, class: "col-sm-2 col-form-label" %>
     <div class="col-sm-7">
       <%= f.text_field :title, class: "form-control" %><br />

@@ -9,6 +9,7 @@ feature 'user updates list item', %{
     4.times do
       FactoryGirl.create(:item, list: list)
     end
+    login_as(list.user, scope: :user)
   end
 
   scenario 'user updates first item from list from list show page' do

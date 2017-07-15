@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_item, only: [:show, :edit, :update, :destroy]
+  before_action :find_user, only: [:new, :edit, :show, :update, :destroy]
   before_action :find_list, except: [:index]
 
   def index
@@ -45,7 +46,7 @@ class ItemsController < ApplicationController
       flash[:notice] = "Deleted Item Successfully."
       redirect_to list_path(@list)
     else
-      redirect_to item_path(@item)
+      redirect_to list_item_path(@list, @item)
     end
   end
 
@@ -59,11 +60,19 @@ class ItemsController < ApplicationController
     @list = List.find(get_item_params[:list_id])
   end
 
+  def find_user
+    if get_item_params[:user_id].present?
+      @user = User.find(get_item_params[:user_id])
+    else
+      @user = current_user
+    end
+  end
+
   def get_item_params
-    params.permit(:id, :list_id)
+    params.permit(:id, :list_id, :user_id)
   end
 
   def post_item_params
-    params.require(:item).permit(:title, :list_id, :completed, :date_completed)
+    params.require(:item).permit(:title, :list_id, :completed, :date_completed, :user_id)
   end
 end

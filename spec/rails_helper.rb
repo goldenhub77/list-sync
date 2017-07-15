@@ -1,34 +1,29 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
+
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
-require 'rspec/rails'
+require "rspec/rails"
 require "capybara/rails"
 require "valid_attribute"
-
-#enable OAuth testing
-OmniAuth.config.test_mode = true
-
-#fake facebook OmniAuth callback
-OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new({
-  provider: "facebook",
-  uid: "123456",
-  info:
-  {
-    email: "test@test.com",
-    name: "Test Name",
-    image: "http://website.com/image/12394854743" },
- credentials:
-  {token:
-    "fakhwekjnf89ry93hfiueaflkjh2h21ygj21hb1kjGHJGJ12hj2ajRwZDZD",
-    "expires_at"=>1503456789,
-    "expires"=>true}
-})
+require "support/omniauth"
 
 RSpec.configure do |config|
+  #support for FactoryGirl
   config.include FactoryGirl::Syntax::Methods
+  #support for signing in automatically in capybara
+  config.include Warden::Test::Helpers
+  #devise sign_in test support for controllers and views
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :view
+
+  #resets warden configuration after every test
+  config.after :each do
+    Warden.test_reset!
+    OmniAuth.config.mock_auth[:facebook] = nil
+  end
 end
 # Add additional requires below this line. Rails is not loaded until this point!
 

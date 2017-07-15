@@ -8,6 +8,7 @@ feature 'user views list show page', %{
     4.times do
       FactoryGirl.create(:list)
     end
+    login_as(List.first.user, scope: :user)
   end
 
   scenario 'user visits lists show page' do

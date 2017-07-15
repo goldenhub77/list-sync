@@ -5,6 +5,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable,
          :omniauth_providers => [:facebook]
 
+  has_many :lists
+  has_many :items
+  accepts_nested_attributes_for :lists
+
   validates :provider, presence: true, allow_blank: true
   validates :uid, presence: true, allow_blank: true
   validate :password_complexity

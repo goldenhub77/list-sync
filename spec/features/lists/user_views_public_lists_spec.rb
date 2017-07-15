@@ -12,6 +12,7 @@ feature 'user sees only public lists', %{
     2.times do
       FactoryGirl.create(:list, public: true)
     end
+    login_as(List.first.user, scope: :user)
   end
 
   scenario 'user visits lists' do

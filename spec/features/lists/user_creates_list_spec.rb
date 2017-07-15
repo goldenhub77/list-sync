@@ -4,6 +4,11 @@ feature 'user creates list', %{
   As a user I should be able to create a list
 } do
 
+  before(:each) do
+    user = FactoryGirl.create(:user)
+    login_as(user, scope: :user)
+  end
+
   scenario 'user creates public list' do
 
     visit new_list_path
