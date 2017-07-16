@@ -1,5 +1,5 @@
 <%= form_for @list do |f| %>
-  <%= render 'shared/errors', collection: flash[:error] %>
+  <%= render 'shared/errors', collection: form_error_messages!(@list) %>
 
   <%= f.hidden_field :user_id, value: @user.id %>
   <div class="form-group row">

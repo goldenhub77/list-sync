@@ -10,4 +10,13 @@ module ApplicationHelper
       nil
     end
   end
+
+  def form_error_messages!(resource)
+    return nil unless form_error_messages?(resource)
+    resource.errors.full_messages
+  end
+
+  def form_error_messages?(resource)
+    !resource.errors.empty?
+  end
 end

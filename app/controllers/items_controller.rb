@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_item, only: [:show, :edit, :update, :destroy]
-  before_action :find_user, only: [:new, :edit, :show, :update, :destroy]
+  before_action :find_user, only: [:new, :create, :edit, :show, :update, :destroy]
   before_action :find_list, except: [:index]
 
   def index
@@ -18,7 +18,6 @@ class ItemsController < ApplicationController
       flash[:notice] = "Created Item Successfully."
       redirect_to list_path(@list)
     else
-      flash.now[:error] = @item.errors.full_messages
       render :new
     end
   end

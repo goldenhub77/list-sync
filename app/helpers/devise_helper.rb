@@ -1,4 +1,5 @@
 module DeviseHelper
+
   def devise_error_messages!
     return nil unless devise_error_messages?
     resource.errors.full_messages

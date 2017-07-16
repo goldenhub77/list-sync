@@ -4,7 +4,6 @@
 	<div class="row main">
 		<div class="main-login main-center">
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-        <%= render 'shared/errors', collection: devise_error_messages! %>
 
 				<div class="form-group">
 					<%= f.label :email, class: "cols-sm-2 control-label" %>

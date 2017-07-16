@@ -44,6 +44,9 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
 
+#implements nice notification messages in javascript
+gem 'toastr-rails'
+
 group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
