@@ -24,6 +24,14 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::ControllerHelpers, type: :view
 
+  config.before :suite do
+    # Run webpack compilation before suite, so assets exists in public/packs
+    # It would be better to run the webpack compilation only if at least one :js spec
+    # should be executed, but `when_first_matching_example_defined`
+    # does not work with `config.infer_spec_type_from_file_location!`
+    # see https://github.com/rspec/rspec-core/issues/2366
+    `bin/webpack`
+  end
   #resets warden configuration after every test
   config.after :each do
     Warden.test_reset!

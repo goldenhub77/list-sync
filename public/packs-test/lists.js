@@ -67,7 +67,7 @@
 /* 0 */
 /***/ (function(module, exports) {
 
-$(document).on("turbolinks:load", function () {
+$(document).ready(function () {
   var dateTimeHidden = $("#js-list-due-date");
   var dateTimeString = dateTimeHidden.val() || null;
   var dueDateInput = $("#js-date-time-view");

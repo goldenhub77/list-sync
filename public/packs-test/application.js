@@ -67,7 +67,7 @@
 /* 0 */
 /***/ (function(module, exports) {
 
-$(document).on("turbolinks:load", function () {
+$(document).ready(function () {
   var dateTimeHidden = $("#js-list-due-date");
   var dateTimeString = dateTimeHidden.val() || null;
   var dueDateInput = $("#js-date-time-view");
@@ -108,10 +108,9 @@ $(document).on("turbolinks:load", function () {
 //
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
-
+var lists = __webpack_require__(0);
 
 $(document).ready(function () {
-  var lists = __webpack_require__(0);
 
   $(".close").on("click", function (event) {
     $(".close").parent().hide("slow");

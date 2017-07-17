@@ -53,11 +53,9 @@ feature 'user creates list', %{
     visit new_list_path
 
     fill_in "Title", with: "Test list"
-    #inputs formatted date into Due date field
-    #changes hidden field to normal text field so selenium will enter value
-    execute_script("$('#js-list-due-date')[0].setAttribute('type', 'text');");
-    #updates Due date with a test date
-    find('input', id: 'js-list-due-date', visible: false).set(date)
+    #server reads due date params from a hidden input field
+    #simulate user picking datetime
+    execute_script("$('#js-list-due-date')[0].value = '#{date}';")
     #when creating a list it defaults to public being unchecked
 
     click_button "Create List"
