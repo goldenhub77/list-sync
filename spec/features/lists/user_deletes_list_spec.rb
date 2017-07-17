@@ -11,12 +11,13 @@ feature 'user deletes list', %{
     login_as(List.first.user, scope: :user)
   end
 
-  scenario 'user visits lists' do
+  scenario 'user visits lists', js: true do
     @list = List.first
 
     visit list_path(@list)
 
     click_on "Delete"
+    page.accept_alert
 
     expect(@list.items).to be_empty
     expect(page).to have_content("Deleted List Successfully.")

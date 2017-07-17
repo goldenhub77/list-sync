@@ -5,7 +5,7 @@ feature 'User signs up directly through LystSync', %{
   LystSync if I choose
 } do
 
-  scenario 'User clicks Sign Up and fills in required information' do
+  scenario 'User clicks Sign Up and fills in required information', js: true do
     visit new_user_registration_path
 
     fill_in "Name", with: "John Smith"
@@ -19,7 +19,7 @@ feature 'User signs up directly through LystSync', %{
     expect(page).to have_content("jsmith77@test.com")
   end
 
-  scenario 'User fills in false information when signing up' do
+  scenario 'User fills in false information when signing up', js: true do
     visit new_user_registration_path
 
     fill_in "Name", with: ""

@@ -10,7 +10,7 @@ feature 'User updates account information', %{
     login_as(user, scope: :user)
   end
 
-  scenario 'User updates account information' do
+  scenario 'User updates account information', js: true do
     user = User.first
     visit edit_user_registration_path(user)
 
@@ -35,7 +35,7 @@ feature 'User updates account information', %{
     expect(page).to have_current_path(root_path)
   end
 
-  scenario 'User fails to update account information' do
+  scenario 'User fails to update account information', js: true do
     user = User.first
     visit edit_user_registration_path(user)
 

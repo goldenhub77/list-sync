@@ -48,22 +48,28 @@ gem 'omniauth-facebook'
 gem 'toastr-rails'
 
 group :development, :test do
-  # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '~> 2.13'
-  gem 'selenium-webdriver'
   #use pry for debugging
   gem 'pry-rails'
-  #user rspec instead of minitest
-  gem 'rspec-rails'
-  gem 'valid_attribute'
-  gem 'factory_girl_rails'
   gem 'coffee-rails'
-  #support for javascript spec testing
-  gem 'teaspoon-jasmine'
-  gem 'launchy', require: false
   #handles environment variables in .env
   gem 'dotenv-rails'
 
+end
+
+group :test do
+  # Adds support for Capybara system testing and selenium driver
+  #use rspec instead of minitest
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'selenium-webdriver'
+  #use chrome instead of firefox for js capybara testing
+  gem "chromedriver-helper", "1.0.0"
+  #support for javascript spec testing
+  gem 'teaspoon-jasmine'
+  gem 'launchy', require: false
+
+  gem 'valid_attribute'
+  gem 'factory_girl_rails'
 end
 
 group :development do

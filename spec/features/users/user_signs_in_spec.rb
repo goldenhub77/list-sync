@@ -5,7 +5,7 @@ feature 'User signs in', %{
   or an OAuth provider (currently only Facebook)
 } do
 
-  scenario 'User signs in directly' do
+  scenario 'User signs in directly', js: true do
       user = FactoryGirl.create(:user)
       visit new_user_session_path
 
@@ -19,7 +19,7 @@ feature 'User signs in', %{
 
   end
 
-  scenario 'User fails to sign in directly' do
+  scenario 'User fails to sign in directly', js: true do
       visit new_user_session_path
 
       fill_in "Email", with: ""
@@ -32,7 +32,7 @@ feature 'User signs in', %{
 
   end
 
-  scenario 'User signs in using Facebook' do
+  scenario 'User signs in using Facebook', js: true do
       visit new_user_session_path
       set_facebook_omniauth()
 
@@ -42,7 +42,7 @@ feature 'User signs in', %{
       expect(page).to have_content("test@test.com")
   end
 
-  scenario 'User fails to sign in using facebook' do
+  scenario 'User fails to sign in using facebook', js: true do
       visit new_user_session_path
       invalid_facebook_omniauth()
 

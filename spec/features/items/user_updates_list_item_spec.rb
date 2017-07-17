@@ -12,7 +12,7 @@ feature 'user updates list item', %{
     login_as(list.user, scope: :user)
   end
 
-  scenario 'user updates first item from list from list show page' do
+  scenario 'user updates first item from list from list show page', js: true do
     @list = List.first
     @item = @list.items.first
 
@@ -31,7 +31,7 @@ feature 'user updates list item', %{
     expect(page).to have_content("Different item")
   end
 
-  scenario 'user updates first item from list from list show page' do
+  scenario 'user updates first item from list from list show page', js: true do
     @list = List.first
     @item = @list.items.first
 

@@ -9,12 +9,14 @@ feature 'user creates list', %{
     login_as(user, scope: :user)
   end
 
-  scenario 'user creates public list' do
+  scenario 'user creates public list', js: true do
 
     visit new_list_path
 
     fill_in "Title", with: "Test list"
-    check "Public"
+    # handles toggling "Public" option on form
+    find('label', class: 'active').click
+
 
     click_button "Create List"
 
@@ -44,15 +46,18 @@ feature 'user creates list', %{
     expect(page).not_to have_content("Test list")
   end
 
-  scenario 'user creates list with due date' do
+  scenario 'user creates list with due date', js: true do
 
-    date = DateTime.now + 36.hours
+    date = (DateTime.now + 36.hours).to_s
 
     visit new_list_path
 
     fill_in "Title", with: "Test list"
-    #server reads due date params from a hidden input field
-    find(:xpath, "//input[@id='js-list-due-date']", visible: false).set date.to_s
+    #inputs formatted date into Due date field
+    #changes hidden field to normal text field so selenium will enter value
+    execute_script("$('#js-list-due-date')[0].setAttribute('type', 'text');");
+    #updates Due date with a test date
+    find('input', id: 'js-list-due-date', visible: false).set(date)
     #when creating a list it defaults to public being unchecked
 
     click_button "Create List"

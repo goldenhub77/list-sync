@@ -10,6 +10,11 @@ require "capybara/rails"
 require "valid_attribute"
 require "support/omniauth"
 
+Capybara.ignore_hidden_elements = false
+Capybara.register_driver :selenium do |app|
+  Capybara::Selenium::Driver.new(app, browser: :chrome)
+end
+
 RSpec.configure do |config|
   #support for FactoryGirl
   config.include FactoryGirl::Syntax::Methods
