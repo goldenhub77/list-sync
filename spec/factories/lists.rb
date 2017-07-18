@@ -3,6 +3,6 @@ FactoryGirl.define do
     sequence(:title) { |n| "List Name#{n}"}
     public false
     due_date nil
-    user 
+    user
   end
 end

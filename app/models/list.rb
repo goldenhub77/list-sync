@@ -1,5 +1,6 @@
 class List < ApplicationRecord
   belongs_to :user
+  belongs_to :creator, class_name: :User, foreign_key: :user_id
   has_many :items, dependent: :destroy
   has_many :lists_users, dependent: :destroy
   has_many :collaborators, source: :user, through: :lists_users, foreign_key: :user_id

@@ -16,6 +16,7 @@ class User < ApplicationRecord
   validates :uid, presence: true, allow_blank: true
   validate :password_complexity
   validates :name, presence: true
+  validates :admin, presence: true, allow_blank: true, inclusion: { in: [true, false] }
 
   #handled returned OAuth data to create a user
   def self.from_omniauth(auth)
