@@ -19,7 +19,8 @@ class User < ApplicationRecord
   def role(list)
     begin
       lists_users.where('list_id = ?', list).first.role
-    rescue ActiveRecord::RecordNotFound, NoMethodError
+    rescue ActiveRecord::StatementInvalid, ActiveRecord::RecordNotFound, NoMethodError => error
+      puts error
       return nil
     end
   end

@@ -1,7 +1,6 @@
 class Item < ApplicationRecord
   belongs_to :list
   belongs_to :user
-  belongs_to :creator, class_name: :User, foreign_key: :user_id
 
   validates :title, presence: true, uniqueness: { case_sensitive: false }
   validates :list_id, presence: true

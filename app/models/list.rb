@@ -1,6 +1,5 @@
 class List < ApplicationRecord
   belongs_to :user
-  belongs_to :creator, class_name: :User, foreign_key: :user_id
   has_many :items, dependent: :destroy
   has_many :lists_users, dependent: :destroy
   has_many :collaborators, source: :user, through: :lists_users, foreign_key: :user_id
@@ -16,7 +15,8 @@ class List < ApplicationRecord
   def role(user)
     begin
       lists_users.where('user_id = ?', user).first.role
-    rescue ActiveRecord::RecordNotFound, NoMethodError
+    rescue ActiveRecord::StatementInvalid, ActiveRecord::RecordNotFound, NoMethodError => error
+      puts error
       return nil
     end
   end

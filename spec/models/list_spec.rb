@@ -54,4 +54,34 @@ RSpec.describe List, type: :model do
       expect(list.send(:due_date_greater_than_today?)).to eq(nil)
     end
   end
+
+  describe '.role(user)', %{
+    This is only for checking the role of a particular collaborator for the list being called.
+    The argument has to be a user_id or user object
+    } do
+
+
+    let(:user) { User.first }
+    let(:list) { FactoryGirl.create(:list, user_id: user.id) }
+    let(:list_collaboration) { FactoryGirl.create(:lists_user, user_id: user.id, list_id: list.id) }
+
+
+    it 'returns nil if NoMethodError or RecordNotFound' do
+      user_bad_type = "string"
+      user_no_record = 0
+
+      expect(list.collaborators).to eq([])
+      expect(list.role(user_bad_type)).to eq(nil)
+      expect(list.role(user_no_record)).to eq(nil)
+    end
+
+    it 'returns either "member" or "admin" depending on user role for particular list' do
+      list_collaboration.reload
+      user.reload
+      list.reload
+
+      expect(list.collaborators).not_to be_empty
+      expect(list.role(user)).to eq('member')
+    end
+  end
 end
