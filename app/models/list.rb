@@ -13,6 +13,14 @@ class List < ApplicationRecord
     List.where('public = true')
   end
 
+  def role(user)
+    begin
+      lists_users.where('user_id = ?', user).first.role
+    rescue ActiveRecord::RecordNotFound, NoMethodError
+      return nil
+    end
+  end
+
   protected
 
   def check_date_format

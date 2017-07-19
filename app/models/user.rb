@@ -18,6 +18,14 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :admin, presence: true, allow_blank: true, inclusion: { in: [true, false] }
 
+  def role(list)
+    begin
+      lists_users.where('list_id = ?', list).first.role
+    rescue ActiveRecord::RecordNotFound, NoMethodError
+      return nil
+    end
+  end
+
   #handled returned OAuth data to create a user
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
