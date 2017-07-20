@@ -1,7 +1,7 @@
 class ListsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_list, only: [:show, :edit, :update, :destroy]
-  before_action :find_user, only: [:new, :create, :show, :edit, :update, :destroy]
+  before_action :find_user, except: [:index]
 
   def index
     @lists = List.public.order("title DESC")

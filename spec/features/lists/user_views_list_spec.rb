@@ -5,9 +5,7 @@ feature 'user views list show page', %{
 } do
 
   before(:each) do
-    4.times do
-      FactoryGirl.create(:list)
-    end
+    FactoryGirl.create(:list)
     login_as(List.first.user, scope: :user)
   end
 

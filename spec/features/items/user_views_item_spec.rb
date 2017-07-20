@@ -6,9 +6,7 @@ feature 'user views list item', %{
 
   before(:each) do
     list = FactoryGirl.create(:list)
-    4.times do
-      FactoryGirl.create(:item, list: list)
-    end
+    FactoryGirl.create(:item, list: list)
     login_as(list.user, scope: :user)
   end
 

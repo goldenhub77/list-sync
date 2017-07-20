@@ -61,6 +61,8 @@ group :test do
   #use rspec instead of minitest
   gem 'rspec-rails'
   gem 'capybara'
+  # provides assigns helper in controller tests
+  gem 'rails-controller-testing'
   gem 'selenium-webdriver'
   #use chrome instead of firefox for js capybara testing
   gem "chromedriver-helper", "1.0.0"
