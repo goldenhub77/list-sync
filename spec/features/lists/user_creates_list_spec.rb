@@ -15,7 +15,7 @@ feature 'user creates list', %{
 
     fill_in "Title", with: "Test list"
     # handles toggling "Public" option on form
-    find('label', class: 'active').click
+    find('label', text: 'No').click
 
 
     click_button "Create List"
