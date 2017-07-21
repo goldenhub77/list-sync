@@ -1,11 +1,11 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_item, only: [:show, :edit, :update, :destroy]
+  before_action :find_item, only: [:show, :edit, :update, :destroy, :complete]
   before_action :find_user, expect: [:index]
   before_action :find_list, except: [:index]
 
   def index
-    @items = Item.order('created_at DESC')
+    @items = policy_scope(Item)
   end
 
   def new
@@ -30,7 +30,6 @@ class ItemsController < ApplicationController
 
   def update
     @item.update(post_item_params)
-    @item.completed.present? ? nil : @item.date_completed = nil
     if @item.save
       flash[:notice] = "Updated Item Successfully."
       redirect_to list_path(@list)
@@ -49,10 +48,23 @@ class ItemsController < ApplicationController
     end
   end
 
+  def complete
+    @item.update(item_completed_params)
+    @item.completed.present? ? nil : @item.date_completed = nil
+    if @item.save
+      flash[:notice] = "Item completed Successfully."
+      redirect_to list_path(@list)
+    else
+      flash.now[:error] = @item.errors.full_messages
+      redirect_to list_path(@list)
+    end
+  end
+
   protected
 
   def find_item
-    @item = Item.find(get_item_params[:id])
+    @item = Item.find(get_item_params[:id] ||= post_item_params[:id])
+    authorize(@item)
   end
 
   def find_list
@@ -71,7 +83,11 @@ class ItemsController < ApplicationController
     params.permit(:id, :list_id, :user_id)
   end
 
+  def item_completed_params
+    params.require(:item).permit(:id, :list_id, :completed, :date_completed, :user_id)
+  end
+
   def post_item_params
-    params.require(:item).permit(:title, :list_id, :completed, :date_completed, :user_id)
+    params.require(:item).permit(:id, :title, :list_id, :user_id)
   end
 end

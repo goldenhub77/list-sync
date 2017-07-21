@@ -47,6 +47,9 @@ gem 'omniauth-facebook'
 #implements nice notification messages in javascript
 gem 'toastr-rails'
 
+#handles security policies for controllers
+gem 'pundit'
+
 group :development, :test do
   #use pry for debugging
   gem 'pry-rails'

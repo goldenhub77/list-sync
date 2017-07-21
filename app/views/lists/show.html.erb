@@ -19,7 +19,8 @@
             <%= link_to "Delete", list_item_path(@list, item), method: "delete", id: "delete-item-#{item.id}", class: "btn btn-danger element-inline", data: { confirm: "Are you sure?" } %>
           </div>
           <div class="col-xs-6 col-md-2">
-            <%= form_for [@list, item] do |f| %>
+            <%= form_for [@list, item], method: :put, url: [@list,item, :complete] do |f| %>
+              <%= f.hidden_field :id, value: item.id %>
               <%= f.hidden_field :list_id, value: @list.id %>
               <%= f.hidden_field :user_id, value: item.user.id %>
               <%= f.hidden_field :date_completed, value: format_date_to_ISO(item.date_completed), class: "js-item-date-completed" %>

@@ -6,7 +6,7 @@ feature 'user updates list item', %{
 
   before(:each) do
     list = FactoryGirl.create(:list)
-    FactoryGirl.create(:item, list: list)
+    FactoryGirl.create(:item, list: list, user: list.user)
     login_as(list.user, scope: :user)
   end
 

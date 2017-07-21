@@ -4,7 +4,7 @@ class ListsController < ApplicationController
   before_action :find_user, except: [:index]
 
   def index
-    @lists = List.public.order("title DESC")
+    @lists = policy_scope(List)
   end
 
   def new
@@ -52,6 +52,7 @@ class ListsController < ApplicationController
 
   def find_list
     @list = List.find(get_list_params[:id])
+    authorize(@list)
   end
 
   def find_user

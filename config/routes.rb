@@ -4,7 +4,9 @@ Rails.application.routes.draw do
 
   resources :lists
   resources :lists do
-    resources :items, except: [:index]
+    resources :items, except: [:index] do
+      put 'complete'
+    end
   end
 
   resources :users do
