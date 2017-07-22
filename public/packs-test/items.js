@@ -81,8 +81,8 @@ $(document).ready(function () {
   }
 
   $(".js-item-completed").change(function (event) {
-    event.delegateTarget.form.elements[6].value = moment().format();
-    event.currentTarget.form.submit();
+    event.target.form.elements.item_date_completed.value = moment().format();
+    event.target.form.submit();
   });
 });
 

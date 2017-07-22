@@ -28,11 +28,10 @@ class ListPolicy < ApplicationPolicy
   protected
 
   def security_for_updating
-    user.admin? or (record.user == user) or (user.role(record) == 'admin')
+    user.admin? or user.role(record) == 'admin' or record.user == user
   end
 
   def member_security
-    user.admin? or (record.user == user) or (user.role(record) == 'member')
+    user.admin? or user.role(record) == 'member' or record.user == user
   end
-
 end

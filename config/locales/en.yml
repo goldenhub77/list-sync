@@ -40,3 +40,4 @@ en:
      edit?: 'You cannot edit this item.'
      show?: 'You are not a member of this item.'
      destroy?: 'You cannot delete this item.'
+     complete?: 'You do not have rights to change'

@@ -32,11 +32,11 @@ class ItemPolicy < ApplicationPolicy
   protected
 
   def security_for_updating
-    user.admin? or (record.user == user) or (user.role(record.list) == 'admin')
+    user.admin? or user.role(record.list) == 'admin' or record.user == user or record.list.user == user
   end
 
   def member_security
-    user.admin? or (record.user == user) or (user.role(record.list) == 'member')
+    user.admin? or user.role(record.list) == 'member' or record.user == user or record.list.user == user
   end
 
   #not 100% about how I want to handle this function yet
