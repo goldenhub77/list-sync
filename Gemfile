@@ -75,6 +75,9 @@ group :test do
 
   gem 'valid_attribute'
   gem 'factory_girl_rails'
+
+  #include custom matchers for testing pundit
+  gem 'pundit-matchers', '~> 1.3.0'
 end
 
 group :development do
