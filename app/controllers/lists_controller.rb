@@ -5,6 +5,14 @@ class ListsController < ApplicationController
 
   def index
     @lists = policy_scope(List)
+    if get_list_params[:user_id].present?
+      @user = User.find(get_list_params[:user_id])
+      if current_user.admin? || current_user == @user
+        @lists = @user.lists.order("title DESC")
+      else
+        redirect_to lists_path
+      end
+    end
   end
 
   def new

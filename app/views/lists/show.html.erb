@@ -1,8 +1,10 @@
 <%= javascript_pack_tag 'items' %>
 <h1><%= @list.title %></h1>
 <div class="container">
-  <%= link_to "Edit", edit_user_list_path(@user, @list), id: "edit-list-#{@list.id}", class: "btn btn-primary" %>
-  <%= link_to "Delete", list_path(@list), method: "delete", id: "delete-list-#{@list.id}", class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
+  <% if policy(@list).edit? %>
+    <%= link_to "Edit", edit_user_list_path(@user, @list), id: "edit-list-#{@list.id}", class: "btn btn-primary" %>
+    <%= link_to "Delete", list_path(@list), method: "delete", id: "delete-list-#{@list.id}", class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
+  <% end %>
   <% if @list.present? %>
     <%= time_left_until_due(@list.due_date) %>
   <% end %>
@@ -15,8 +17,10 @@
             <h3><%= link_to item.title, list_item_path(@list, item) %></h3>
           </div>
           <div class="col-xs-6 col-md-3">
-            <%= link_to "Edit", edit_list_item_path(@list, item), id: "edit-item-#{item.id}", class: "btn btn-default element-inline" %>
-            <%= link_to "Delete", list_item_path(@list, item), method: "delete", id: "delete-item-#{item.id}", class: "btn btn-danger element-inline", data: { confirm: "Are you sure?" } %>
+            <% if policy(item).edit? %>
+              <%= link_to "Edit", edit_list_item_path(@list, item), id: "edit-item-#{item.id}", class: "btn btn-default element-inline" %>
+              <%= link_to "Delete", list_item_path(@list, item), method: "delete", id: "delete-item-#{item.id}", class: "btn btn-danger element-inline", data: { confirm: "Are you sure?" } %>
+            <% end %>
           </div>
           <div class="col-xs-6 col-md-2">
             <%= form_for [@list, item], method: :put, url: [@list,item, :complete] do |f| %>

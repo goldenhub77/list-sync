@@ -1,4 +1,7 @@
 <div class="container">
+  <% if params[:user_id].present? && current_user.admin? && params[:user_id].to_i != current_user.id %>
+    <h2><%= @user.email %></h2>
+  <% end %>
   <% @lists.each do |list| %>
     <div class="panel panel-primary">
       <div class="panel-body">

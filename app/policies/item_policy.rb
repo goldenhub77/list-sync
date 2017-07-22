@@ -39,4 +39,8 @@ class ItemPolicy < ApplicationPolicy
     user.admin? or (record.user == user) or (user.role(record.list) == 'member')
   end
 
+  #not 100% about how I want to handle this function yet
+  # def item_completed_security
+  #   (record.user == user) or (user.role(record.list) == 'admin') or (user.role(record.list) == 'member' and record.completed == false)
+  # end
 end
