@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 
   resources :lists
   resources :lists do
@@ -10,7 +10,10 @@ Rails.application.routes.draw do
   end
 
   resources :users do
-    resources :lists
+    get 'collaborations'
+    resources :lists do
+      post 'join'
+    end
   end
 
 

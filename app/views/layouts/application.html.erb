@@ -24,7 +24,7 @@
           <% flash.each do |f| %>
       	    <% type = f[0].to_s.gsub('alert', 'error').gsub('notice', 'info') %>
             toastr.options.positionClass = 'toast-top-left';
-            toastr.options.timeOut = '2000';
+            toastr.options.timeOut = '3000';
             toastr['<%= type %>']('<%= f[1] %>');
     	   <% end %>
         </script>

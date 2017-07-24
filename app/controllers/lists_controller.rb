@@ -1,6 +1,6 @@
 class ListsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_list, only: [:show, :edit, :update, :destroy]
+  before_action :find_list, only: [:show, :edit, :update, :destroy, :join]
   before_action :find_user, except: [:index]
 
   def index
@@ -56,10 +56,21 @@ class ListsController < ApplicationController
     end
   end
 
+  def join
+    @list_collaboration = ListsUser.create(join_params)
+
+    if @list_collaboration.valid?
+      flash[:notice] = "Joined List Successfully."
+      redirect_to list_path(@list)
+    else
+      redirect_to lists_path
+    end
+  end
+
   protected
 
   def find_list
-    @list = List.find(get_list_params[:id])
+    @list = List.find(get_list_params[:id] ||= join_params[:list_id])
     authorize(@list)
   end
 
@@ -77,5 +88,9 @@ class ListsController < ApplicationController
 
   def post_list_params
     params.require(:list).permit(:title, :public, :due_date, :user_id)
+  end
+
+  def join_params
+    params.permit(:user_id, :list_id)
   end
 end

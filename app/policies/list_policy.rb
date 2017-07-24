@@ -25,6 +25,10 @@ class ListPolicy < ApplicationPolicy
     security_for_updating
   end
 
+  def join?
+    join_security
+  end
+
   protected
 
   def security_for_updating
@@ -33,5 +37,9 @@ class ListPolicy < ApplicationPolicy
 
   def member_security
     user.admin? or user.role(record) == 'member' or record.user == user
+  end
+
+  def join_security
+    user.role(record).nil? && record.public == true
   end
 end

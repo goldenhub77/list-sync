@@ -8,7 +8,7 @@
   <% if @list.present? %>
     <%= time_left_until_due(@list.due_date) %>
   <% end %>
-  <a class="add-btn btn btn-primary" href="<%= new_list_item_path(@list) %>" role="button">&#43;</a>
+  <%= link_to raw("&#43;"), new_list_item_path(@list), role: "button", class: "add-btn btn" %>
   <div class="list-group">
     <% @items.each do |item| %>
       <div class="well list-items">

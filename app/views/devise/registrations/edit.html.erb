@@ -38,7 +38,7 @@
               <%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: "Enter your new Password" %>
 						</div>
             <% if @minimum_password_length %>
-              <em>(<%= @minimum_password_length %> characters minimum with 1 lowercase, 1 capital, and 1 symbol.)</em>
+              <em>(<%= @minimum_password_length %> character minimum with 1 lowercase, 1 capital, and 1 symbol.)</em>
             <% end %>
 					</div>
 				</div>
@@ -75,8 +75,6 @@
       <h3>Cancel my account</h3>
 
       <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger" %></p>
-
-      <%= link_to "Back", :back %>
     </div>
   </div>
 </div>

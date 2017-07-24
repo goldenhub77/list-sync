@@ -9,4 +9,8 @@ module ListsHelper
       "No Due Date"
     end
   end
+
+  def not_joined?(list)
+    current_user.role(list).nil? && current_user != list.user
+  end
 end

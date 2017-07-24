@@ -82,12 +82,8 @@
 }
 
 
-#myFooter .facebook:hover {
-    color: #0077e2;
-}
-
-#myFooter .google:hover {
-    color: #ef1a1a;
+#myFooter .linkedin:hover {
+    color: #0077b5;
 }
 
 #myFooter .github:hover {
