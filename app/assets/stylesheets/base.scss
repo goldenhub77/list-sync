@@ -1,6 +1,6 @@
 // webkit-font-smoothing added to fixed font display issues within Safari and other browsers
 body {
-  font-size: 18px;
+  font-size: 15px;
   background: white url(asset-path("yield-background.png")) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -87,10 +87,6 @@ button.close.element-inline {
 .object-errors {
   padding-left: 5rem;
 }
-
-// .form-group label {
-//   text-align: right;
-// }
 
 .form-explanation {
   font-size: 1.25rem;

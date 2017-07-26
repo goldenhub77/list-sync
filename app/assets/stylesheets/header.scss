@@ -1,8 +1,20 @@
-.global-search-field, .search-submit {
-      display: inline !important;
+#global-search-form.navbar-form {
+  box-shadow: none;
+  padding: 10px 15px;
+  display: inline-block;
+  width: 400px;
+  margin: 0;
+  border: none;
+  .global-search-field *  {
+      display: inline-block;
     }
 
-.global-search-field {
-      margin-bottom: 5px;
-      width: 250px !important;
+  .global-search-field input {
+      width: 70%;
     }
+
+  .global-search-field button {
+      float: right;
+      min-width: 28%;
+    }
+}
