@@ -62,7 +62,6 @@
 #myFooter .second-bar {
     text-align: center;
     background-color: #33373e;
-    text-align: center;
 }
 
 #myFooter .second-bar a {
@@ -90,7 +89,7 @@
     color: white;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 900px) {
     #myFooter {
         text-align: center;
     }

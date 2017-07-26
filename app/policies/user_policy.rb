@@ -12,6 +12,6 @@ class UserPolicy < ApplicationPolicy
   protected
 
   def default_security
-    user.admin? or user == record
+    user.admin? || user == record
   end
 end

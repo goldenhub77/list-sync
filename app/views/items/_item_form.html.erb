@@ -1,15 +1,25 @@
-<%= form_for [@list, @item] do |f| %>
-  <%= render 'shared/errors', collection: form_error_messages!(@item) %>
+<div class="container">
+	<div class="row main">
+		<div class="main-login main-center">
+      <%= form_for [@list, @item] do |f| %>
+        <%= render 'shared/errors', collection: form_error_messages!(@item) %>
 
-  <%= f.hidden_field :list_id, value: @list.id %>
-  <%= f.hidden_field :user_id, value: @user.id %>
-  <div class="form-group row">
-    <%= f.label :title, class: "col-sm-2 col-form-label" %>
-    <div class="col-sm-7">
-      <%= f.text_field :title, class: "form-control" %><br />
-    </div>
-  </div>
-  <div class="form-group row">
-    <%= f.submit class: "btn btn-lg btn-primary btn-center" %>
-  </div>
-<% end %>
+        <%= f.hidden_field :list_id, value: @list.id %>
+        <%= f.hidden_field :user_id, value: @user.id %>
+        <div class="form-group">
+          <%= f.label :title, class: "cols-sm-2 control-label" %>
+          <div class="cols-sm-10">
+            <div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-list fa" aria-hidden="true"></i></span>
+              <%= f.text_field :title, class: "form-control", placeholder: "Enter a Title" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.submit class: "btn btn-primary btn-lg btn-block btn-center" %>
+        </div>
+			<% end %>
+		</div>
+	</div>
+</div>

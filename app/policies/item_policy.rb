@@ -32,15 +32,15 @@ class ItemPolicy < ApplicationPolicy
   protected
 
   def security_for_updating
-    user.admin? or user.role(record.list) == 'admin' or record.user == user or record.list.user == user
+    user.admin? || user.role(record.list) == 'admin' || record.user == user || record.list.user == user
   end
 
   def member_security
-    user.admin? or user.role(record.list) == 'member' or record.user == user or record.list.user == user
+    user.admin? || user.role(record.list) == 'member' || record.user == user || record.list.user == user
   end
 
   #not 100% about how I want to handle this function yet
   # def item_completed_security
-  #   (record.user == user) or (user.role(record.list) == 'admin') or (user.role(record.list) == 'member' and record.completed == false)
+  #   (record.user == user) || (user.role(record.list) == 'admin') || (user.role(record.list) == 'member' and record.completed == false)
   # end
 end

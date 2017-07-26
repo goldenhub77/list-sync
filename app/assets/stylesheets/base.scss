@@ -74,12 +74,6 @@ h1.title > span, #myFooter .logo, title, .navbar-brand {
   min-height: 60em;
 }
 
-.btn-center {
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-}
-
 .element-inline {
   display: inline;
   padding: 1rem;
@@ -94,10 +88,41 @@ button.close.element-inline {
   padding-left: 5rem;
 }
 
-.form-group label {
-  text-align: right;
-}
+// .form-group label {
+//   text-align: right;
+// }
 
 .form-explanation {
   font-size: 1.25rem;
+}
+
+.btn.btn-lg.btn-block, .btn-forgot-pass {
+  width: auto;
+}
+
+.btn-center {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+div.main-login {
+  background-color: rgba(239,239,239, 0.5);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin: auto;
+  max-width: 700px;
+  min-width: 495px;
+  padding: 4em;
+  border: 1px solid black;
+  border-radius: 40px;
+
+  @media screen and (max-width: 767px) {
+    margin: 0 15px;
+  }
+}
+
+// bootstrap toggle switches
+.toggle {
+  border-radius: 0px;
 }
