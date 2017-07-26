@@ -10,11 +10,10 @@
       </button>
       <a class="navbar-brand" href="<%= root_path %>">LystSync</a>
       <!-- future search integration -->
-       <form id="global-search-form" class="navbar-form navbar-left cols-sm-2">
+       <form id="global-search-form" class="navbar-form navbar-left">
         <div class="global-search-field">
           <input type="text" class="form-control" placeholder="Search">
-
-          <button type="submit" class="btn btn-default">Submit</button>
+          <button type="submit" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i></button>
         </div>
       </form>
     </div>
@@ -33,8 +32,6 @@
               <li role="separator" class="divider"></li>
               <li class="<%= link_active?(user_lists_path(current_user)) %>"><%= link_to "Lists I Created", user_lists_path(current_user) %></li>
               <li class="<%= link_active?(user_collaborations_path(current_user)) %>"><%= link_to "My Collaborations", user_collaborations_path(current_user) %></li>
-              <li role="separator" class="divider"></li>
-              <li class=""><a href="#">Friends<span class="sr-only">(current)</span></a></li>
               <li role="separator" class="divider"></li>
               <li class="<%= link_active?(edit_user_registration_path) %>"><%= link_to "Edit Account", edit_user_registration_path %></li>
               <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
