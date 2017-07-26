@@ -30,7 +30,7 @@ class ListsController < ApplicationController
   end
 
   def show
-    @items = @list.items.order("date_completed DESC")
+    @items = @list.items.order("date_completed DESC, created_at DESC")
   end
 
   def edit

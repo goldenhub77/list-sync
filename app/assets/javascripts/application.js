@@ -13,6 +13,7 @@
 //= require rails-ujs
 //= require jquery
 //= require jquery_ujs
+//= require jquery.easy-autocomplete.min
 //= require moment
 //= require bootstrap.min
 //= require bootstrap-toggle.min

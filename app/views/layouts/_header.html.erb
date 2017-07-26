@@ -10,17 +10,21 @@
       </button>
       <a class="navbar-brand" href="<%= root_path %>">LystSync</a>
       <!-- future search integration -->
-       <form id="global-search-form" class="navbar-form navbar-left">
-        <div class="global-search-field">
-          <input type="text" class="form-control" placeholder="Search">
-          <button type="submit" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i></button>
-        </div>
-      </form>
+      <div id="global-search-div">
+        <form id="js-global-search-form">
+         <div class="input-group">
+           <input id="js-global-search-input" type="text" class="form-control" placeholder="Search">
+           <span class="input-group-btn">
+             <button type="submit" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i></button>
+           </span>
+         </div>
+       </form>
+      </div>
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="<%= link_active?(lists_path) %>"><a href="<%= lists_path %>">Public Lists</a></li>
+        <li class="<%= link_active?(lists_path) %>"><a href="<%= lists_path %>">Open Lists</a></li>
         <li class=""><a href="#">Friends<span class="sr-only">(current)</span></a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">

@@ -9,6 +9,8 @@
 let lists = require('packs/lists');
 
 $(document).ready(() => {
+  // fix for easyAutocomplete dynamic widths, must add this after calling easyAutocomplete()
+  $('div.easy-autocomplete').removeAttr('style');
 
   $(".close").on("click", (event) => {
     $(".close").parent().hide("slow");

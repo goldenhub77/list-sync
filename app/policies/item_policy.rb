@@ -2,7 +2,7 @@ class ItemPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       if user.admin?
-        scope.all.order("title DESC")
+        scope.order("created_at DESC")
       else
         nil
       end
