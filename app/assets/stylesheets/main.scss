@@ -9,6 +9,18 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+.yield-container {
+  margin-top: 6em;
+  min-height: 60em;
+}
+
+// moves main page container to account for search bar when less than 900px
+@media screen and (max-width: 900px) {
+  .yield-container {
+    margin-top: 10em;
+  }
+}
+
 .carousel-div {
   margin: 5rem 0;
 }
@@ -66,12 +78,6 @@ h1.title > span, #myFooter .logo, title, .navbar-brand {
 .add-btn:hover {
   color: white;
   background: #56b156;
-}
-
-
-.yield-container {
-  margin-top: 6em;
-  min-height: 60em;
 }
 
 .element-inline {

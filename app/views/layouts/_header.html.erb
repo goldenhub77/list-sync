@@ -11,20 +11,20 @@
       <a class="navbar-brand" href="<%= root_path %>">LystSync</a>
       <!-- future search integration -->
       <div id="global-search-div">
-        <form id="js-global-search-form">
+        <%= form_with url: search_path, local: true, method: :get, html: { id: "js-global-search-form" } do |f| %>
          <div class="input-group">
-           <input id="js-global-search-input" type="text" class="form-control" placeholder="Search">
+           <%= f.text_field :q, placeholder: "Search", id: "js-global-search-input", value: "#{session['q']}", class: "form-control" %>
            <span class="input-group-btn">
-             <button type="submit" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i></button>
+             <%= f.button raw('<i class="fa fa-search" aria-hidden="true"></i>'), name: nil, id: "js-global-search-btn", class: "btn btn-default" %>
            </span>
          </div>
-       </form>
+       <% end %>
       </div>
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="<%= link_active?(lists_path) %>"><a href="<%= lists_path %>">Open Lists</a></li>
+        <li class="<%= link_active?(lists_path) %>"><a href="<%= lists_path %>">Shared Lists</a></li>
         <li class=""><a href="#">Friends<span class="sr-only">(current)</span></a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">

@@ -29,7 +29,8 @@ gem 'jquery-rails'
 # gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
-#datetime picker
+
+#bootstrap datetime picker
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails'
 # Use Redis adapter to run Action Cable in production
@@ -49,6 +50,9 @@ gem 'toastr-rails'
 
 #handles security policies for controllers
 gem 'pundit'
+
+#handles search engine
+gem 'ransack'
 
 group :development, :test do
   #use pry for debugging

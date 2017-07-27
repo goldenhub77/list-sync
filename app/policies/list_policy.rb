@@ -2,7 +2,7 @@ class ListPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       if user.admin?
-        scope.all.order("title DESC")
+        scope.order("title DESC")
       else
         scope.public.order("title DESC")
       end

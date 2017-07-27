@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get :autocomplete, controller: :main
+  get :search, controller: :main
 
-  root 'welcome#index'
+  root 'main#welcome'
 end

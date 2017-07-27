@@ -1,0 +1,15 @@
+<h1><%= pluralize(@lists.count + @users.count, 'result') %></h1>
+
+<h2>Lists</h2>
+<ol>
+  <% @lists.each do |list| %>
+    <li><%=list.title %> - Due: <%= list.due_date %></li>
+  <% end %>
+</ol>
+
+<h2>Friends</h2>
+<ol>
+  <% @users.each do |user| %>
+    <li><%=user.name %> - <%= user.email %></li>
+  <% end %>
+</ol>
