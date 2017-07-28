@@ -1,7 +1,14 @@
-$(document).ready( () => {
-  let $globalSearch = $('#js-global-search-input');
+// let executeSearch = (event) => {
+//   let input = $('#js-global-search-input').val();
+//   if (input == "") {
+//     event.preventDefault();
+//   }
+// }
 
-  let options = {
+$(document).ready( () => {
+  var $searchBtn = $("#js-global-search-btn");
+  var $globalSearch = $('#js-global-search-input');
+  var options = {
     getValue: (element) => {
       return element.title || element.name;
     },
@@ -11,22 +18,33 @@ $(document).ready( () => {
     categories: [
       {
         listLocation: "lists",
-        header: "<strong>Lists</strong>"
+        header: "<strong><em>Lists</em></strong>"
       },
       {
         listLocation: "users",
-        header: "<strong>Users</strong>"
+        header: "<strong><em>Users</em></strong>"
       }
     ],
+    requestDelay: 500,
     list: {
       onChooseEvent: () => {
-        let url = $globalSearch.getSelectedItemData().url
-        $("#js-global-search-btn").click();
+        //possible future use
+        // let currentData = $globalSearch.getSelectedItemData();
+        $searchBtn.click();
+      }
     }
-  }
-};
-
+  };
   $globalSearch.easyAutocomplete(options);
-  //workaround to fix styling issue of search input
+    //workaround to fix styling issue of search input after intializing easyAutocomplete
   $('div.easy-autocomplete').removeAttr('style');
+
+  $globalSearch.val(localStorage.q);
+
+  // $searchBtn.on('click', (event) => {
+  //   executeSearch(event);
+  // });
+
+  $globalSearch.on('change', (event) => {
+    localStorage.setItem('q', $globalSearch.val());
+  });
 });

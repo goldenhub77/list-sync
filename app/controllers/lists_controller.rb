@@ -1,5 +1,4 @@
 class ListsController < ApplicationController
-  before_action :authenticate_user!
   before_action :find_list, only: [:show, :edit, :update, :destroy, :join]
   before_action :find_user, except: [:index]
 
@@ -21,7 +20,8 @@ class ListsController < ApplicationController
 
   def create
     @list = List.create(post_list_params)
-    if @list.valid?
+    @collaboration = @list.lists_users.create(user: @user, role: 'admin')
+    if @list.valid? && @collaboration.valid?
       flash[:notice] = "Created List Successfully."
       redirect_to list_path(@list)
     else

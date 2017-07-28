@@ -60,43 +60,11 @@
 /******/ 	__webpack_require__.p = "/packs-test/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ([
-/* 0 */
-/***/ (function(module, exports) {
-
-$(document).ready(function () {
-  var dateTimeHidden = $("#js-list-due-date");
-  var dateTimeString = dateTimeHidden.val() || null;
-  var dueDateInput = $("#js-date-time-view");
-  var formattedViewTime = "";
-
-  dueDateInput.on("keydown keyup", function (event) {
-    event.preventDefault();
-  });
-
-  if (dateTimeString != null) {
-    formattedViewTime = moment(dateTimeString).format('MM/DD/YYYY hh:mm A');
-  }
-
-  $("#js-list-date-picker").datetimepicker({
-    useCurrent: false,
-    keepInvalid: true,
-    showTodayButton: true,
-    showClear: true
-  });
-  dueDateInput.val(formattedViewTime);
-  dateTimeHidden.val(dateTimeString);
-
-  $("#js-list-date-picker").on("dp.change db.show", function (event) {
-    formattedTime = moment(dueDateInput.val()).local().format();
-    dateTimeHidden.val(formattedTime);
-  });
-});
-
-/***/ }),
+/* 0 */,
 /* 1 */
 /***/ (function(module, exports) {
 
@@ -145,28 +113,6 @@ $(document).ready(function () {
 
   $globalSearch.on('change', function (event) {
     localStorage.setItem('q', $globalSearch.val());
-  });
-});
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* eslint no-console:0 */
-// This file is automatically compiled by Webpack, along with any other files
-// present in this directory. You're encouraged to place your actual application logic in
-// a relevant structure within app/javascript and only use these pack files to reference
-// that code so it'll be compiled.
-//
-// To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
-// layout file, like app/views/layouts/application.html.erb
-var lists = __webpack_require__(0);
-var autocomplete = __webpack_require__(1);
-
-$(document).ready(function () {
-
-  $(".close").on("click", function (event) {
-    $(".close").parent().hide("slow");
   });
 });
 

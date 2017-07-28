@@ -1,5 +1,6 @@
 {
   "application.js": "/packs-test/application.js",
+  "autocomplete.js": "/packs-test/autocomplete.js",
   "items.js": "/packs-test/items.js",
   "lists.js": "/packs-test/lists.js"
 }

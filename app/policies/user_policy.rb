@@ -25,7 +25,7 @@ class UserPolicy < ApplicationPolicy
   protected
 
   def friends_only
-    # user.admin? ||  requires friends feature to be completed
+    # user.admin? ||  user_policy.rb needs refactor - requires friends feature to be completed
   end
 
   def default_security

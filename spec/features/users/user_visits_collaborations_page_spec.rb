@@ -36,7 +36,7 @@ feature 'user visits collaborations page', %{
     admin = FactoryGirl.create(:user, admin: true)
     user2 = User.second
     list = List.first
-    logout(user2, scope: :user)
+    logout
     login_as(admin, scope: :user)
 
     visit user_collaborations_path(user2)
