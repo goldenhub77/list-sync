@@ -15,7 +15,7 @@ feature 'user joins list', %{
     user = User.first
     list = List.first
 
-    visit lists_path
+    visit list_path(list)
 
     expect(page).to have_content("Join")
 
@@ -25,7 +25,7 @@ feature 'user joins list', %{
     expect(page).to have_content(list.title)
 
     visit lists_path
-    
+
     expect(page).not_to have_content("Join")
   end
 end

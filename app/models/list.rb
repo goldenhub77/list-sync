@@ -7,7 +7,6 @@ class List < ApplicationRecord
   validates :title, presence: true
   validates :public, inclusion: { in: [true, false] }
   validate :check_date_format, :due_date_greater_than_today?
-  after_create { validates_presence_of :lists_users }
 
   def self.public
     List.where('public = true')

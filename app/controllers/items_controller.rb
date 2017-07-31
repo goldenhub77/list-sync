@@ -1,7 +1,9 @@
 class ItemsController < ApplicationController
   before_action :find_item, only: [:show, :edit, :update, :destroy, :complete]
-  before_action :find_user, expect: [:index]
   before_action :find_list, except: [:index]
+  before_action :authorize_list, only: [:new, :create]
+  before_action :find_user, expect: [:index]
+
 
   def index
     @items = policy_scope(Item)
@@ -76,6 +78,10 @@ class ItemsController < ApplicationController
     else
       @user = current_user
     end
+  end
+
+  def authorize_list
+    authorize(@list)
   end
 
   def get_item_params

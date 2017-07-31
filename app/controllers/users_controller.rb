@@ -19,8 +19,8 @@ class UsersController < ApplicationController
   protected
 
   def find_user
-    if get_user_params[:user_id].present?
-      @user = User.find(get_user_params[:user_id])
+    if get_user_params[:user_id].present? || get_user_params[:id].present?
+      @user = User.find(get_user_params[:user_id] ||= get_user_params[:id])
     else
       @user = current_user
     end
@@ -28,7 +28,7 @@ class UsersController < ApplicationController
   end
 
   def get_user_params
-    params.permit(:user_id)
+    params.permit(:id, :user_id)
   end
 
 end

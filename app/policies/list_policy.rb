@@ -9,37 +9,45 @@ class ListPolicy < ApplicationPolicy
     end
   end
 
+  def new?
+    user.admin? || member_security
+  end
+
+  def create?
+    user.admin? || security_for_updating
+  end
+
   def show?
-    member_security
+    user.admin? || public_security || member_security
   end
 
   def edit?
-    security_for_updating
+    user.admin? || security_for_updating
   end
 
   def update?
-    security_for_updating
+    user.admin? || security_for_updating
   end
 
   def destroy?
-    security_for_updating
+    user.admin? || security_for_updating
   end
 
   def join?
-    join_security
+    user.admin? || public_security
   end
 
   protected
 
   def security_for_updating
-    user.admin? || user.role(record) == 'admin' || record.user == user
+     user.role(record) == 'admin' || record.user == user
   end
 
   def member_security
-    user.admin? || user.role(record) == 'member' || record.user == user
+    user.role(record) == 'member' || record.user == user
   end
 
-  def join_security
-    user.role(record).nil? && record.public == true
+  def public_security
+    record.public == true
   end
 end

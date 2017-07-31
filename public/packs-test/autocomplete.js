@@ -68,13 +68,6 @@
 /* 1 */
 /***/ (function(module, exports) {
 
-// let executeSearch = (event) => {
-//   let input = $('#js-global-search-input').val();
-//   if (input == "") {
-//     event.preventDefault();
-//   }
-// }
-
 $(document).ready(function () {
   var $searchBtn = $("#js-global-search-btn");
   var $globalSearch = $('#js-global-search-input');
@@ -94,10 +87,11 @@ $(document).ready(function () {
     }],
     requestDelay: 500,
     list: {
-      onChooseEvent: function onChooseEvent() {
+      onClickEvent: function onClickEvent() {
         //possible future use
-        // let currentData = $globalSearch.getSelectedItemData();
-        $searchBtn.click();
+        var currentData = $globalSearch.getSelectedItemData();
+        // $searchBtn.click();
+        window.location.href = currentData.url;
       }
     }
   };

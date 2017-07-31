@@ -49,7 +49,7 @@ class User < ApplicationRecord
 
 # if registering from LystSync directly this handles the password restrictions
   def password_complexity
-    if provider.nil? && password.present? and not password.match(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=.\-_*])([a-zA-Z0-9@#$%^&+=*.\-_]){3,}$/)
+    if provider.nil? && password.present? and not password.match(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=.\-_*!])([a-zA-Z0-9@#$%^&+=*.\-_!]){3,}$/)
       errors.add :password, "must include at least one lowercase letter, one uppercase letter, one digit, and one symbol"
     end
   end

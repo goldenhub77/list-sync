@@ -1,5 +1,8 @@
 <%= javascript_pack_tag 'items' %>
 <h1><%= @list.title %></h1>
+<% if not_joined?(@list) %>
+  <%= link_to "Join", user_list_join_path(current_user, @list), method: :post, class: 'btn btn-primary pull-right' %>
+<% end %>
 <div class="container">
   <% if policy(@list).edit? %>
     <%= link_to "Edit", edit_user_list_path(@user, @list), id: "edit-list-#{@list.id}", class: "btn btn-primary" %>

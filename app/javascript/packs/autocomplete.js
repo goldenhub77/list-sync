@@ -1,10 +1,3 @@
-// let executeSearch = (event) => {
-//   let input = $('#js-global-search-input').val();
-//   if (input == "") {
-//     event.preventDefault();
-//   }
-// }
-
 $(document).ready( () => {
   var $searchBtn = $("#js-global-search-btn");
   var $globalSearch = $('#js-global-search-input');
@@ -27,10 +20,11 @@ $(document).ready( () => {
     ],
     requestDelay: 500,
     list: {
-      onChooseEvent: () => {
+      onClickEvent: () => {
         //possible future use
-        // let currentData = $globalSearch.getSelectedItemData();
-        $searchBtn.click();
+        let currentData = $globalSearch.getSelectedItemData();
+        // $searchBtn.click();
+        window.location.href = currentData.url;
       }
     }
   };

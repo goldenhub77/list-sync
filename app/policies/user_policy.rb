@@ -9,26 +9,29 @@ class UserPolicy < ApplicationPolicy
     end
   end
 
+  # def new?
+  #   true
+  # end
+
+
+
   def index?
     user.admin?
   end
 
   def show?
+    # REFACTOR WHEN FRIENDS FEATURE COMPLETED
     #security deactivated until friend feature built
     true
   end
 
   def collaborations?
-    default_security
+    user.admin? || user == record
   end
 
   protected
 
-  def friends_only
-    # user.admin? ||  user_policy.rb needs refactor - requires friends feature to be completed
-  end
-
-  def default_security
-    user.admin? || user == record
-  end
+  # def friends_only
+  #   user.admin? ||  user_policy.rb needs refactor - requires friends feature to be completed
+  # end
 end

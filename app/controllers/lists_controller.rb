@@ -20,8 +20,7 @@ class ListsController < ApplicationController
 
   def create
     @list = List.create(post_list_params)
-    @collaboration = @list.lists_users.create(user: @user, role: 'admin')
-    if @list.valid? && @collaboration.valid?
+    if @list.valid?
       flash[:notice] = "Created List Successfully."
       redirect_to list_path(@list)
     else
@@ -58,7 +57,6 @@ class ListsController < ApplicationController
 
   def join
     @list_collaboration = ListsUser.create(join_params)
-
     if @list_collaboration.valid?
       flash[:notice] = "Joined List Successfully."
       redirect_to list_path(@list)
@@ -80,6 +78,7 @@ class ListsController < ApplicationController
     else
       @user = current_user
     end
+    # authorize(@user)
   end
 
   def get_list_params

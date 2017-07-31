@@ -33,12 +33,14 @@ en:
   pundit:
    default: 'You are not authorized to perform this action.'
    list_policy:
-     edit?: "You cannot edit this list"
-     show?: "You are not a member of this list"
+     new?: 'You are not a member of this list'
+     edit?: 'You cannot edit this list'
+     show?: 'You are not a member of this list'
      destroy?: 'You cannot delete this list.'
    item_policy:
      edit?: 'You cannot edit this item.'
-     show?: 'You are not a member of this item.'
+     new?: 'You are not a member'
+     show?: 'You are not a member'
      destroy?: 'You cannot delete this item.'
      complete?: 'You do not have rights to change'
    user_policy:

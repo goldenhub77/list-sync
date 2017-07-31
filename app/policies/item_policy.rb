@@ -9,34 +9,43 @@ class ItemPolicy < ApplicationPolicy
     end
   end
 
+  def new?
+    # user.admin? || member_security
+    true
+  end
+
+  def create?
+    user.admin? || security_for_updating
+  end
+
   def show?
-    member_security
+    user.admin? || member_security
   end
 
   def edit?
-    security_for_updating
+    user.admin? || security_for_updating
   end
 
   def update?
-    security_for_updating
+    user.admin? || security_for_updating
   end
 
   def destroy?
-    security_for_updating
+    user.admin? || security_for_updating
   end
 
   def complete?
-    member_security
+    user.admin? || member_security
   end
 
   protected
 
   def security_for_updating
-    user.admin? || user.role(record.list) == 'admin' || record.user == user || record.list.user == user
+    user.role(record.list) == 'admin' || record.user == user || record.list.user == user
   end
 
   def member_security
-    user.admin? || user.role(record.list) == 'member' || record.user == user || record.list.user == user
+    user.role(record.list) == 'member' || record.user == user || record.list.user == user
   end
 
   #not 100% about how I want to handle this function yet
