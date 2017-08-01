@@ -1,0 +1,26 @@
+<h2><%= object_type?(collection.first) %>s</h2>
+<p><%= pluralize(collection.count, 'result') %></p>
+<% if collection.present? %>
+    <ul class="media-list">
+      <% collection.each do |obj| %>
+        <li class="media search-results">
+          <% if object_type?(obj) == "User" %>
+            <div class="media-left">
+              <a href="#">
+                <img class="media-object" src="<%= obj.profile_picture %>" alt="profile picture">
+              </a>
+            </div>
+            <div class="media-body">
+              <h4 class="media-heading"><%=link_to obj.name.humanize, user_path(obj) %></h4>
+              <%=obj.email %>
+            </div>
+          <% elsif object_type?(obj) == "List" %>
+            <div class="media-body">
+              <h4 class="media-heading"><%=link_to obj.title.humanize, list_path(obj) %></h4>
+              <%= obj.due_date %>
+            </div>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+<% end %>

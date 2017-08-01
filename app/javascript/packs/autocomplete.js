@@ -18,7 +18,6 @@ $(document).ready( () => {
         header: "<strong><em>Users</em></strong>"
       }
     ],
-    requestDelay: 500,
     list: {
       onClickEvent: () => {
         //possible future use

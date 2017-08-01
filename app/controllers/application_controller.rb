@@ -18,8 +18,8 @@ class ApplicationController < ActionController::Base
   end
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :profile_picture, :admin])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :profile_picture, :admin])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :uid, :provider, :profile_picture, :admin])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :uid, :provider, :profile_picture, :admin])
   end
 
   #resolves notifications from persisting when utiltizing browser back or forward buttons

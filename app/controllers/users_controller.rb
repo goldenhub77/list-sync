@@ -16,6 +16,14 @@ class UsersController < ApplicationController
     @collaborations = @user.list_collaborations
   end
 
+  def lists
+    if current_user.admin? || current_user == @user
+      @lists = @user.lists.order("title DESC")
+    else
+      redirect_to lists_path
+    end
+  end
+
   protected
 
   def find_user

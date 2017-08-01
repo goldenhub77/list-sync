@@ -1,0 +1,16 @@
+<% if collection.empty? %>
+  <h3>You don't have any yet.</h3>
+<% else %>
+  <% collection.each do |list| %>
+    <div class="panel panel-primary">
+      <div class="panel-body">
+        <%= link_to list.title.humanize, list_path(list) %>
+      </div>
+      <div class="panel-footer">
+        <% if list.present? %>
+          <%= time_left_until_due(list.due_date) %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

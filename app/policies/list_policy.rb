@@ -37,6 +37,10 @@ class ListPolicy < ApplicationPolicy
     user.admin? || public_security
   end
 
+  def leave?
+    user.admin? || member_security
+  end
+
   protected
 
   def security_for_updating

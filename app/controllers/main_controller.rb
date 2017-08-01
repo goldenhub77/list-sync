@@ -6,6 +6,7 @@ class MainController < ApplicationController
   end
 
   def autocomplete
+    #Future refactor opportunity
     if current_user.admin?
       @lists = List.all.ransack(title_cont: params[:q]).result(distinct: true).limit(5)
     else
@@ -14,11 +15,11 @@ class MainController < ApplicationController
       pubs = List.public.ransack(title_cont: params[:q]).result(distinct: true).limit(5)
       @lists = (user_lists + collabs + pubs).uniq
     end
-    # @lists = @search_lists.ransack(title_cont: params[:q]).result(distinct: true).limit(5)
     @users = User.all.ransack(name_cont: params[:q]).result(distinct: true).limit(5)
   end
 
   def search
+    #Future refactor opportunity
     session[:q] = params['q'];
     if params['q'].present?
       if current_user.admin?
@@ -29,7 +30,6 @@ class MainController < ApplicationController
         pubs = List.public.ransack(title_cont: params[:q]).result(distinct: true)
         @lists = (user_lists + collabs + pubs).uniq
       end
-      # @lists = @search_lists.ransack(title_cont: params[:q]).result(distinct: true).limit(5)
       @users = User.all.ransack(name_cont: params[:q]).result(distinct: true)
     else
       flash.now[:error] = "Please enter a search query."

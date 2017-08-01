@@ -9,12 +9,6 @@ class UserPolicy < ApplicationPolicy
     end
   end
 
-  # def new?
-  #   true
-  # end
-
-
-
   def index?
     user.admin?
   end
@@ -26,6 +20,10 @@ class UserPolicy < ApplicationPolicy
   end
 
   def collaborations?
+    user.admin? || user == record
+  end
+
+  def lists?
     user.admin? || user == record
   end
 

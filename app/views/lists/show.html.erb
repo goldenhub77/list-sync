@@ -1,7 +1,10 @@
 <%= javascript_pack_tag 'items' %>
 <h1><%= @list.title %></h1>
+<h4>Started by - <%= @list.user.email %></h4>
 <% if not_joined?(@list) %>
   <%= link_to "Join", user_list_join_path(current_user, @list), method: :post, class: 'btn btn-primary pull-right' %>
+<% elsif @list.user != current_user %>
+  <%= link_to "Leave", user_list_leave_path(current_user, @list), method: :delete, class: 'btn btn-primary pull-right' %>
 <% end %>
 <div class="container">
   <% if policy(@list).edit? %>
@@ -11,33 +14,35 @@
   <% if @list.present? %>
     <%= time_left_until_due(@list.due_date) %>
   <% end %>
+  <% if policy(@list).new? %>
   <%= link_to raw("&#43;"), new_list_item_path(@list), role: "button", class: "add-btn btn" %>
-  <div class="list-group">
-    <% @items.each do |item| %>
-      <div class="well list-items">
-        <div class="row">
-          <div class="col-xs-12 col-md-7">
-            <h3><%= link_to item.title, list_item_path(@list, item) %></h3>
+    <div class="list-group">
+      <% @items.each do |item| %>
+        <div class="well list-items">
+          <div class="row">
+            <div class="col-xs-12 col-md-7">
+              <h3><%= link_to item.title, list_item_path(@list, item) %></h3>
+            </div>
+            <div class="col-xs-6 col-md-3">
+              <% if policy(item).edit? %>
+                <%= link_to "Edit", edit_list_item_path(@list, item), id: "edit-item-#{item.id}", class: "btn btn-default element-inline" %>
+                <%= link_to "Delete", list_item_path(@list, item), method: "delete", id: "delete-item-#{item.id}", class: "btn btn-danger element-inline", data: { confirm: "Are you sure?" } %>
+              <% end %>
+            </div>
+            <div class="col-xs-6 col-md-2">
+              <%= form_for [@list, item], method: :put, url: [@list,item, :complete] do |f| %>
+                <%= f.hidden_field :id, value: item.id %>
+                <%= f.hidden_field :list_id, value: @list.id %>
+                <%= f.hidden_field :user_id, value: item.user.id %>
+                <%= f.hidden_field :date_completed, value: format_date_to_ISO(item.date_completed), class: "js-item-date-completed" %>
+                <%= f.check_box :completed, { "data-onstyle": "success", "data-offstyle": "warning", "data-toggle": "toggle", "data-on": "Completed", "data-off": "Incomplete", class: "js-item-completed" } %>
+              <% end %>
+              <p class="js-item-human-date"></p>
+            </div>
           </div>
-          <div class="col-xs-6 col-md-3">
-            <% if policy(item).edit? %>
-              <%= link_to "Edit", edit_list_item_path(@list, item), id: "edit-item-#{item.id}", class: "btn btn-default element-inline" %>
-              <%= link_to "Delete", list_item_path(@list, item), method: "delete", id: "delete-item-#{item.id}", class: "btn btn-danger element-inline", data: { confirm: "Are you sure?" } %>
-            <% end %>
-          </div>
-          <div class="col-xs-6 col-md-2">
-            <%= form_for [@list, item], method: :put, url: [@list,item, :complete] do |f| %>
-              <%= f.hidden_field :id, value: item.id %>
-              <%= f.hidden_field :list_id, value: @list.id %>
-              <%= f.hidden_field :user_id, value: item.user.id %>
-              <%= f.hidden_field :date_completed, value: format_date_to_ISO(item.date_completed), class: "js-item-date-completed" %>
-              <%= f.check_box :completed, { "data-onstyle": "success", "data-offstyle": "warning", "data-toggle": "toggle", "data-on": "Completed", "data-off": "Incomplete", class: "js-item-completed" } %>
-            <% end %>
-            <p class="js-item-human-date"></p>
-          </div>
+          <small>footnote</small>
         </div>
-        <small>footnote</small>
-      </div>
-    <% end %>
-  </div>
+      <% end %>
+    </div>
+  <% end %>
 </div>

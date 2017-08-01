@@ -7,15 +7,12 @@ describe ItemPolicy do
   let(:list) { FactoryGirl.create(:list) }
   let(:item) { FactoryGirl.create(:item, list: list) }
 
-
   context 'being a random visitor' do
-    let(:user) { FactoryGirl.create(:user) }
 
     it { is_expected.to forbid_actions([:show, :edit, :update, :destroy]) }
   end
 
   context 'being a collaborator' do
-    let(:user) { FactoryGirl.create(:user) }
     let(:list_collaboration) { FactoryGirl.create(:lists_user, user: user, list: list) }
 
     before(:each) do

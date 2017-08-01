@@ -1,17 +1,10 @@
 class ListsController < ApplicationController
-  before_action :find_list, only: [:show, :edit, :update, :destroy, :join]
+  before_action :find_list, only: [:show, :edit, :update, :destroy, :join, :leave]
   before_action :find_user, except: [:index]
+  before_action :collaboration_present?, only: [:leave]
 
   def index
     @lists = policy_scope(List)
-    if get_list_params[:user_id].present?
-      @user = User.find(get_list_params[:user_id])
-      if current_user.admin? || current_user == @user
-        @lists = @user.lists.order("title DESC")
-      else
-        redirect_to lists_path
-      end
-    end
   end
 
   def new
@@ -65,6 +58,17 @@ class ListsController < ApplicationController
     end
   end
 
+  def leave
+    # @list_collaboration = @user.lists_users.where(join_params).first
+    @list_collaboration.destroy
+    if @list_collaboration.valid?
+      flash[:notice] = "Left List Successfully."
+      redirect_to list_path(@list)
+    else
+      redirect_to lists_path
+    end
+  end
+
   protected
 
   def find_list
@@ -79,6 +83,16 @@ class ListsController < ApplicationController
       @user = current_user
     end
     # authorize(@user)
+  end
+
+  def collaboration_present?
+    @list_collaboration = @user.lists_users.where(join_params).first
+    if @list_collaboration.present?
+      authorize(@list_collaboration)
+    else
+      flash[:notice] = "You created or have not joined this list."
+      redirect_to list_path(@list)
+    end
   end
 
   def get_list_params
