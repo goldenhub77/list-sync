@@ -1,7 +1,6 @@
 class ListsController < ApplicationController
   before_action :find_list, only: [:show, :edit, :update, :destroy, :join, :leave]
   before_action :find_user, except: [:index]
-  before_action :collaboration_present?, only: [:leave]
 
   def index
     @lists = policy_scope(List)
@@ -49,24 +48,28 @@ class ListsController < ApplicationController
   end
 
   def join
-    @list_collaboration = ListsUser.create(join_params)
-    if @list_collaboration.valid?
-      flash[:notice] = "Joined List Successfully."
-      redirect_to list_path(@list)
+    if collaboration_present?
+      flash[:notice] = "You already joined this list."
     else
-      redirect_to lists_path
+      @list_collaboration = ListsUser.create(join_params)
+      if @list_collaboration.valid?
+        flash[:notice] = "Joined List Successfully."
+      end
     end
+    redirect_to list_path(@list)
   end
 
   def leave
-    # @list_collaboration = @user.lists_users.where(join_params).first
-    @list_collaboration.destroy
-    if @list_collaboration.valid?
-      flash[:notice] = "Left List Successfully."
-      redirect_to list_path(@list)
+    if collaboration_present?
+      authorize(@list_collaboration)
+      @list_collaboration.destroy
+      if @list_collaboration.valid?
+        flash[:notice] = "Left List Successfully."
+      end
     else
-      redirect_to lists_path
+      flash[:notice] = "You created, or have not joined this list."
     end
+    redirect_to list_path(@list)
   end
 
   protected
@@ -82,16 +85,14 @@ class ListsController < ApplicationController
     else
       @user = current_user
     end
-    # authorize(@user)
   end
 
   def collaboration_present?
     @list_collaboration = @user.lists_users.where(join_params).first
     if @list_collaboration.present?
-      authorize(@list_collaboration)
+      true
     else
-      flash[:notice] = "You created or have not joined this list."
-      redirect_to list_path(@list)
+      false
     end
   end
 

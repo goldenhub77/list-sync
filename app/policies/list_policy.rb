@@ -14,7 +14,7 @@ class ListPolicy < ApplicationPolicy
   end
 
   def create?
-    user.admin? || security_for_updating
+    true
   end
 
   def show?

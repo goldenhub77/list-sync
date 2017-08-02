@@ -10,12 +10,11 @@ class ItemPolicy < ApplicationPolicy
   end
 
   def new?
-    # user.admin? || member_security
     true
   end
 
   def create?
-    user.admin? || security_for_updating
+    user.admin? || member_security
   end
 
   def show?

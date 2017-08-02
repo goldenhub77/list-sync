@@ -26,9 +26,9 @@ class User < ApplicationRecord
 
   #handled returned OAuth data to create a user
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+    where(provider: auth.provider, uid: auth.uid).first_or_initialize do |user|
       user.email = auth.info.email
-      user.password = Devise.friendly_token[0,20]
+      # user.password = Devise.friendly_token[0,20]
       user.name = auth.info.name
       user.profile_picture = auth.info.image #no functionality for this yet, but will be implemented
       # If you are using confirmable and the provider(s) you use validate emails,
@@ -43,6 +43,9 @@ class User < ApplicationRecord
       if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
         user.name = data["name"] if user.name.blank?
         user.email = data["email"] if user.email.blank?
+        user.provider = session["devise.facebook_data"]["provider"]
+        user.uid = session["devise.facebook_data"]['uid']
+        user.profile_picture = session["devise.facebook_data"]["info"]["image"]
       end
     end
   end

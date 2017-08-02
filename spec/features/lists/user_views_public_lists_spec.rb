@@ -24,7 +24,7 @@ feature 'user sees only public lists', %{
       if list.public == false
         expect(page).not_to have_content(list.title)
       elsif list.public == true
-        expect(page).to have_content(list.title)
+        expect(page).to have_content(list.title.humanize)
         expect(page).to have_content("No Due Date")
       end
     end

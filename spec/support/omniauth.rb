@@ -11,7 +11,8 @@ def set_facebook_omniauth()
     {token:
       "fakhwekjnf89ry93hfiueaflkjh2h21ygj21hb1kjGHJGJ12hj2ajRwZDZD",
       "expires_at"=>1503456789,
-      "expires"=>true}
+      "expires"=>true},
+      "extra"=>{"raw_info"=>{"name"=>"Test Name", "email"=>"test@test.com", "id"=>"123456"}}
   }
 
   #enable OAuth testing

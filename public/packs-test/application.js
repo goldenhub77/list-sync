@@ -117,7 +117,6 @@ $(document).ready(function () {
       listLocation: "users",
       header: "<strong><em>Users</em></strong>"
     }],
-    requestDelay: 500,
     list: {
       onClickEvent: function onClickEvent() {
         //possible future use

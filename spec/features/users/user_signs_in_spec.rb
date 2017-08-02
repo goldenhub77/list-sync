@@ -6,52 +6,67 @@ feature 'User signs in', %{
 } do
 
   scenario 'User signs in directly', js: true do
-      user = FactoryGirl.create(:user)
-      visit new_user_session_path
+    user = FactoryGirl.create(:user)
+    visit new_user_session_path
 
-      fill_in "Email", with: user.email
-      fill_in "Password", with: user.password
+    fill_in "Email", with: user.email
+    fill_in "Password", with: user.password
 
-      click_button "Log In"
+    click_button "Log In"
 
       expect(page).to have_content("Signed in successfully.")
       expect(page).to have_content(user.email)
-
   end
 
   scenario 'User fails to sign in directly', js: true do
-      visit new_user_session_path
+    visit new_user_session_path
 
-      fill_in "Email", with: ""
-      fill_in "Password", with: ""
+    fill_in "Email", with: ""
+    fill_in "Password", with: ""
 
-      click_button "Log In"
+    click_button "Log In"
 
-      expect(page).not_to have_content("Signed in successfully.")
-      expect(page).to have_content("Invalid Email or password.")
-
+    expect(page).not_to have_content("Signed in successfully.")
+    expect(page).to have_content("Invalid Email or password.")
   end
 
-  scenario 'User signs in using Facebook', js: true do
-      visit new_user_session_path
-      set_facebook_omniauth()
+  scenario 'User signs in using Facebook for the first time and as a returning member', js: true do
+    visit new_user_session_path
+    set_facebook_omniauth()
 
-      click_link_or_button "Connect with Facebook"
+    click_link_or_button "Connect with Facebook"
 
-      expect(page).to have_content("Successfully authenticated from Facebook account.")
-      expect(page).to have_content("test@test.com")
+    expect(page).to have_content("Sign Up")
+
+    fill_in "Password", with: "Pa$$word5"
+    fill_in "Password confirmation", with: "Pa$$word5"
+
+    click_button "Sign Up"
+
+    expect(page).to have_content("Welcome! You have signed up successfully.")
+
+    click_link "test@test.com"
+    click_link "Sign Out"
+
+    visit new_user_session_path
+    set_facebook_omniauth()
+
+    click_link_or_button "Connect with Facebook"
+
+    expect(page).to have_content("Successfully authenticated from Facebook account.")
+    expect(page).to have_content("test@test.com")
   end
 
   scenario 'User fails to sign in using facebook', js: true do
-      visit new_user_session_path
-      invalid_facebook_omniauth()
+    visit new_user_session_path
+    invalid_facebook_omniauth()
 
-      click_link_or_button "Connect with Facebook"
+    click_link_or_button "Connect with Facebook"
 
-      expect(page).not_to have_content("Successfully authenticated from Facebook account.")
-      expect(page).not_to have_content("test@test.com")
-      expect(page).to have_content("Sign In")
-      expect(page).to have_content("Sign Up")
-      expect(page).to have_current_path(root_path)
+    expect(page).not_to have_content("Successfully authenticated from Facebook account.")
+    expect(page).not_to have_content("test@test.com")
+    expect(page).to have_content("Sign In")
+    expect(page).to have_content("Sign Up")
+    expect(page).to have_current_path(root_path)
   end
 end

@@ -1,7 +1,7 @@
 module SearchHelper
 
   def object_type?(obj)
-    return nil unless obj.present?
+    return "" unless obj.present?
     begin
       if obj.class == Array
         type = obj.first.class.name
@@ -9,7 +9,7 @@ module SearchHelper
         type = obj.class.name
       end
     rescue NoMethodError
-      return nil
+      return ""
     end
   end
 end

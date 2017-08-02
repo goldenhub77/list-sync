@@ -56,7 +56,7 @@ feature 'User searches lists or users', %{
     fill_in "js-global-search-input", with: list.title
     click_link_or_button "js-global-search-btn"
 
-    expect(page).to have_content(list.title)
+    expect(page).to have_content(list.title.humanize)
     expect(page).to have_content("1 result")
     expect(page).to have_current_path("/search?utf8=%E2%9C%93&q=#{list.title.gsub(' ', '+')}")
 
@@ -64,7 +64,7 @@ feature 'User searches lists or users', %{
     click_link_or_button "js-global-search-btn"
 
     List.all.each do |list|
-      expect(page).to have_content(list.title)
+      expect(page).to have_content(list.title.humanize)
     end
     expect(page).to have_content("7 results")
     expect(page).to have_current_path('/search?utf8=%E2%9C%93&q=list+name')
@@ -104,8 +104,7 @@ feature 'User searches lists or users', %{
     fill_in "js-global-search-input", with: list_search.title
     click_link_or_button "js-global-search-btn"
 
-    expect(page).not_to have_content(list_search.title)
-    expect(page).to have_content("0 result")
+    expect(page).to have_content("0 results No search results for '#{list_search.title}' found.")
     expect(page).to have_current_path("/search?utf8=%E2%9C%93&q=#{list_search.title.gsub(' ', '+')}")
 
     fill_in "js-global-search-input", with: "list name"
@@ -113,9 +112,9 @@ feature 'User searches lists or users', %{
 
     List.all.each.with_index do |list, index|
       if index < 4
-        expect(page).to have_content(list.title)
+        expect(page).to have_content(list.title.humanize)
       else
-        expect(page).not_to have_content(list.title)
+        expect(page).not_to have_content(list.title.humanize)
       end
     end
 
@@ -142,7 +141,7 @@ feature 'User searches lists or users', %{
     fill_in "js-global-search-input", with: list_search.title
     click_link_or_button "js-global-search-btn"
 
-    expect(page).to have_content(list_search.title)
+    expect(page).to have_content(list_search.title.humanize)
     expect(page).to have_content("1 result")
     expect(page).to have_current_path("/search?utf8=%E2%9C%93&q=#{list_search.title.gsub(' ', '+')}")
 
@@ -150,7 +149,7 @@ feature 'User searches lists or users', %{
     click_link_or_button "js-global-search-btn"
 
     user_logged_in.list_collaborations.each do |list|
-      expect(page).to have_content(list.title)
+      expect(page).to have_content(list.title.humanize)
     end
     expect(page).to have_content("4 results")
     expect(page).to have_current_path('/search?utf8=%E2%9C%93&q=list+name')

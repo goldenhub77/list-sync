@@ -58,7 +58,7 @@ RSpec.describe ListsController, type: :controller do
         user = User.first
         list = List.first
         items = FactoryGirl.create(:item, list_id: list.id, user_id: user.id)
-        
+
         get :show, params: { id: list.id }
 
         expect(assigns(:list)).not_to eq(list)
@@ -119,6 +119,7 @@ RSpec.describe ListsController, type: :controller do
 
     before(:each) do
       user = FactoryGirl.create(:user)
+      FactoryGirl.create(:user)
       FactoryGirl.create(:list, user_id: user.id)
       sign_in user
     end
@@ -228,5 +229,35 @@ RSpec.describe ListsController, type: :controller do
         expect(response).to redirect_to(lists_path)
       end
     end
+
+    #PENDING TESTS
+    # describe "POST join" do
+    #   it "creates a lists_user for a particular list" do
+    #     user = User.second
+    #     list = List.first
+    #
+    #     post :join, params: { user: user, list: list }
+    #
+    #     expect(assigns(:list)).to eq(list)
+    #     expect(assigns(:user)).to eq(user)
+    #     expect(response).to have_http_status(:found)
+    #     expect(response).to redirect_to(list_path(list))
+    #   end
+    # end
+    #
+    # describe "DELETE leave" do
+    #   it "deletes a lists_user for a particular list" do
+    #     user = User.first
+    #     list = List.first
+    #
+    #     post :join, params: { user_id: user.id, list_id: list.id }
+    #     delete :leave, params: { user_id: user.id, list_id: list.id }
+    #
+    #     expect(assigns(:list)).to eq(list)
+    #     expect(assigns(:user)).to eq(user)
+    #     expect(response).to have_http_status(:found)
+    #     expect(response).to redirect_to(list_path(list))
+    #   end
+    # end
   end
 end

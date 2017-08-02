@@ -45,3 +45,6 @@ en:
      complete?: 'You do not have rights to change'
    user_policy:
      collaborations?: 'You cannot view this users collaborations'
+   lists_user_policy:
+     join?: 'You already joined this list.'
+     leave?: 'You created, or have not joined this list.'
