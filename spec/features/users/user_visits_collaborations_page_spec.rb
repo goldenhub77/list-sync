@@ -19,7 +19,7 @@ feature 'user visits collaborations page', %{
 
     visit user_collaborations_path(user2)
 
-    expect(page).to have_content(list.title.humanize)
+    expect(page).to have_content(list.title.titleize)
   end
 
   scenario 'user2 views user1 collaborations page', js: true do
@@ -41,6 +41,6 @@ feature 'user visits collaborations page', %{
 
     visit user_collaborations_path(user2)
 
-    expect(page).to have_content(list.title.humanize)
+    expect(page).to have_content(list.title.titleize)
   end
 end

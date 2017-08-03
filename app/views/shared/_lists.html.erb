@@ -4,7 +4,7 @@
   <% collection.each do |list| %>
     <div class="panel panel-primary">
       <div class="panel-body">
-        <%= link_to list.title.humanize, list_path(list) %>
+        <%= link_to list.title.titleize, list_path(list) %>
       </div>
       <div class="panel-footer">
         <% if list.present? %>

@@ -9,7 +9,6 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="<%= root_path %>">LystSync</a>
-      <!-- future search integration -->
       <div id="global-search-div">
         <%= form_with url: search_path, local: true, method: :get, html: { id: "js-global-search-form" } do |f| %>
          <div class="input-group">
@@ -24,7 +23,8 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="<%= link_active?(lists_path) %>"><a href="<%= lists_path %>">Shared Lists</a></li>
+        <li class="<%= link_active?(lists_path) %>"><a href="<%= lists_path %>">Lists</a></li>
+        <li class="<%= link_active?(users_path) %>"><a href="<%= users_path %>">Find Friends</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if current_user %>

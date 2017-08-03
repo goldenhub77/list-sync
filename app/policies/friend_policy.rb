@@ -19,6 +19,15 @@ class FriendPolicy < ApplicationPolicy
     true
   end
 
+  def add?
+    true
+  end
+
+  def remove?
+    binding.pry
+    true
+  end
+
   protected
 
   def friends_only

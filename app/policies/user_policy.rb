@@ -1,22 +1,16 @@
 class UserPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      if user.admin?
-        scope.order("name DESC")
-      else
-        nil
-      end
+      scope.order("name DESC")
     end
   end
 
   def index?
-    user.admin? || user == record
+    true
   end
 
   def show?
-    # REFACTOR WHEN FRIENDS FEATURE COMPLETED
-    #security deactivated until friend feature built
-    true
+    user.admin? || are_friends?
   end
 
   def collaborations?
@@ -25,5 +19,11 @@ class UserPolicy < ApplicationPolicy
 
   def lists?
     user.admin? || user == record
+  end
+
+  protected
+
+  def are_friends?
+    user.friends.where('id = ?', record.id).present?
   end
 end

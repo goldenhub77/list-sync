@@ -1,5 +1,7 @@
 class FriendsController < ApplicationController
   before_action :find_user
+  before_action :find_friend, only: [:add, :remove]
+  before_action :find_friendship, only: :remove
 
   def index
     if @user == current_user
@@ -14,19 +16,43 @@ class FriendsController < ApplicationController
 
   end
 
+  def add
+    @friendship = @user.friends_users.create(post_friend_params)
+    if @friendship.valid?
+      flash[:notice] = "You are now friends with #{@friend.name}"
+    end
+    redirect_to request.referrer
+  end
+
+  def remove
+    @friendship.destroy
+    if @friendship.valid?
+      flash[:notice] = "You are no longer friends with #{@friend.name}"
+    end
+    redirect_to request.referrer
+  end
+
   protected
 
   def find_user
-    if get_user_params[:user_id].present? || get_user_params[:id].present?
-      @user = User.find(get_user_params[:user_id] ||= get_user_params[:id])
+    if post_friend_params[:user_id].present? || post_friend_params[:id].present?
+      @user = User.find(post_friend_params[:user_id] ||= post_friend_params[:id])
     else
       @user = current_user
     end
-    authorize(@user)
+    authorize(@user, :lists?)
   end
 
-  def get_user_params
-    params.permit(:id, :user_id)
+  def find_friend
+    @friend = User.find(post_friend_params[:friend_id])
+  end
+
+  def find_friendship
+    @friendship = @user.friends_users.where(post_friend_params).first
+  end
+
+  def post_friend_params
+    params.permit(:id, :user_id, :friend_id)
   end
 
 end

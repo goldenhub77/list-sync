@@ -86,8 +86,8 @@ $(document).ready(function () {
       header: "<strong><em>Users</em></strong>"
     }],
     list: {
+      maxNumberOfElements: 10,
       onClickEvent: function onClickEvent() {
-        //possible future use
         var currentData = $globalSearch.getSelectedItemData();
         // $searchBtn.click();
         window.location.href = currentData.url;
@@ -99,10 +99,6 @@ $(document).ready(function () {
   $('div.easy-autocomplete').removeAttr('style');
 
   $globalSearch.val(localStorage.q);
-
-  // $searchBtn.on('click', (event) => {
-  //   executeSearch(event);
-  // });
 
   $globalSearch.on('change', function (event) {
     localStorage.setItem('q', $globalSearch.val());

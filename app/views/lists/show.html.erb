@@ -1,10 +1,10 @@
 <%= javascript_pack_tag 'items' %>
-<h1><%= @list.title %></h1>
-<h4>Started by - <%= @list.user.email %></h4>
+<h1><%= @list.title.titleize %></h1>
+<h4>Created by - <%= @list.user.name.titleize %></h4>
 <% if not_joined?(@list) %>
-  <%= link_to "Join", user_list_join_path(current_user, @list), method: :post, class: 'btn btn-primary pull-right' %>
+  <%= link_to "Join", user_list_join_path(current_user, @list), method: :post, class: 'btn btn-primary join-btn pull-right' %>
 <% elsif @list.user != current_user %>
-  <%= link_to "Leave", user_list_leave_path(current_user, @list), method: :delete, class: 'btn btn-primary pull-right' %>
+  <%= link_to "Leave", user_list_leave_path(current_user, @list), method: :delete, class: 'btn btn-primary join-btn pull-right' %>
 <% end %>
 <div class="container">
   <% if policy(@list).edit? %>

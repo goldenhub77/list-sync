@@ -12,7 +12,10 @@ Rails.application.routes.draw do
   resources :users do
     get 'collaborations'
     get 'lists'
-    resources :friends
+    resources :friends, only: :index do
+      post 'add'
+      delete 'remove'
+    end
     resources :lists do
       post 'join'
       delete 'leave'

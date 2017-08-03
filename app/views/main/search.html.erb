@@ -1,4 +1,4 @@
-<h1><%= pluralize(@lists.count + @users.count, 'result') %></h1>
+<h1><%= pluralize(@lists.count + @users.count, 'result' ) + " for '#{session['q']}'" %></h1>
 <% if @lists.empty? && @users.empty? %>
   <h2>No search results for '<%= session['q'] %>' found.</h2>
 <% else %>

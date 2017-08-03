@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :find_user
 
   def index
+    @users = policy_scope(User)
   end
 
   def show
@@ -38,5 +39,4 @@ class UsersController < ApplicationController
   def get_user_params
     params.permit(:id, :user_id)
   end
-
 end

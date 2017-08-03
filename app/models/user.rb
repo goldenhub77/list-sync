@@ -9,8 +9,8 @@ class User < ApplicationRecord
   has_many :items
   has_many :lists_users, dependent: :destroy
   has_many :list_collaborations, source: :list, through: :lists_users, foreign_key: :list_id
-  has_many :friendships, dependent: :destroy
-  has_many :friends, through: :friendships
+  has_many :friends_users, dependent: :destroy
+  has_many :friends, through: :friends_users
 
   validates :provider, presence: true, allow_blank: true
   validates :uid, presence: true, allow_blank: true

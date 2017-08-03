@@ -7,14 +7,14 @@ class MainController < ApplicationController
 
   def autocomplete
     if current_user.admin?
-      @lists = List.all.ransack(title_cont: params[:q]).result(distinct: true).limit(5)
+      @lists = List.all.ransack(title_cont: params[:q]).result(distinct: true).limit(10)
     else
-      user_lists = current_user.lists.ransack(title_cont: params[:q]).result(distinct: true).limit(5)
-      collabs = current_user.list_collaborations.ransack(title_cont: params[:q]).result(distinct: true).limit(5)
-      pubs = List.public.ransack(title_cont: params[:q]).result(distinct: true).limit(5)
+      user_lists = current_user.lists.ransack(title_cont: params[:q]).result(distinct: true).limit(10)
+      collabs = current_user.list_collaborations.ransack(title_cont: params[:q]).result(distinct: true).limit(10)
+      pubs = List.public.ransack(title_cont: params[:q]).result(distinct: true).limit(10)
       @lists = (user_lists + collabs + pubs).uniq
     end
-    @users = User.all.ransack(name_cont: params[:q]).result(distinct: true).limit(5)
+    @users = User.all.ransack(name_cont: params[:q]).result(distinct: true)
   end
 
   def search

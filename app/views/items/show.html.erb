@@ -1,4 +1,4 @@
-<h1><%= @item.title %></h1>
+<h1><%= @item.title.titleize %></h1>
 <% if policy(@item).edit? %>
   <%= link_to "Edit", edit_list_item_path(@list, @item), class: "btn btn-primary" %>
   <%= link_to "Delete", list_item_path(@list, @item), method: "delete", class: "btn btn-danger", data: { confirm: "Are you sure?" } %>

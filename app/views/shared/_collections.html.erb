@@ -12,15 +12,20 @@
               <h4 class="media-heading"><%=link_to obj.name, user_path(obj) %></h4>
               <%=obj.email %>
               <% if current_user.has_no_friendship?(obj) %>
-                <%= link_to "Add Friend", user_friends_path(current_user), class: "btn btn-primary btn-sm friend-btn pull-right", method: :post %>
+                <%= link_to "Add Friend", user_friend_add_path(current_user, obj), class: "btn btn-primary btn-sm friend-btn pull-right", id: "friend-btn-#{obj.id}", method: :post %>
               <% elsif obj != current_user %>
-                <%= link_to "Unfriend", user_friends_path(current_user), class: "btn btn-primary btn-sm friend-btn pull-right", method: :delete %>
+                <%= link_to "Unfriend", user_friend_remove_path(current_user, obj), class: "btn btn-primary btn-sm friend-btn pull-right", id: "unfriend-btn-#{obj.id}", method: :delete %>
               <% end %>
             </div>
           <% elsif object_type?(obj) == "List" %>
             <div class="media-body">
-              <h4 class="media-heading"><%=link_to obj.title.humanize, list_path(obj) %></h4>
+              <h4 class="media-heading"><%=link_to obj.title.titleize, list_path(obj) %></h4>
               <%= obj.due_date %>
+              <% if not_joined?(obj) %>
+                <%= link_to "Join", user_list_join_path(current_user, obj), method: :post, class: 'btn btn-primary btn-sm join-btn pull-right' %>
+              <% elsif obj.user != current_user %>
+                <%= link_to "Leave", user_list_leave_path(current_user, obj), method: :delete, class: 'btn btn-primary btn-sm join-btn pull-right' %>
+              <% end %>
             </div>
           <% end %>
         </li>
