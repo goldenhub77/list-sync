@@ -6,7 +6,6 @@ class MainController < ApplicationController
   end
 
   def autocomplete
-    #Future refactor opportunity
     if current_user.admin?
       @lists = List.all.ransack(title_cont: params[:q]).result(distinct: true).limit(5)
     else
@@ -19,7 +18,6 @@ class MainController < ApplicationController
   end
 
   def search
-    #Future refactor opportunity
     session[:q] = params['q'];
     if params['q'].present?
       if current_user.admin?

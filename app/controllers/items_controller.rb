@@ -54,11 +54,10 @@ class ItemsController < ApplicationController
     @item.completed.present? ? nil : @item.date_completed = nil
     if @item.save
       flash[:notice] = "Item updated Successfully."
-      redirect_to list_path(@list)
     else
       flash.now[:error] = @item.errors.full_messages
-      redirect_to list_path(@list)
     end
+    redirect_to list_path(@list)
   end
 
   protected

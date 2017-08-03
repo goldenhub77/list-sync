@@ -6,7 +6,7 @@ class User < ApplicationRecord
          :omniauth_providers => [:facebook]
 
   has_many :lists, dependent: :destroy
-  has_many :items, dependent: :destroy
+  has_many :items
   has_many :lists_users, dependent: :destroy
   has_many :list_collaborations, source: :list, through: :lists_users, foreign_key: :list_id
 
