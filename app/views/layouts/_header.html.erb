@@ -25,7 +25,6 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="<%= link_active?(lists_path) %>"><a href="<%= lists_path %>">Shared Lists</a></li>
-        <li class=""><a href="#">Friends<span class="sr-only">(current)</span></a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if current_user %>
@@ -36,7 +35,7 @@
               <li role="separator" class="divider"></li>
               <li class="<%= link_active?(user_lists_path(current_user)) %>"><%= link_to "Lists I Created", user_lists_path(current_user) %></li>
               <li class="<%= link_active?(user_collaborations_path(current_user)) %>"><%= link_to "My List Collaborations", user_collaborations_path(current_user) %></li>
-              <li class=""><a href="#">My Friends<span class="sr-only">(current)</span></a></li>
+              <li class="<%= link_active?(user_friends_path(current_user)) %>"><a href="<%= user_friends_path(current_user) %>">My Friends</a></li>
               <li role="separator" class="divider"></li>
               <li class="<%= link_active?(edit_user_registration_path) %>"><%= link_to "Edit Account", edit_user_registration_path %></li>
               <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>

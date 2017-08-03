@@ -1,8 +1,8 @@
-class UserPolicy < ApplicationPolicy
+class FriendPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       if user.admin?
-        scope.order("name DESC")
+        user.friends.order("name DESC")
       else
         nil
       end
@@ -10,7 +10,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def index?
-    user.admin? || user == record
+    user.admin? || friends_only
   end
 
   def show?
@@ -19,11 +19,10 @@ class UserPolicy < ApplicationPolicy
     true
   end
 
-  def collaborations?
-    user.admin? || user == record
-  end
+  protected
 
-  def lists?
-    user.admin? || user == record
+  def friends_only
+    binding.pry
+    user == record.user
   end
 end

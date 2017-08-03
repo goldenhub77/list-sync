@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_many :items
   has_many :lists_users, dependent: :destroy
   has_many :list_collaborations, source: :list, through: :lists_users, foreign_key: :list_id
+  has_many :friendships, dependent: :destroy
+  has_many :friends, through: :friendships
 
   validates :provider, presence: true, allow_blank: true
   validates :uid, presence: true, allow_blank: true
@@ -22,6 +24,10 @@ class User < ApplicationRecord
     rescue ActiveRecord::StatementInvalid, ActiveRecord::RecordNotFound, NoMethodError => error
       return nil
     end
+  end
+
+  def has_no_friendship?(user)
+    self != user && friends.where('friend_id = ?', user.id).empty?
   end
 
   #handled returned OAuth data to create a user

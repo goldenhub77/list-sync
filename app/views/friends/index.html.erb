@@ -1,0 +1,6 @@
+<h1><%= @title %></h1>
+<% if @friends.empty? %>
+  <h3>You don't have any yet.</h3>
+<% else %>
+  <%= render 'shared/collections', collection: @friends %>
+<% end %>

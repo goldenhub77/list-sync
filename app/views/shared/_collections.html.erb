@@ -1,6 +1,4 @@
-<h2><%= object_type?(collection.first).pluralize %></h2>
 <% if collection.present? %>
-  <p><%= pluralize(collection.count, 'result') %></p>
     <ul class="media-list">
       <% collection.each do |obj| %>
         <li class="media search-results">
@@ -13,6 +11,11 @@
             <div class="media-body">
               <h4 class="media-heading"><%=link_to obj.name, user_path(obj) %></h4>
               <%=obj.email %>
+              <% if current_user.has_no_friendship?(obj) %>
+                <%= link_to "Add Friend", user_friends_path(current_user), class: "btn btn-primary btn-sm friend-btn pull-right", method: :post %>
+              <% elsif obj != current_user %>
+                <%= link_to "Unfriend", user_friends_path(current_user), class: "btn btn-primary btn-sm friend-btn pull-right", method: :delete %>
+              <% end %>
             </div>
           <% elsif object_type?(obj) == "List" %>
             <div class="media-body">
