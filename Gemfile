@@ -54,6 +54,9 @@ gem 'pundit'
 #handles search engine
 gem 'ransack'
 
+#include font-awesome
+gem 'font-awesome-rails'
+
 group :development, :test do
   #use pry for debugging
   gem 'pry-rails'
@@ -63,9 +66,6 @@ group :development, :test do
 
   #include custom matchers for testing pundit
   gem 'pundit-matchers', '~> 1.3.0'
-
-  #include font-awesome
-  gem 'font-awesome-rails'
 end
 
 group :test do
