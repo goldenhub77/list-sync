@@ -10,7 +10,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def show?
-    user.admin? || are_friends?
+    user.admin? || user == record || are_friends?
   end
 
   def collaborations?
@@ -24,6 +24,6 @@ class UserPolicy < ApplicationPolicy
   protected
 
   def are_friends?
-    user.friends.where('id = ?', record.id).present?
+    user.friends.where('users.id = ?', record.id).present?
   end
 end
