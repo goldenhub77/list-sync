@@ -49,6 +49,7 @@ class FriendsController < ApplicationController
 
   def find_friendship
     @friendship = @user.friends_users.where(post_friend_params).first
+    authorize(@friendship)
   end
 
   def post_friend_params

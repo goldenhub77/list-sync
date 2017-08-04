@@ -1,4 +1,4 @@
-class FriendPolicy < ApplicationPolicy
+class FriendsUserPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       if user.admin?
@@ -14,24 +14,16 @@ class FriendPolicy < ApplicationPolicy
   end
 
   def show?
-    # REFACTOR WHEN FRIENDS FEATURE COMPLETED
-    #security deactivated until friend feature built
-    true
-  end
-
-  def add?
-    true
+    user.admin? || friends_only
   end
 
   def remove?
-    binding.pry
-    true
+    user.admin? || friends_only
   end
 
   protected
 
   def friends_only
-    binding.pry
     user == record.user
   end
 end

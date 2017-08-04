@@ -10,7 +10,7 @@ class FriendsUser < ApplicationRecord
 
   def friend_id_check
     if friend_id == user_id
-      errors.add(:friend_id, 'cannot be a friend with yourself.')
+      errors.add(:friend_id, 'cannot be with yourself.')
     end
   end
 end
