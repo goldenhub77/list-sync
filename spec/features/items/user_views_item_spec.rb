@@ -18,7 +18,7 @@ feature 'user views list item', %{
 
     click_on @item.title
 
-    expect(page).to have_content(@item.title)
+    expect(page).to have_content(@item.title.titleize)
     expect(page).to have_link("Edit")
     expect(page).to have_link("Delete")
   end

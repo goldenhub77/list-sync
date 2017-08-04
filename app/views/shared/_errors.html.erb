@@ -1,7 +1,7 @@
 <% if collection.present? %>
   <ul class="object-errors alert alert-danger">
     <% collection.each do |msg| %>
-      <li><%= msg.titleize %></li>
+      <li><%= msg %></li>
     <% end %>
   </ul>
 <% end %>

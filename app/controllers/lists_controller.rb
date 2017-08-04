@@ -56,7 +56,7 @@ class ListsController < ApplicationController
         flash[:notice] = "Joined List Successfully."
       end
     end
-    redirect_to request.referrer
+    redirect_to request.referrer || list_path(@list)
   end
 
   def leave
@@ -69,7 +69,7 @@ class ListsController < ApplicationController
     else
       flash[:notice] = "You created, or have not joined this list."
     end
-    redirect_to request.referrer
+    redirect_to request.referrer || list_path(@list)
   end
 
   protected

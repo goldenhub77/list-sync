@@ -21,11 +21,11 @@ feature 'user creates list', %{
     click_button "Create List"
 
     expect(page).to have_content("Created List Successfully.")
-    expect(page).to have_content("Test list")
+    expect(page).to have_content("Test List")
 
     visit lists_path
 
-    expect(page).to have_content("Test list")
+    expect(page).to have_content('Test List')
   end
 
   scenario 'user creates private list' do
@@ -38,12 +38,12 @@ feature 'user creates list', %{
     click_button "Create List"
 
     expect(page).to have_content("Created List Successfully.")
-    expect(page).to have_content("Test list")
+    expect(page).to have_content("Test List")
     expect(page).to have_content("No Due Date")
 
     visit lists_path
 
-    expect(page).not_to have_content("Test list")
+    expect(page).not_to have_content('Test List')
   end
 
   scenario 'user creates list with due date', js: true do
@@ -61,11 +61,11 @@ feature 'user creates list', %{
     click_button "Create List"
 
     expect(page).to have_content("Created List Successfully.")
-    expect(page).to have_content("Test list")
+    expect(page).to have_content("Test List")
     expect(page).to have_content("1 day")
 
     visit lists_path
 
-    expect(page).not_to have_content("Test list")
+    expect(page).not_to have_content('Test List')
   end
 end

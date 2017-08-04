@@ -104,7 +104,7 @@ feature 'User searches lists or users', %{
     fill_in "js-global-search-input", with: list_search.title
     click_link_or_button "js-global-search-btn"
 
-    expect(page).to have_content("0 results No search results for '#{list_search.title}' found.")
+    expect(page).to have_content("No search results for '#{list_search.title.titleize}' found.")
     expect(page).to have_current_path("/search?utf8=%E2%9C%93&q=#{list_search.title.gsub(' ', '+')}")
 
     fill_in "js-global-search-input", with: "list name"
@@ -168,7 +168,7 @@ feature 'User searches lists or users', %{
     click_link_or_button "js-global-search-btn"
 
     expect(page).to have_content("Please enter a search query.")
-    expect(page).to have_content("0 results")
+    expect(page).to have_content("No search results for '' found.")
     expect(page).to have_current_path('/search?utf8=%E2%9C%93&q=')
   end
 end

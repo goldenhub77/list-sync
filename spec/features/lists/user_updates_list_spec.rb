@@ -22,7 +22,7 @@ feature 'user updates list', %{
     @list.reload
 
     expect(page).to have_content("Updated List Successfully.")
-    expect(page).to have_content("Test list")
+    expect(page).to have_content("Test List")
     expect(page).to have_content("No Due Date")
   end
 
@@ -46,7 +46,7 @@ feature 'user updates list', %{
     @list.reload
 
     expect(page).to have_content("Updated List Successfully.")
-    expect(page).to have_content("Test list")
+    expect(page).to have_content("Test List")
     expect(page).to have_content("1 day")
   end
 end
