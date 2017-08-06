@@ -2,9 +2,9 @@ class ProfilePictureUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
-  include CarrierWave::MiniMagick
-
-  process resize_to_fill: [80, 80]
+  # include CarrierWave::MiniMagick
+  #
+  # process resize_to_fill: [80, 80]
 
   # Choose what kind of storage to use for this uploader:
   if Rails.env.test?
