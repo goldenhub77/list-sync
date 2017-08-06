@@ -57,6 +57,16 @@ gem 'ransack'
 #include font-awesome
 gem 'font-awesome-rails'
 
+#support for AmazonS3 storage
+gem 'fog-aws'
+
+#support image manipulation for carrierwave
+gem 'mini_magick'
+#support for file validations
+gem 'file_validators'
+#support for safe and reliable file uploading
+gem 'carrierwave', '~> 1.0'
+
 group :development, :test do
   #use pry for debugging
   gem 'pry-rails'

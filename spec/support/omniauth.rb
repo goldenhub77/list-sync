@@ -6,7 +6,7 @@ def set_facebook_omniauth()
     {
       email: "test@test.com",
       name: "Test Name",
-      image: "http://website.com/image/12394854743" },
+      image: "" },
    credentials:
     {token:
       "fakhwekjnf89ry93hfiueaflkjh2h21ygj21hb1kjGHJGJ12hj2ajRwZDZD",

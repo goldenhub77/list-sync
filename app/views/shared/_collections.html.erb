@@ -4,8 +4,8 @@
         <li class="media search-results">
           <% if object_type?(obj) == "User" %>
             <div class="media-left">
-              <a href="#">
-                <img class="media-object" src="<%= obj.profile_picture %>" alt="profile picture">
+              <a href="<%= user_path(obj) %>">
+                <%= image_tag(obj.profile_picture, class: "media-object", size: "80", alt: "Profile Picture") %>
               </a>
             </div>
             <div class="media-body">
