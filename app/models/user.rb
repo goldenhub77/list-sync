@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable,
          :omniauth_providers => [:facebook]
 
+  mount_uploader :profile_picture, ProfilePictureUploader
+
   has_many :lists, dependent: :destroy
   has_many :items
   has_many :lists_users, dependent: :destroy
@@ -17,6 +19,8 @@ class User < ApplicationRecord
   validate :password_complexity
   validates :name, presence: true
   validates :admin, presence: true, allow_blank: true, inclusion: { in: [true, false] }
+  validates :profile_picture, file_size: { less_than_or_equal_to: 5.megabytes },
+                     file_content_type: { allow: ['image/jpeg', 'image/png'] }
 
   def role(list)
     begin
@@ -36,7 +40,7 @@ class User < ApplicationRecord
       user.email = auth.info.email
       # user.password = Devise.friendly_token[0,20]
       user.name = auth.info.name
-      user.profile_picture = auth.info.image #no functionality for this yet, but will be implemented
+      user.remote_profile_picture_url = auth.info.image
       # If you are using confirmable and the provider(s) you use validate emails,
       # uncomment the line below to skip the confirmation emails.
       # user.skip_confirmation!
@@ -51,7 +55,7 @@ class User < ApplicationRecord
         user.email = data["email"] if user.email.blank?
         user.provider = session["devise.facebook_data"]["provider"]
         user.uid = session["devise.facebook_data"]['uid']
-        user.profile_picture = session["devise.facebook_data"]["info"]["image"]
+        user.remote_profile_picture_url = session["devise.facebook_data"]["info"]["image"]
       end
     end
   end

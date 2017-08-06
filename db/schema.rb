@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(version: 20170803021154) do
     t.string "provider"
     t.string "uid"
     t.string "name", null: false
-    t.text "profile_picture"
+    t.string "profile_picture"
     t.boolean "admin", default: false, null: false
     t.index ["admin"], name: "index_users_on_admin"
     t.index ["email"], name: "index_users_on_email", unique: true
