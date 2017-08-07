@@ -32,7 +32,7 @@
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-picture-o fa" aria-hidden="true"></i></span>
 							<% if f.object.profile_picture? %>
-								<%= image_tag(resource.profile_picture, class: "media-object", size: "80", alt: "Profile Picture") %>
+								<%= image_tag(resource.profile_picture, class: "media-object form-profile-picture", alt: "Profile Picture") %>
 							<% end %>
 							<%= f.file_field :profile_picture, class: "form-control" %>
 							<%= f.hidden_field :profile_picture_cache %>
