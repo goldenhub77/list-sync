@@ -7,7 +7,7 @@ class User < ApplicationRecord
 
   mount_uploader :profile_picture, ProfilePictureUploader
 
-  has_many :lists, dependent: :destroy
+  has_many :lists
   has_many :items
   has_many :lists_users, dependent: :destroy
   has_many :list_collaborations, source: :list, through: :lists_users, foreign_key: :list_id
@@ -21,6 +21,8 @@ class User < ApplicationRecord
   validates :admin, presence: true, allow_blank: true, inclusion: { in: [true, false] }
   validates :profile_picture, file_size: { less_than_or_equal_to: 5.megabytes },
                      file_content_type: { allow: ['image/jpeg', 'image/png'] }
+
+  scope :all_active_users, -> { where('deleted_at IS NULL') }
 
   def role(list)
     begin
@@ -65,5 +67,20 @@ class User < ApplicationRecord
     if provider.nil? && password.present? and not password.match(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=.\-_*!])([a-zA-Z0-9@#$%^&+=*.\-_!]){3,}$/)
       errors.add :password, "must include at least one lowercase letter, one uppercase letter, one digit, and one symbol"
     end
+  end
+
+  # instead of deleting, indicate the user requested a delete & timestamp it
+  def soft_delete
+    update_attribute(:deleted_at, Time.current)
+  end
+
+  # ensure user account is active
+  def active_for_authentication?
+    super && !deleted_at
+  end
+
+  # provide a custom message for a deleted account
+  def inactive_message
+  	!deleted_at ? super : :deleted_account
   end
 end

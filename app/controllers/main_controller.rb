@@ -14,7 +14,7 @@ class MainController < ApplicationController
       pubs = List.public.ransack(title_cont: params[:q]).result(distinct: true).limit(10)
       @lists = (user_lists + collabs + pubs).uniq
     end
-    @users = User.all.ransack(name_cont: params[:q]).result(distinct: true)
+    @users = User.all_active_users.ransack(name_cont: params[:q]).result(distinct: true)
   end
 
   def search
@@ -28,7 +28,7 @@ class MainController < ApplicationController
         pubs = List.public.ransack(title_cont: params[:q]).result(distinct: true)
         @lists = (user_lists + collabs + pubs).uniq
       end
-      @users = User.all.ransack(name_cont: params[:q]).result(distinct: true)
+      @users = User.all_active_users.ransack(name_cont: params[:q]).result(distinct: true)
     else
       flash.now[:error] = "Please enter a search query."
     end

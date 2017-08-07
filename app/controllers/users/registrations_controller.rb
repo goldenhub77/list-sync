@@ -23,9 +23,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # DELETE /resource
-  # def destroy
-  #   super
-  # end
+  # overrides normal devise user deletion by soft deleting so collaborators still have
+  # access to shared lists
+  def destroy
+    #NEED TO HANDLE CASE WHEN USER IS THE ONLY ADMIN ON A LIST THEY CREATED OR
+    #IF THEY ARE THE ONLY COLLABORATOR THE LIST NEEDS TO BE DELETED
+    #IF THERE IS ANOTHER COLLABORATOR A ADMIN NEEDS TO BE NAMED BEFORE CLOSING ACCOUNT
+    resource.soft_delete
+    Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
+    set_flash_message :notice, :destroyed if is_flashing_format?
+    yield resource if block_given?
+    respond_with_navigational(resource){ redirect_to after_sign_out_path_for(resource_name) }
+  end
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign

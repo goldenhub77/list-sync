@@ -1,6 +1,7 @@
 class FriendsController < ApplicationController
   before_action :find_user
   before_action :find_friend, only: [:add, :remove]
+  before_action :check_user_status, only: :add
   before_action :find_friendship, only: :remove
 
   def index
@@ -50,6 +51,13 @@ class FriendsController < ApplicationController
   def find_friendship
     @friendship = @user.friends_users.where(post_friend_params).first
     authorize(@friendship)
+  end
+
+  def check_user_status
+    if @friend.deleted_at?
+      flash[:notice] = 'This user is no longer active.'
+      redirect_to request.referrer
+    end
   end
 
   def post_friend_params
