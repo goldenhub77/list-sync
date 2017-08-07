@@ -16,7 +16,8 @@ feature 'User signs up directly through LystSync', %{
     click_button "Sign Up"
 
     expect(page).to have_content("Welcome! You have signed up successfully.")
-    expect(page).to have_content("jsmith77@test.com")
+    expect(page).to have_css("img[class*='header-profile-picture']")
+    expect(page).to have_content("John Smith")
   end
 
   scenario 'User fills in false information when signing up', js: true do
@@ -29,7 +30,7 @@ feature 'User signs up directly through LystSync', %{
 
     click_button "Sign Up"
 
-
+    
     expect(page).to have_content("Email can't be blank")
     expect(page).to have_content("Password can't be blank")
     expect(page).to have_content("Name can't be blank")

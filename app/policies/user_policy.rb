@@ -1,7 +1,7 @@
 class UserPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.order("name DESC")
+      scope.all_active_users.order("name DESC")
     end
   end
 

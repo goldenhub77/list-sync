@@ -6,6 +6,8 @@ feature 'User cancels account', %{
 
   before(:each) do
     user = FactoryGirl.create(:user)
+    FactoryGirl.create(:list, user: user)
+    FactoryGirl.create(:item, user: user)
     login_as(user, scope: :user)
   end
 
@@ -18,5 +20,9 @@ feature 'User cancels account', %{
 
     expect(page).to have_content("Bye! Your account has been successfully cancelled. We hope to see you again soon.")
     expect(page).to have_current_path(root_path)
+    user.reload
+    expect(user.deleted_at).not_to eq(nil)
+    expect(user.lists).not_to be_empty
+    expect(user.items).not_to be_empty
   end
 end

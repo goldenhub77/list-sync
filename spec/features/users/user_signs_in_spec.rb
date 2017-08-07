@@ -15,7 +15,7 @@ feature 'User signs in', %{
     click_button "Log In"
 
       expect(page).to have_content("Signed in successfully.")
-      expect(page).to have_content(user.email)
+      expect(page).to have_content(user.name)
   end
 
   scenario 'User fails to sign in directly', js: true do
@@ -45,7 +45,7 @@ feature 'User signs in', %{
 
     expect(page).to have_content("Welcome! You have signed up successfully.")
 
-    click_link "test@test.com"
+    click_link "Test Name"
     click_link "Sign Out"
 
     visit new_user_session_path
@@ -54,7 +54,8 @@ feature 'User signs in', %{
     click_link_or_button "Connect with Facebook"
 
     expect(page).to have_content("Successfully authenticated from Facebook account.")
-    expect(page).to have_content("test@test.com")
+    expect(page).to have_css("img[class*='header-profile-picture']")
+    expect(page).to have_content("Test Name")
   end
 
   scenario 'User fails to sign in using facebook', js: true do
@@ -64,7 +65,8 @@ feature 'User signs in', %{
     click_link_or_button "Connect with Facebook"
 
     expect(page).not_to have_content("Successfully authenticated from Facebook account.")
-    expect(page).not_to have_content("test@test.com")
+    expect(page).not_to have_css("img[class*='header-profile-picture']")
+    expect(page).not_to have_content("Test Name")
     expect(page).to have_content("Sign In")
     expect(page).to have_content("Sign Up")
     expect(page).to have_current_path(root_path)
