@@ -45,6 +45,7 @@ en:
      complete?: 'You do not have rights to change'
    user_policy:
      collaborations?: 'You cannot view this users collaborations'
+     show?: 'You are not friends with this member yet.'
    lists_user_policy:
      join?: 'You already joined this list.'
      leave?: 'You created, or have not joined this list.'
@@ -55,3 +56,6 @@ en:
       carrierwave_download_error: "Couldn't download image."
       extension_whitelist_error: "You are not allowed to upload %{extension} files, allowed types: %{allowed_types}"
       extension_blacklist_error: "You are not allowed to upload %{extension} files, prohibited types: %{prohibited_types}"
+  devise:
+    failure:
+      deleted_account: "You've deleted your account. Thanks!"

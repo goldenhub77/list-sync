@@ -6,6 +6,10 @@ class UsersController < ApplicationController
   end
 
   def show
+    if @user.deleted_at?
+      flash[:notice] = 'This user is no longer active'
+      redirect_to request.referrer
+    end
   end
 
   def collaborations
