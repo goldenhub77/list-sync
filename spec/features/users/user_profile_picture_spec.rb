@@ -16,6 +16,6 @@ feature "profile photo" do
 
     visit edit_user_registration_path
 
-    expect(page).to have_content("Current: good_photo.png")
+    expect(page).to have_css("img[class*='form-profile-picture']")
   end
 end
