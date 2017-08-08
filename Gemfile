@@ -73,7 +73,7 @@ group :development, :test do
   gem 'coffee-rails'
   #handles environment variables in .env
   gem 'dotenv-rails'
-
+  gem 'mailcatcher'
   #include custom matchers for testing pundit
   gem 'pundit-matchers', '~> 1.3.0'
 end
