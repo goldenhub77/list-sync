@@ -1,0 +1,10 @@
+Hey, <%= @user.name %>,
+
+You <%= @status %> item <%= link_to @item.title.titleize, list_item_url(@item.list, @item) %>
+which you are collaborating on.
+The details are as follows:
+List: <%= link_to @item.list.title.titleize, list_url(@item.list) %>
+Completed: <%= @item.date_completed.present?.to_s.capitalize %>
+<% if @item.date_completed.present? %>
+  Date: <%= @item.date_completed %>
+<% end %>

@@ -1,0 +1,9 @@
+Hey, %recipient.name%,
+
+Just wanted to let you know that item <%= link_to @item.title.titleize, list_item_url(@item.list, @item) %>
+<%= @status %>.
+List: <%= @item.list.title.titleize %>
+Completed: <%= @item.date_completed.present?.to_s.capitalize %>
+<% if @item.date_completed.present? %>
+  Date: <%= @item.date_completed %>
+<% end %>

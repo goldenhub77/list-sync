@@ -2,65 +2,55 @@ class BatchMailer < ApplicationMailer
 
   def item_create(item, recipients = [])
     @item = item
-    @user = item.user
     builder = batch_builder()
-    builder.subject("New Item Added to list #{@item.list.title.titleize}")
+    builder.subject("New Item Added to #{@item.list.title.titleize}")
+    set_templates(builder, @item, "batch_mailer/item_create")
+    add_recipients(builder, @item, recipients)
 
-    # Render html version
-    html = render_to_string(
-      template: "batch_mailer/item_create",
-      formats: [:html],
-      locals: { request: item }
-    )
-
-    # Render plain text version
-    txt = render_to_string(
-      template: "batch_mailer/item_create",
-      formats: [:text],
-      # layout: false,
-      locals: { request: item }
-    )
-
-    builder.body_text(txt.to_str)
-    builder.body_html(html.to_str)
-
-    recipients.each do |user|
-      if user != @user
-        builder.add_recipient(:to, user.email, 'name' => user.name,
-                                               'account-id' => user.id)
-      end
-    end
     builder.finalize
   end
 
-  def item_complete(item, recipients = [])
+  def item_status(item, recipients = [])
     @item = item
-    @user = item.user
+    if @item.date_completed.present?
+      @status = 'was completed'
+    else
+      @status = 'is incomplete'
+    end
     builder = batch_builder()
-    builder.subject("Item #{@item.list.title.titleize} Completed")
+    builder.subject("#{@item.title.titleize} #{@status}")
+    set_templates(builder, @item, "batch_mailer/item_status")
+    add_recipients(builder, @item, recipients)
 
+    builder.finalize
+  end
+
+  protected
+
+  def set_templates(mail_object, resource, action)
     # Render html version
     html = render_to_string(
-      template: "batch_mailer/item_complete",
+      template: action,
       formats: [:html],
-      locals: { request: item }
+      locals: { request: resource }
     )
 
     # Render plain text version
     txt = render_to_string(
-      template: "batch_mailer/item_complete",
+      template: action,
       formats: [:text],
       # layout: false,
-      locals: { request: item }
+      locals: { request: resource }
     )
 
-    builder.body_text(txt.to_str)
-    builder.body_html(html.to_str)
+    mail_object.body_text(txt.to_str)
+    mail_object.body_html(html.to_str)
+  end
 
+  def add_recipients(mail_object, resource, recipients)
     recipients.each do |user|
-        builder.add_recipient(:to, user.email, 'name' => user.name,
+        mail_object.add_recipient(:to, user.email, 'name' => user.name,
                                                'account-id' => user.id)
     end
-    builder.finalize
   end
 end

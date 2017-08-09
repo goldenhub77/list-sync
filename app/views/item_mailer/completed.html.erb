@@ -1,0 +1,11 @@
+<h1>Hey, <%= @user.name %>,</h1>
+<p>
+  You <%= @status %> item <%= link_to @item.title.titleize, list_item_url(@item.list, @item) %>
+  which you are collaborating on.<br>
+  The details are as follows:<br>
+  List: <%= link_to @item.list.title.titleize, list_url(@item.list) %><br>
+  Completed: <%= @item.date_completed.present?.to_s.capitalize %><br>
+  <% if @item.date_completed.present? %>
+    Date: <%= @item.date_completed %>
+  <% end %>
+</p>
