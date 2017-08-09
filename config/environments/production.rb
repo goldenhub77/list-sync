@@ -67,19 +67,13 @@ Rails.application.configure do
 
   #production email url
   config.action_mailer.default_url_options = { host: 'https://lystsync.herokuapp.com', port: 443 }
-  
+
   config.action_mailer.raise_delivery_errors = false
 
-  config.action_mailer.delivery_method = :smtp
-
-  config.action_mailer.smtp_settings = {
-    address: "smtp.mailgun.org",
-    port: 587,
-    domain: ENV["MG_DOMAIN"],
-    authentication: "plain",
-    enable_starttls_auto: true,
-    user_name: ENV["MG_USERNAME"],
-    password: ENV["MG_PASSWORD"]
+  config.action_mailer.delivery_method = :mailgun
+  config.action_mailer.mailgun_settings = {
+    api_key: ENV['MG_API_KEY'],
+    domain: ENV['MG_DOMAIN']
   }
 
   # Ignore bad email addresses and do not raise email delivery errors.

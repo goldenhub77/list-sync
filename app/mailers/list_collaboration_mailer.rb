@@ -1,0 +1,2 @@
+class ListCollaborationMailer < ApplicationMailer
+end

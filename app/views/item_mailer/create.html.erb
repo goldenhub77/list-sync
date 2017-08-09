@@ -1,0 +1,7 @@
+<h1>Hey, <%= @user.name %>,</h1>
+<p>
+  You created a item for <%= link_to @item.list.title.titleize, list_url(@item.list) %>
+  on <%= @item.created_at %> which you are collaborating on,
+  The details are as follows:<br>
+  Item: <%= link_to @item.title.titleize, list_item_url(@item.list, @item) %>.<br>
+</p>

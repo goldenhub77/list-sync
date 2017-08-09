@@ -17,6 +17,8 @@ class ItemsController < ApplicationController
     @item = Item.create(post_item_params)
     if @item.valid?
       flash[:notice] = "Created Item Successfully."
+      ItemMailer.create(@item, @item.user).deliver_later
+      BatchMailer.item_create(@item, @list.collaborators.to_a).deliver_later
       redirect_to list_path(@list)
     else
       render :new
@@ -54,6 +56,7 @@ class ItemsController < ApplicationController
     @item.completed.present? ? nil : @item.date_completed = nil
     if @item.save
       flash[:notice] = "Item updated Successfully."
+      BatchMailer.item_complete(@item, @list.collaborators.to_a).deliver_later
     else
       flash.now[:error] = @item.errors.full_messages
     end
