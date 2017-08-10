@@ -1,10 +1,9 @@
-<h1>Hey, %recipient.name%,</h1>
+<h2>Hey %recipient.name%,</h2>
 <p>
-  Just wanted to let you know that item <%= link_to @item.title.titleize, list_item_url(@item.list, @item) %>
+  Just wanted to let you know that <%= link_to @item.title.titleize, list_item_url(@item.list, @item) %>
   <%= @status %>.<br>
   List: <%= @item.list.title.titleize %><br>
-  Completed: <%= @item.date_completed.present?.to_s.capitalize %><br>
   <% if @item.date_completed.present? %>
-    Date: <%= @item.date_completed %>
+    Date: <%= @item.date_completed.localtime.strftime("%a %m/%d/%Y %l:%M %p %Z") %>
   <% end %>
 </p>

@@ -1,10 +1,10 @@
 class BatchMailer < ApplicationMailer
 
-  def item_create(item, recipients = [])
+  def create_item(item, recipients = [])
     @item = item
     builder = batch_builder()
     builder.subject("New Item Added to #{@item.list.title.titleize}")
-    set_templates(builder, @item, "batch_mailer/item_create")
+    set_templates(builder, @item, "batch_mailer/create_item")
     add_recipients(builder, @item, recipients)
 
     builder.finalize

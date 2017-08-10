@@ -1,7 +1,0 @@
-Hey, %recipient.name%,
-
-A new item was added to <%= link_to @item.list.title.titleize, list_url(@item.list) %>
-on <%= @item.created_at %> which you are collaborating on,
-The details are as follows:
-List Owner: <%= link_to @item.list.user.email, user_url(@item.list.user) %>
-Item: <%= link_to @item.title.titleize, list_item_url(@item.list, @item) %>

@@ -1,0 +1,7 @@
+Hey %recipient.name%,
+
+A new item was added to <%= link_to @item.list.title.titleize, list_url(@item.list) %>
+on <%= @item.created_at.localtime.strftime("%a %m/%d/%Y %l:%M %p %Z") %> which you are collaborating on,
+The details are as follows:
+List Creator: <%= link_to @item.list.user.name.titleize, user_url(@item.list.user) %>
+Item: <%= link_to @item.title.titleize, list_item_url(@item.list, @item) %>

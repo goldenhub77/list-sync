@@ -1,6 +1,7 @@
-Hey, <%= @user.name %>,
+Hey <%= @user.name %>,
 
-You created a item for list <%= link_to @item.list.title.titleize, list_url(@item.list) %>
-on <%= @item.created_at %> which you are collaborating on,
+You created a item for <%= link_to @item.list.title.titleize, list_url(@item.list) %>
+on <%= @item.created_at.localtime.strftime("%a %m/%d/%Y%l:%M %p %Z") %> which you are collaborating on,
 The details are as follows:
-Item: <%= link_to @item.title.titleize, list_item_url(@item.list, @item) %>
+List Creator: <%= link_to @item.list.user.name.titleize, user_url(@item.list.user) %>
+Item: <%= link_to @item.title.titleize, list_item_url(@item.list, @item) %>.

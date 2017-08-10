@@ -17,7 +17,7 @@ class ItemsController < ApplicationController
     @item = Item.create(post_item_params)
     if @item.valid?
       flash[:notice] = "Created Item Successfully."
-      BatchMailer.item_create(@item, @list.collaborators.to_a).deliver_later
+      BatchMailer.create_item(@item, @list.collaborators.to_a).deliver_later
       redirect_to list_path(@list)
     else
       render :new
