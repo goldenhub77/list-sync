@@ -6,6 +6,6 @@
 <h3>Items:</h3>
 <ul>
   <% @list.items.each do |item| %>
-    <li><em><%= link_to item.title.titleize, list_item_url(@list, item) %></em> - completed: <%= item.created_at.localtime.strftime("%a %m/%d/%Y %l:%M %p %Z") %></li>
+    <li><em><%= link_to item.title.titleize, list_item_url(@list, item) %></em> - completed: <%= item.date_completed.localtime.strftime("%a %m/%d/%Y %l:%M %p %Z") %></li>
   <% end %>
 </ul>

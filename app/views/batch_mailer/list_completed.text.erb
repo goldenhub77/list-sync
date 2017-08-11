@@ -4,5 +4,5 @@ Congratulations, <%= link_to @list.title.titleize, list_url(@list) %> has been c
 Here are the details:
 Items:
 <% @list.items.each do |item| %>
-  <%= link_to item.title.titleize, list_item_url(@list, item) %> - completed: <%= item.created_at.localtime.strftime("%a %m/%d/%Y %l:%M %p %Z") %>
+  <%= link_to item.title.titleize, list_item_url(@list, item) %> - completed: <%= item.date_completed.localtime.strftime("%a %m/%d/%Y %l:%M %p %Z") %>
 <% end %>

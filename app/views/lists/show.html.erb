@@ -17,6 +17,17 @@
   <% if @list.present? %>
     <%= time_left_until_due(@list.due_date) %>
   <% end %>
+  <br>
+  <h3>Collaborators</h3>
+  <ol>
+    <% @list.collaborators.each do |user| %>
+      <% if user == current_user %>
+        <li><%= link_to 'Me', user_path(user) %></li>
+      <% else %>
+        <li><%= link_to user.name.titleize, user_path(user) %></li>
+      <% end %>
+    <% end %>
+  </ol>
   <% if policy(@list).new? %>
   <%= link_to raw("&#43;"), new_list_item_path(@list), role: "button", class: "add-btn btn" %>
     <div class="list-group">
