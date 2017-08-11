@@ -56,6 +56,9 @@ class ItemsController < ApplicationController
     if @item.save
       flash[:notice] = "Item updated Successfully."
       BatchMailer.item_status(@item, @list.collaborators.to_a).deliver_later
+      if @list.percent_complete == 100
+        BatchMailer.list_completed(@list, @list.collaborators.to_a).deliver_later
+      end
     else
       flash.now[:error] = @item.errors.full_messages
     end

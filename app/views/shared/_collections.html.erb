@@ -20,11 +20,16 @@
           <% elsif object_type?(obj) == "List" %>
             <div class="media-body">
               <h4 class="media-heading"><%=link_to obj.title.titleize, list_path(obj) %></h4>
-              <%= obj.due_date %>
+              <% if obj.present? %>
+                <%= time_left_until_due(obj.due_date) %>
+              <% end %>
               <% if not_joined?(obj) %>
                 <%= link_to "Join", user_list_join_path(current_user, obj), method: :post, class: 'btn btn-primary btn-sm join-btn pull-right' %>
               <% elsif obj.user != current_user %>
                 <%= link_to "Leave", user_list_leave_path(current_user, obj), method: :delete, class: 'btn btn-primary btn-sm join-btn pull-right' %>
+              <% end %>
+              <% if obj.percent_complete.present? %>
+                <h4><%= obj.percent_complete %>% completed</h4>
               <% end %>
             </div>
           <% end %>

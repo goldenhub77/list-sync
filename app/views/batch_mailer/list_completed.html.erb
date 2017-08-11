@@ -1,0 +1,11 @@
+<h2>Hey %recipient.name%,</h2>
+<p>
+  Congratulations, <%= link_to @list.title.titleize, list_url(@list) %> has been completed.<br>
+  Here are the details:<br>
+</p>
+<h3>Items:</h3>
+<ul>
+  <% @list.items.each do |item| %>
+    <li><em><%= link_to item.title.titleize, list_item_url(@list, item) %></em> - completed: <%= item.created_at.localtime.strftime("%a %m/%d/%Y %l:%M %p %Z") %></li>
+  <% end %>
+</ul>

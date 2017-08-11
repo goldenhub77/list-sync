@@ -4,6 +4,11 @@ You <%= @status %> <%= link_to @item.title.titleize, list_item_url(@item.list, @
 which you are collaborating on.
 The details are as follows:
 List: <%= link_to @item.list.title.titleize, list_url(@item.list) %>
+Items Completed: <%= list.percent_complete %>%
 <% if @item.date_completed.present? %>
   Date: <%= @item.date_completed.localtime.strftime("%a %m/%d/%Y %l:%M %p %Z") %>
+<% end %>
+Pending:
+<% @pending_items.each do |item| %>
+  <%= item.title.titleize %>
 <% end %>

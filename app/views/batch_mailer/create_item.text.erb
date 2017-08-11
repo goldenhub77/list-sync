@@ -5,3 +5,8 @@ on <%= @item.created_at.localtime.strftime("%a %m/%d/%Y %l:%M %p %Z") %> which y
 The details are as follows:
 List Creator: <%= link_to @item.list.user.name.titleize, user_url(@item.list.user) %>
 Item: <%= link_to @item.title.titleize, list_item_url(@item.list, @item) %>
+Items Completed: <%= @item.list.percent_complete %>%
+Pending:
+<% @pending_items.each do |item| %>
+  <%= item.title.titleize %>
+<% end %>
