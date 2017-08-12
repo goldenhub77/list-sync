@@ -17,6 +17,7 @@ class ItemsController < ApplicationController
     @item = Item.create(post_item_params)
     if @item.valid?
       flash[:notice] = "Created Item Successfully."
+      BatchMailer.create_item(@item, @list.collaborators.to_a).deliver_later
       redirect_to list_path(@list)
     else
       render :new
@@ -54,6 +55,10 @@ class ItemsController < ApplicationController
     @item.completed.present? ? nil : @item.date_completed = nil
     if @item.save
       flash[:notice] = "Item updated Successfully."
+      BatchMailer.item_status(@item, @list.collaborators.to_a).deliver_later
+      if @list.percent_complete == 100
+        BatchMailer.list_completed(@list, @list.collaborators.to_a).deliver_later
+      end
     else
       flash.now[:error] = @item.errors.full_messages
     end

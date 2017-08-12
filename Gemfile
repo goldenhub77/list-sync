@@ -67,13 +67,16 @@ gem 'file_validators'
 #support for safe and reliable file uploading
 gem 'carrierwave', '~> 1.0'
 
+#handles email
+gem 'mailgun-ruby', '~>1.1.6'
+
 group :development, :test do
   #use pry for debugging
   gem 'pry-rails'
   gem 'coffee-rails'
   #handles environment variables in .env
   gem 'dotenv-rails'
-
+  gem 'mailcatcher'
   #include custom matchers for testing pundit
   gem 'pundit-matchers', '~> 1.3.0'
 end

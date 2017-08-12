@@ -1,0 +1,17 @@
+<h2>Hey, <%= @user.name %>,</h2>
+<p>
+  You <%= @status %> <%= link_to @item.title.titleize, list_item_url(@item.list, @item) %>
+  which you are collaborating on.<br>
+  The details are as follows:<br>
+  List: <%= link_to @item.list.title.titleize, list_url(@item.list) %><br>
+  Items Completed: <%= list.percent_complete %>%<br>
+  <% if @item.date_completed.present? %>
+    Date: <%= @item.date_completed.localtime.strftime("%a %m/%d/%Y %l:%M %p %Z") %>
+  <% end %>
+</p>
+<h3>Pending:</h3>
+<ul>
+  <% @pending_items.each do |item| %>
+    <li><em><%= item.title.titleize %></em></li>
+  <% end %>
+</ul>

@@ -1,6 +1,9 @@
 <%= javascript_pack_tag 'items' %>
 <h1><%= @list.title.titleize %></h1>
 <h4>Created by - <%= @list.user.name.titleize %></h4>
+<% if @list.percent_complete.present? %>
+  <h4><%= @list.percent_complete %>% completed</h4>
+<% end %>
 <% if not_joined?(@list) %>
   <%= link_to "Join", user_list_join_path(current_user, @list), method: :post, class: 'btn btn-primary join-btn pull-right' %>
 <% elsif @list.user != current_user %>
@@ -14,6 +17,17 @@
   <% if @list.present? %>
     <%= time_left_until_due(@list.due_date) %>
   <% end %>
+  <br>
+  <h3>Collaborators</h3>
+  <ol>
+    <% @list.collaborators.each do |user| %>
+      <% if user == current_user %>
+        <li><%= link_to 'Me', user_path(user) %></li>
+      <% else %>
+        <li><%= link_to user.name.titleize, user_path(user) %></li>
+      <% end %>
+    <% end %>
+  </ol>
   <% if policy(@list).new? %>
   <%= link_to raw("&#43;"), new_list_item_path(@list), role: "button", class: "add-btn btn" %>
     <div class="list-group">

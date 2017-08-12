@@ -20,6 +20,10 @@ class List < ApplicationRecord
     end
   end
 
+  def percent_complete
+    ((items.where(completed: true).count.to_f / items.count) * 100).round unless items.count <= 0
+  end
+
   protected
 
   def check_date_format

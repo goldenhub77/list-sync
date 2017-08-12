@@ -1,0 +1,15 @@
+<h2>Hey <%= @user.name %>,</h2>
+<p>
+  You created a item for <%= link_to @item.list.title.titleize, list_url(@item.list) %>
+  on <%= @item.created_at.localtime.strftime("%a %m/%d/%Y%l:%M %p %Z") %> which you are collaborating on.<br>
+  The details are as follows:<br>
+  List Creator: <%= link_to @item.list.user.name.titleize, user_url(@item.list.user) %><br>
+  Item: <%= link_to @item.title.titleize, list_item_url(@item.list, @item) %>.<br>
+  Items Completed: <%= @item.list.percent_complete %>%<br>
+</p>
+<h3>Pending:</h3>
+<ul>
+  <% @pending_items.each do |item| %>
+    <li><em><%= item.title.titleize %></em></li>
+  <% end %>
+</ul>

@@ -5,6 +5,9 @@
     <div class="panel panel-primary">
       <div class="panel-body">
         <%= link_to list.title.titleize, list_path(list) %>
+        <% if list.percent_complete.present? %>
+          <h4><%= list.percent_complete %>% completed</h4>
+        <% end %>
       </div>
       <div class="panel-footer">
         <% if list.present? %>

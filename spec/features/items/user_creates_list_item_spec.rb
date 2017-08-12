@@ -15,7 +15,7 @@ feature 'user creates list item', %{
     fill_in "Title", with: "Item 1"
 
     click_button "Create Item"
-    
+  
     expect(page).to have_content("Created Item Successfully.")
     expect(page).to have_content(list.title)
     expect(page).to have_content("Item 1")

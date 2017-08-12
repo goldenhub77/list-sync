@@ -1,0 +1,13 @@
+Hey, %recipient.name%,
+
+Just wanted to let you know that <%= link_to @item.title.titleize, list_item_url(@item.list, @item) %>
+<%= @status %>.
+List: <%= @item.list.title.titleize %>
+Items Completed: <%= @item.list.percent_complete %>%
+<% if @item.date_completed.present? %>
+  Date: <%= @item.date_completed.localtime.strftime("%a %m/%d/%Y %l:%M %p %Z") %>
+<% end %>
+Pending:
+<% @pending_items.each do |item| %>
+  <%= item.title.titleize %>
+<% end %>
