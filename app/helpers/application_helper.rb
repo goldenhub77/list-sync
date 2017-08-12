@@ -19,4 +19,21 @@ module ApplicationHelper
   def form_error_messages?(resource)
     !resource.errors.empty?
   end
+
+  def its_me(resource)
+    begin
+      if resource.class.name == "User"
+        user = resource
+      else
+        user = resource.user
+      end
+      if current_user == user
+        "Me"
+      else
+        resource.name.titleize
+      end
+    rescue NoMethodError => e
+      puts e
+    end
+  end
 end

@@ -1,6 +1,6 @@
 <%= javascript_pack_tag 'items' %>
 <h1><%= @list.title.titleize %></h1>
-<h4>Created by - <%= @list.user.name.titleize %></h4>
+<h4>Created by - <%= its_me(@list.user) %></h4>
 <% if @list.percent_complete.present? %>
   <h4><%= @list.percent_complete %>% completed</h4>
 <% end %>
@@ -11,38 +11,53 @@
 <% end %>
 <div class="container">
   <% if policy(@list).edit? %>
-    <%= link_to "Edit", edit_user_list_path(@user, @list), id: "edit-list-#{@list.id}", class: "btn btn-primary" %>
-    <%= link_to "Delete", list_path(@list), method: "delete", id: "delete-list-#{@list.id}", class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
+    <div class="btn-group pull-right">
+      <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        List <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li><%= link_to "Edit", edit_user_list_path(@user, @list), id: "edit-list-#{@list.id}" %></li>
+        <li><%= link_to "Delete", list_path(@list), method: "delete", id: "delete-list-#{@list.id}", data: { confirm: "Are you sure?" } %></li>
+      </ul>
+    </div>
   <% end %>
   <% if @list.present? %>
-    <%= time_left_until_due(@list.due_date) %>
+    Due in <%= time_left_until_due(@list.due_date) %>
   <% end %>
   <br>
   <h3>Collaborators</h3>
   <ol>
     <% @list.collaborators.each do |user| %>
-      <% if user == current_user %>
-        <li><%= link_to 'Me', user_path(user) %></li>
-      <% else %>
-        <li><%= link_to user.name.titleize, user_path(user) %></li>
-      <% end %>
+      <li>
+        <%= link_to its_me(user), user_path(user) %>
+        <% if current_user.has_no_friendship?(user) %>
+          <%= link_to "Add Friend", user_friend_add_path(current_user, user), class: "btn btn-primary btn-xs friend-btn", id: "friend-btn-#{user.id}", method: :post %>
+        <% elsif user != current_user %>
+          <%= link_to "Unfriend", user_friend_remove_path(current_user, user), class: "btn btn-primary btn-xs friend-btn", id: "unfriend-btn-#{user.id}", method: :delete %>
+        <% end %>
+      </li>
     <% end %>
   </ol>
   <% if policy(@list).new? %>
   <%= link_to raw("&#43;"), new_list_item_path(@list), role: "button", class: "add-btn btn" %>
     <div class="list-group">
       <% @items.each do |item| %>
-        <div class="well list-items">
-          <div class="row">
+        <div class="well">
+          <div class="row list-items">
             <div class="col-xs-12 col-md-7">
               <h3><%= link_to item.title, list_item_path(@list, item) %></h3>
             </div>
-            <div class="col-xs-6 col-md-3">
               <% if policy(item).edit? %>
-                <%= link_to "Edit", edit_list_item_path(@list, item), id: "edit-item-#{item.id}", class: "btn btn-default element-inline" %>
-                <%= link_to "Delete", list_item_path(@list, item), method: "delete", id: "delete-item-#{item.id}", class: "btn btn-danger element-inline", data: { confirm: "Are you sure?" } %>
+                <div class="btn-group pull-right">
+                  <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Item <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><%= link_to "Edit", edit_list_item_path(@list, item), id: "edit-item-#{item.id}" %></li>
+                    <li><%= link_to "Delete", list_item_path(@list, item), method: "delete", id: "delete-item-#{item.id}", data: { confirm: "Are you sure?" } %></li>
+                  </ul>
+                </div>
               <% end %>
-            </div>
             <div class="col-xs-6 col-md-2">
               <%= form_for [@list, item], method: :put, url: [@list,item, :complete] do |f| %>
                 <%= f.hidden_field :id, value: item.id %>
