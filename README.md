@@ -1,24 +1,15 @@
-# README
+# LystSync
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Organizational task driven application with the purpose of synchronizing todo lists for two or more people with easy workflow and progress completion.
 
-Things you may want to cover:
+Still in progress:
 
-* Ruby version
+* Ruby version 2.4
 
-* System dependencies
+* Rails version 5.1
 
-* Configuration
+* Database version PostgreSQL 9.6
 
-* Database creation
+* Third party system dependencies - Facebook Omniauth, MailGun, Twilio, Amazon S3 Storage
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Current feature in progress - MailGun and Twilio notifications
