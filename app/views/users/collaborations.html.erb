@@ -1,3 +1,7 @@
 <h1><%= @title %></h1>
 <h2>User ID: <%= @user.uid ||= @user.id %></h2>
-<%= render 'shared/lists', collection: @collaborations %>
+<% if @collaborations.empty? %>
+  <h3>You have no collaborations yet.</h3>
+<% else %>
+  <%= render 'shared/collections', collection: @collaborations %>
+<% end %>

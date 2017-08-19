@@ -3,5 +3,9 @@
   <% if params[:user_id].present? && current_user.admin? && params[:user_id].to_i != current_user.id %>
     <h2><%= @user.email %></h2>
   <% end %>
-  <%= render 'shared/lists', collection: @lists %>
+  <% if @lists.empty? %>
+    <h3>There are no shared lists yet.</h3>
+  <% else %>
+    <%= render 'shared/collections', collection: @lists %>
+  <% end %>
 </div>
