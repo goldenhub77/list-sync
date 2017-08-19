@@ -21,38 +21,31 @@
       </ul>
     </div>
   <% end %>
-  <% if @list.present? %>
+  <% if @list.due_date.present? %>
     Due in <%= time_left_until_due(@list.due_date) %>
   <% end %>
   <br>
   <br>
-  <div class="panel-group" role="tablist">
-    <div class="panel panel-default">
-      <div class="panel-heading" role="tab" id="collapseListGroupHeading1">
-        <h4 class="panel-title">
-          <a href="#collapseListGroup1" class="collapsed" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapseListGroup1">
-            Collaborators <span class="caret"></span>
-          </a>
-        </h4>
-      </div>
-      <div class="collapse panel-collapse" role="tabpanel" id="collapseListGroup1" aria-labelledby="collapseListGroupHeading1">
-        <ul class="list-group">
-          <% @list.collaborators.each do |user| %>
-            <li class="list-group-item">
-              <%= link_to its_me(user), user_path(user) %>
-              <% if current_user.has_no_friendship?(user) %>
-                <%= link_to "Add Friend", user_friend_add_path(current_user, user), class: "btn btn-primary btn-xs friend-btn", id: "friend-btn-#{user.id}", method: :post %>
-              <% elsif user != current_user %>
-                <%= link_to "Unfriend", user_friend_remove_path(current_user, user), class: "btn btn-primary btn-xs friend-btn", id: "unfriend-btn-#{user.id}", method: :delete %>
-              <% end %>
-            </li>
+  <div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+      Collaborators
+      <span class="caret"></span>
+    </button>
+    <div class="dropdown-menu collaborator-menu" aria-labelledby="dropdownMenu1">
+      <% @list.collaborators.each do |user| %>
+        <div class="collaborator-list">
+          <%= link_to its_me(user), user_path(user) %>
+          <% if current_user.has_no_friendship?(user) %>
+            <%= link_to "Add Friend", user_friend_add_path(current_user, user), class: "btn btn-primary btn-xs friend-btn pull-right", id: "friend-btn-#{user.id}", method: :post %>
+          <% elsif user != current_user %>
+            <%= link_to "Unfriend", user_friend_remove_path(current_user, user), class: "btn btn-primary btn-xs friend-btn pull-right", id: "unfriend-btn-#{user.id}", method: :delete %>
           <% end %>
-        </ul>
-      </div>
+        </div>
+      <% end %>
     </div>
   </div>
   <% if policy(@list).new? %>
-  <%= link_to raw("&#43;"), new_list_item_path(@list), role: "button", class: "add-btn btn" %>
+    <%= link_to raw("&#43;"), new_list_item_path(@list), role: "button", class: "add-btn btn" %>
     <div class="list-group">
       <% @items.each do |item| %>
         <div class="well">
