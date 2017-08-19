@@ -17,6 +17,10 @@
 }
 
 @media screen and (min-width: 900px) {
+  .navbar-nav>li>a {
+    padding-top: 20px;
+  }
+
   #global-search-div {
     width: 480px;
     display: block;
