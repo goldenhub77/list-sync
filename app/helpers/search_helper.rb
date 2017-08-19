@@ -9,7 +9,7 @@ module SearchHelper
         type = obj.class.name
       end
     rescue NoMethodError
-      return ""
+      nil
     end
   end
 end
