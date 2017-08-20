@@ -20,7 +20,7 @@
           <% elsif object_type?(obj) == "List" %>
             <div class="media-body">
               <h4 class="media-heading"><%=link_to obj.title.titleize, list_path(obj) %></h4>
-              <% if obj.present? %>
+              <% if obj.percent_complete < 100 %>
                 <%= time_left_until_due(obj.due_date) %>
               <% end %>
               <% if not_joined?(obj) %>

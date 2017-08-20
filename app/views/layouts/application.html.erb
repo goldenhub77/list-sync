@@ -19,7 +19,13 @@
       	    <% type = f[0].to_s.gsub('alert', 'error').gsub('notice', 'info') %>
             toastr.options.positionClass = 'toast-top-left';
             toastr.options.timeOut = '3000';
-            toastr['<%= type %>']('<%= f[1] %>');
+            <% if f[1].class == Array %>
+              <% f[1].each do |msg| %>
+                toastr['<%= type %>']('<%= msg %>');
+              <% end %>
+            <% else %>
+              toastr['<%= type %>']('<%= f[1] %>');
+            <% end %>
     	   <% end %>
         </script>
       <% end %>

@@ -21,8 +21,8 @@
       </ul>
     </div>
   <% end %>
-  <% if @list.due_date.present? %>
-    Due in <%= time_left_until_due(@list.due_date) %>
+  <% if @list.percent_complete < 100 %>
+    <%= time_left_until_due(@list.due_date) %>
   <% end %>
   <br>
   <br>
