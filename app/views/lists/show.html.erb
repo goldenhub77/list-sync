@@ -1,7 +1,7 @@
 <%= javascript_pack_tag 'items' %>
 <h1><%= @list.title.titleize %></h1>
 <h4>Created by - <%= its_me(@list.user) %></h4>
-<% if @list.percent_complete.present? %>
+<% if @list.items.count > 0 %>
   <h4><%= @list.percent_complete %>% completed</h4>
 <% end %>
 <% if not_joined?(@list) %>

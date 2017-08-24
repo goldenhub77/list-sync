@@ -84,4 +84,25 @@ RSpec.describe List, type: :model do
       expect(list.role(user)).to eq('member')
     end
   end
+
+  describe '.percent_complete' do
+    it 'returns 0 if list item count is not greater than 0' do
+      list = List.first
+
+      expect(list.percent_complete).to eq(0)
+    end
+
+    it 'returns percent integer for completed items' do
+      user = User.first
+      list = FactoryGirl.create(:list, user: user)
+      item = FactoryGirl.create(:item, list: list, user: user)
+
+      expect(list.percent_complete).to eq(0)
+
+      item.completed = true
+      item.save
+
+      expect(list.percent_complete).to eq(100)
+    end
+  end
 end

@@ -21,7 +21,11 @@ class List < ApplicationRecord
   end
 
   def percent_complete
-    ((items.where(completed: true).count.to_f / items.count) * 100).round unless items.count <= 0
+    if items.count > 0
+      ((items.where(completed: true).count.to_f / items.count) * 100).round
+    else
+      return 0
+    end
   end
 
   protected
