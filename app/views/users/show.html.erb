@@ -1,1 +1,7 @@
-<h1><%="#{@user.name} / #{@user.email}" %> SHOW PAGE</h1>
+<div class="profile-header">
+  <%= image_tag(@user.profile_picture, class: "media-object show-profile-picture", alt: "Profile Picture") %>
+  <h1 class="profile-title-name vertical-bottom"><%="#{@user.name}" %></h1>
+  <% if @user == current_user %>
+    <%= link_to "Edit Account", edit_user_registration_path, class: "pull-right btn btn-primary vertical-bottom" %>
+  <% end %>
+</div>

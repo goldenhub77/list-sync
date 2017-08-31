@@ -18,6 +18,8 @@ Status: IN DEVELOPMENT
 
   * finish footer layout and links
 
+  * pagination of objects
+
   * implement restful AJAX for joining lists, adding items and friends
 
   * refactor soft deleting of a user account
@@ -25,6 +27,8 @@ Status: IN DEVELOPMENT
   * refactor mailer policies, add more notifications events, and user ability to control notifications
 
   * integration of Twilio for text notifications
+
+  * implement animations and refactor UI design(implementation of animate.css and/or anime.js)
 
 ## Installation Instructions
 

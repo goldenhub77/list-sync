@@ -36,6 +36,7 @@
             <ul class="dropdown-menu">
               <li class="<%= link_active?(new_user_list_path(current_user)) %>"><%= link_to "Create List", new_user_list_path(current_user) %></li>
               <li role="separator" class="divider"></li>
+              <li class="<%= link_active?(user_path(current_user)) %>"><%= link_to "My Profile", user_path(current_user) %></li>
               <li class="<%= link_active?(user_lists_path(current_user)) %>"><%= link_to "Lists I Created", user_lists_path(current_user) %></li>
               <li class="<%= link_active?(user_collaborations_path(current_user)) %>"><%= link_to "My List Collaborations", user_collaborations_path(current_user) %></li>
               <li class="<%= link_active?(user_friends_path(current_user)) %>"><a href="<%= user_friends_path(current_user) %>">My Friends</a></li>
