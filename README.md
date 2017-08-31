@@ -53,11 +53,10 @@ Status: IN DEVELOPMENT
     * MG_PASSWORD
     * MG_API_KEY
 
-5. Webpacker configuration(This is already completed but included for reference)
+5. Webpacker configuration(Step 5 is for webpacker reference in creating a new rails app)
 
   *-This configuration is for Rails 5.1+*
 
-  *-Yarn used to install JS dependencies*
   1. ```rails new myapp --webpack=react```
   2. run ```yarn``` (follow [docs](https://yarnpkg.com/lang/en/docs/install/) if you need to install)
   3. add ```config.x.webpacker[:dev_server_host] = "http://127.0.0.1:8080"``` to config/environments/development.rb
@@ -73,70 +72,3 @@ Status: IN DEVELOPMENT
     * run ```git push heroku master```
 
 #### Congratulations! now code, code, code and make some awesome new features :)
-
-
-### **Gem dependencies**
-*Please refer to the gemfile for all dependencies*
-
-  ###### *Rails*
-  * gem 'rails', '~> 5.1.2'
-
-  ###### *postgresql database for Active Record*
-  * gem 'pg', '~> 0.18'
-
-  ###### *Puma for the app server*
-  * gem 'puma', '~> 3.7'
-
-  ###### *SCSS for stylesheets*
-  * gem 'sass-rails', '~> 5.0'
-
-  ###### *Uglifier as compressor for JavaScript* assets
-  * gem 'uglifier', '>= 1.3.0'
-
-  ###### *Transpile JavaScript.(Used to convert ES6 to ES5) [Docs](https://github.com/rails/webpacker)*
-  * gem 'webpacker'
-
-  ###### *Easy implementation of jquery in rails app*
-  * gem 'jquery-rails'
-
-  ###### *Build JSON APIs with ease. [Read more](https://github.com/rails/jbuilder)*
-  * gem 'jbuilder', '~> 2.5'
-
-  ###### *bootstrap datetime picker and moment.js to handle datetime objects*
-    * gem 'momentjs-rails', '>= 2.9.0'
-    * gem 'bootstrap3-datetimepicker-rails'
-
-  ###### *Adapter to run Action Cable in production*
-  * gem 'redis', '~> 3.0'
-
-  ###### ActiveModel has_secure_password
-  * gem 'bcrypt', '~> 3.1.7'
-
-  ###### *devise user authentication with facebook integration*
-  * gem 'devise'
-  * gem 'omniauth'
-  * gem 'omniauth-facebook'
-
-  ###### *implements nice notification messages in javascript*
-  * gem 'toastr-rails'
-
-  ###### *handles security policies for controllers*
-  * gem 'pundit'
-
-  ###### *handles search engine*
-  * gem 'ransack'
-
-  ###### *include font-awesome*
-  * gem 'font-awesome-rails'
-
-  ###### *support for AmazonS3 storage*
-  * gem 'fog-aws'
-
-  ###### *support for file validations*
-  * gem 'file_validators'
-
-  ###### *support for safe and reliable file uploading*
-  * gem 'carrierwave', '~> 1.0'
-
-  ###### *service handling email notifications*
-  * gem 'mailgun-ruby', '~>1.1.6'
