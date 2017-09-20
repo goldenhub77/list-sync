@@ -1,6 +1,6 @@
 <%= javascript_pack_tag 'items' %>
 <h1><%= @list.title.titleize %></h1>
-<h4>Created by - <%= its_me(@list.user) %></h4>
+<h4>Created by - <%= its_me?(@list.user) %></h4>
 <% if @list.items.count > 0 %>
   <h4><%= @list.percent_complete %>% completed</h4>
 <% end %>
@@ -34,7 +34,7 @@
     <div class="dropdown-menu collaborator-menu" aria-labelledby="dropdownMenu1">
       <% @list.collaborators.each do |user| %>
         <div class="collaborator-list">
-          <%= link_to its_me(user), user_path(user) %>
+          <%= link_to its_me?(user), user_path(user) %>
           <% if current_user.has_no_friendship?(user) %>
             <%= link_to "Add Friend", user_friend_add_path(current_user, user), class: "btn btn-primary btn-xs friend-btn pull-right", id: "friend-btn-#{user.id}", method: :post %>
           <% elsif user != current_user %>
@@ -68,14 +68,15 @@
               <%= form_for [@list, item], method: :put, url: [@list,item, :complete] do |f| %>
                 <%= f.hidden_field :id, value: item.id %>
                 <%= f.hidden_field :list_id, value: @list.id %>
-                <%= f.hidden_field :user_id, value: item.user.id %>
                 <%= f.hidden_field :date_completed, value: format_date_to_ISO(item.date_completed), class: "js-item-date-completed" %>
                 <%= f.check_box :completed, { "data-onstyle": "success", "data-offstyle": "warning", "data-toggle": "toggle", "data-on": "Completed", "data-off": "Incomplete", class: "js-item-completed" } %>
               <% end %>
               <p class="js-item-human-date"></p>
             </div>
           </div>
-          <small>footnote</small>
+          <% if item.completed_by %>
+            <small>Completed by: <%= its_me?(item.completed_by) %></small>
+          <% end %>
         </div>
       <% end %>
     </div>

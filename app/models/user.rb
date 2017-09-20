@@ -13,13 +13,15 @@ class User < ApplicationRecord
   has_many :list_collaborations, source: :list, through: :lists_users, foreign_key: :list_id
   has_many :friends_users, dependent: :destroy
   has_many :friends, through: :friends_users
+  has_many :completed_lists_items
+  has_many :items_completed, source: :item, through: :completed_lists_items, foreign_key: :item_id
 
   validates :provider, presence: true, allow_blank: true
   validates :uid, presence: true, allow_blank: true
   validate :password_complexity
   validates :name, presence: true
   validates :admin, presence: true, allow_blank: true, inclusion: { in: [true, false] }
-  validates :profile_picture, file_size: { less_than_or_equal_to: 5.megabytes },
+  validates :profile_picture, file_size: { less_than_or_equal_to: 3.megabytes },
                      file_content_type: { allow: ['image/jpeg', 'image/png'] }
 
   scope :all_active_users, -> { where('deleted_at IS NULL') }

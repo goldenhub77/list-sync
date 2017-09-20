@@ -52,7 +52,12 @@ class ItemsController < ApplicationController
 
   def complete
     @item.update(item_completed_params)
-    @item.completed.present? ? nil : @item.date_completed = nil
+    if @item.completed.present?
+      @item.completed_by = @user
+    else
+      @item.completed_by = nil
+      @item.date_completed = nil
+    end
     if @item.save
       flash[:notice] = "Item updated Successfully."
       BatchMailer.item_status(@item, @list.collaborators.to_a).deliver_later
@@ -60,7 +65,7 @@ class ItemsController < ApplicationController
         BatchMailer.list_completed(@list, @list.collaborators.to_a).deliver_later
       end
     else
-      flash.now[:error] = @item.errors.full_messages
+      flash[:notice] = @item.errors.full_messages
     end
     redirect_to list_path(@list)
   end
@@ -93,7 +98,7 @@ class ItemsController < ApplicationController
   end
 
   def item_completed_params
-    params.require(:item).permit(:id, :list_id, :completed, :date_completed, :user_id)
+    params.require(:item).permit(:id, :list_id, :completed, :date_completed)
   end
 
   def post_item_params

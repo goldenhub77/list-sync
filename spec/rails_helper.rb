@@ -13,6 +13,7 @@ require "valid_attribute"
 require "support/omniauth"
 
 Capybara.ignore_hidden_elements = false
+Capybara.javascript_driver = :chrome
 Capybara.register_driver :selenium do |app|
   Capybara::Selenium::Driver.new(app, browser: :chrome)
 end

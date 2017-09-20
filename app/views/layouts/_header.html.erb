@@ -9,16 +9,18 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="<%= root_path %>">LystSync</a>
-      <div id="global-search-div">
-        <%= form_with url: search_path, local: true, method: :get, html: { id: "js-global-search-form" } do |f| %>
-         <div class="input-group">
-           <%= f.text_field :q, placeholder: "Search", id: "js-global-search-input", value: "#{session['q']}", class: "form-control" %>
-           <span class="input-group-btn">
-             <%= f.button raw('<i class="fa fa-search" aria-hidden="true"></i>'), name: nil, id: "js-global-search-btn", class: "btn btn-default" %>
-           </span>
-         </div>
-       <% end %>
-      </div>
+      <% if current_user %>
+        <div id="global-search-div">
+          <%= form_with url: search_path, local: true, method: :get, html: { id: "js-global-search-form" } do |f| %>
+           <div class="input-group">
+             <%= f.text_field :q, placeholder: "Search", id: "js-global-search-input", value: "#{session['q']}", class: "form-control" %>
+             <span class="input-group-btn">
+               <%= f.button raw('<i class="fa fa-search" aria-hidden="true"></i>'), name: nil, id: "js-global-search-btn", class: "btn btn-default" %>
+             </span>
+           </div>
+         <% end %>
+        </div>
+      <% end %>
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

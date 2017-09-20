@@ -20,7 +20,7 @@ module ApplicationHelper
     !resource.errors.empty?
   end
 
-  def its_me(resource)
+  def its_me?(resource)
     begin
       if resource.class.name == "User"
         user = resource
