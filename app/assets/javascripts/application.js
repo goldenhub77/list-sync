@@ -15,6 +15,7 @@
 //= require jquery_ujs
 //= require jquery.easy-autocomplete.min
 //= require moment
+//= require moment-timezone-with-data
 //= require bootstrap.min
 //= require bootstrap-toggle.min
 //= require bootstrap-datetimepicker

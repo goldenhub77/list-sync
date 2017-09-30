@@ -32,6 +32,7 @@ gem 'jbuilder', '~> 2.5'
 
 #bootstrap datetime picker
 gem 'momentjs-rails', '>= 2.9.0'
+gem 'moment_timezone-rails'
 gem 'bootstrap3-datetimepicker-rails'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
